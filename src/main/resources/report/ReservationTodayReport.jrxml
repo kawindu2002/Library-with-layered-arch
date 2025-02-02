@@ -1,0 +1,130 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="ReservationTodayReport" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ac867e4-ef87-41ea-9621-ead60d050e59">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LibraryDBConnection"/>
+	<parameter name="P_Date" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[select * from Reservation where Reservation.Reservation_date = $P{P_Date};
+]]></query>
+	<field name="Reservation_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Reservation_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reservation_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<field name="Member_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<field name="Book_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Book_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Book_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<field name="User_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<field name="Reservation_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Reservation_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reservation_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<field name="State" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="State"/>
+		<property name="com.jaspersoft.studio.field.label" value="State"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reservation"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="82" splitType="Stretch">
+		<element kind="staticText" uuid="dec41830-3b97-4959-936d-8c07d2f0dfe5" x="171" y="10" width="219" height="53" fontName="Serif" fontSize="24.0" italic="false" strikeThrough="false" underline="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reservation Report]]></text>
+		</element>
+		<element kind="staticText" uuid="e2ac2e31-4f7c-4d7a-8378-d4d7dcaa8534" x="434" y="10" width="40" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Date : ]]></text>
+		</element>
+		<element kind="textField" uuid="a7542847-104e-44d2-b3c6-393e4b91e845" x="480" y="10" width="70" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{P_Date}]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="35" splitType="Stretch">
+		<element kind="staticText" uuid="ea8ffb4b-9faa-4d74-9749-53947200a757" x="30" y="3" width="92" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Reservation_Id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="1e192517-f06d-42e0-9e90-5221afb31067" x="122" y="3" width="100" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[User_Id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="68d198de-c67a-4fcc-a4f0-590984481c0a" x="223" y="3" width="100" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Member_Id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="601bf0ae-c639-4b6a-a624-90bf4fa75fe9" x="323" y="3" width="100" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Book_Id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="eed33b1f-a703-4fe6-b9df-fbea211cd7ba" x="423" y="3" width="100" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[State]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+			<box>
+				<pen lineWidth="0.5"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="104" splitType="Stretch">
+			<element kind="textField" uuid="7b62c3cd-23f9-4d04-86cf-75850d4c0c6f" x="30" y="-2" width="92" height="30" fontName="SansSerif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Reservation_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="655742cb-f293-4842-a3a6-d6597c90f5c4" x="122" y="-2" width="100" height="30" fontName="SansSerif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{User_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f3d1da77-44bb-477c-bb8f-842e484101d6" x="223" y="-2" width="100" height="30" fontName="SansSerif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Member_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="15816f01-de61-4ca5-84ea-0434d9e8bd75" x="423" y="-2" width="100" height="30" fontName="SansSerif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{State}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="259b14ca-bc7c-4e9e-950a-483ae708bc7d" x="323" y="-2" width="100" height="30" fontName="SansSerif" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Book_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

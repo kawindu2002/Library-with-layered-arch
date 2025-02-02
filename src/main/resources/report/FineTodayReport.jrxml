@@ -1,0 +1,142 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="FineTodayReport" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fbff5d69-4b83-4c84-90a4-167e0366b9a3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LibraryDBConnection"/>
+	<parameter name="P_Date" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[select * from Fine where Fine.Fine_date = $P{P_Date};
+]]></query>
+	<field name="Fine_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Fine_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fine_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="User_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="Member_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="Loan_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Loan_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Loan_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="Price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="Price"/>
+		<property name="com.jaspersoft.studio.field.label" value="Price"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="Fine_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Fine_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fine_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<field name="Reason" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Reason"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reason"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fine"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="c9b91d90-b4cf-4bc4-a610-3bf50ffe8032" x="181" y="10" width="199" height="53" fontName="Serif" fontSize="24.0" italic="false" bold="true" strikeThrough="false" underline="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Fine Report]]></text>
+		</element>
+		<element kind="staticText" uuid="c6c1fbd6-a3c7-4b56-88fe-e731401a2d26" x="434" y="10" width="40" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Date : ]]></text>
+		</element>
+		<element kind="textField" uuid="6a96aa23-6aed-4b25-8a64-b948bc1021c6" x="480" y="10" width="70" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{P_Date}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="2" splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="185" splitType="Stretch">
+			<element kind="staticText" uuid="d5422817-6e13-4324-929f-37c1f0b10cd3" x="25" y="21" width="81" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Fine_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="293bef10-2ac0-43ae-bff5-ecceb61c8028" x="25" y="51" width="81" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Fine_Id}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="5a5498e0-cdbe-46ea-8280-fa4bfdd1ca14" x="106" y="51" width="80" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{User_Id}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="9db117b7-56fa-494e-b320-9cea7ee34aed" x="106" y="21" width="80" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[User_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="851f42e5-f0d5-418f-a8c0-bdfb2aa6a93a" x="186" y="21" width="80" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Member_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="bb2df64f-1404-4886-88c7-a73c1f860465" x="186" y="51" width="80" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Member_Id}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="82ee5573-5b3c-4d56-95ea-9fd8bb3b4d45" x="266" y="21" width="80" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Loan_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8ac8f297-2dfe-478e-879d-df8c95877928" x="266" y="51" width="80" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Loan_Id}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="777a4726-5466-48de-870e-20e39d6929d3" x="426" y="21" width="101" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Reason]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="5eac3ff3-529f-4cf1-8f74-ff8d1ee8b038" x="426" y="51" width="101" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Reason}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="5c23e684-2b43-4d87-9992-caa3af34a508" x="346" y="51" width="80" height="30" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Price}]]></expression>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="330b4f9e-3952-4038-8963-a649f7ac1f74" x="346" y="21" width="80" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Price]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

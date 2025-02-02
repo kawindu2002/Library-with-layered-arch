@@ -1,0 +1,115 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="UserReport" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="29ee6f53-23dc-4998-9f77-ab33e1c9a003">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LibraryDBConnection"/>
+	<parameter name="P_Date" class="java.lang.String"/>
+	<parameter name="P_User_Id" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[select User.User_Id,User.Name,User.Role,User.Reg_date,User.State from User where User.User_Id = $P{P_User_Id};
+]]></query>
+	<field name="User_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="Role" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Role"/>
+		<property name="com.jaspersoft.studio.field.label" value="Role"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="Reg_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Reg_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reg_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="State" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="State"/>
+		<property name="com.jaspersoft.studio.field.label" value="State"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="87" splitType="Stretch">
+		<element kind="staticText" uuid="b313b894-2a07-4f64-85cb-d12a38491034" x="180" y="10" width="199" height="53" fontName="Serif" fontSize="24.0" underline="true" strikeThrough="false" italic="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[User Report]]></text>
+		</element>
+		<element kind="textField" uuid="940962f6-373d-483f-8624-9b08000b5d27" x="480" y="10" width="72" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<expression><![CDATA[$P{P_Date}]]></expression>
+		</element>
+		<element kind="staticText" uuid="a7760bb0-10eb-4f27-b789-1345645a228f" x="434" y="10" width="40" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Date : ]]></text>
+		</element>
+	</title>
+	<pageHeader height="173" splitType="Stretch">
+		<element kind="staticText" uuid="4486589f-d621-4550-9d58-83f2f4949f07" x="80" y="2" width="140" height="30" fontName="Serif" fontSize="16.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[User ID : ]]></text>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="c7c6cab5-d0c6-4b43-ab91-cd3b0d418f9b" x="80" y="68" width="140" height="30" fontName="Serif" fontSize="16.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Role : ]]></text>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="a5cb7871-d042-4992-95d4-cfcc45545428" x="80" y="138" width="140" height="30" fontName="Serif" fontSize="16.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[State : ]]></text>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="a95cc571-562b-439c-944b-c6c3c71b5bce" x="80" y="103" width="140" height="30" fontName="Serif" fontSize="16.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Registered Date : ]]></text>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="3e8680ec-b8e8-4d02-bf34-e397e05f917d" x="80" y="36" width="140" height="30" fontName="Serif" fontSize="16.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Name : ]]></text>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="6edf3c6d-000e-429f-9153-b20602170533" x="221" y="2" width="158" height="30" fontSize="14.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{User_Id}]]></expression>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b905384f-31d5-44a5-901f-0855380fc867" x="221" y="36" width="158" height="30" fontSize="14.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Name}]]></expression>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b24e8248-dfdd-49b8-a24a-5c67e8f8680b" x="221" y="68" width="158" height="30" fontSize="14.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Role}]]></expression>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8f666c7f-5487-40f6-8679-a2587ace9f4b" x="221" y="103" width="158" height="30" fontSize="14.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Reg_date}]]></expression>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="a99084de-5fc9-461c-89c9-b5a5225f297d" x="221" y="138" width="158" height="30" fontSize="14.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{State}]]></expression>
+			<box>
+				<pen lineWidth="0.0"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader height="61" splitType="Stretch"/>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

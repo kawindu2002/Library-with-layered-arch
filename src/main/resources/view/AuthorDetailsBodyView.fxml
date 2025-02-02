@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="authorDetailsBodyAnchPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="875.0" style="-fx-background-color: #EDEEC0; -fx-border-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.gdse71.library.controller.AuthorDetailsBodyController">
+   <children>
+      <AnchorPane fx:id="authorDetailsHeaderAnchPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="875.0" style="-fx-background-color: #A5B452; -fx-border-color: black;">
+         <children>
+            <Label fx:id="authorDetailsManageLbl" layoutX="299.0" layoutY="9.0" text="Add Authors For Book">
+               <font>
+                  <Font name="Serif Bold" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="addToListBtn" layoutX="632.0" layoutY="298.0" mnemonicParsing="false" onAction="#addToListBtnActionClicked" prefHeight="34.0" prefWidth="147.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Add to list">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="resetBtn" layoutX="632.0" layoutY="344.0" mnemonicParsing="false" onAction="#resetBtnActionClicked" prefHeight="34.0" prefWidth="147.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Reset">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="authorIdLbl" layoutX="41.0" layoutY="129.0" text="Author ID">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="authorNameLbl" layoutX="41.0" layoutY="175.0" text="Name">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameShowLbl" layoutX="157.0" layoutY="175.0" prefHeight="20.0" prefWidth="224.0">
+         <font>
+            <Font name="Serif Bold" size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="authorIdCombo" layoutX="157.0" layoutY="125.0" onAction="#authorIdComboOnAction" prefHeight="26.0" prefWidth="224.0" style="-fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20;" visibleRowCount="5">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <TableView fx:id="authorDetailsCartTbl" layoutX="41.0" layoutY="251.0" prefHeight="270.0" prefWidth="534.0">
+         <columns>
+            <TableColumn fx:id="authorDetailsCartAuthorIdCol" prefWidth="75.0" text="Author ID" />
+            <TableColumn fx:id="actionCol" prefWidth="75.0" text="Action" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Button fx:id="insertAuthorsBtn" layoutX="632.0" layoutY="251.0" mnemonicParsing="false" onAction="#insertAuthorsBtnActionClicked" prefHeight="34.0" prefWidth="147.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Insert Authors">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="bookIdLbl" layoutX="41.0" layoutY="85.0" text="Book ID">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="bookIdShowLbl" layoutX="158.0" layoutY="85.0" prefHeight="20.0" prefWidth="224.0" text="book">
+         <font>
+            <Font name="Serif Bold" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="632.0" layoutY="389.0" mnemonicParsing="false" onAction="#backBtnActionClicked" prefHeight="34.0" prefWidth="147.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Back">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

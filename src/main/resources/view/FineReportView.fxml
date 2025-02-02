@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="fineReportAnchPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="470.0" style="-fx-background-color: #EDEEC0; -fx-border-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.gdse71.library.controller.FineReportController">
+   <children>
+      <AnchorPane fx:id="fineReportHeaderAnchPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="470.0" style="-fx-background-color: #A5B452; -fx-border-color: black;">
+         <children>
+            <Label fx:id="fineReportLbl" layoutX="159.0" layoutY="9.0" text="Fine Report ">
+               <font>
+                  <Font name="Serif Bold" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="generateReportBtn" layoutX="33.0" layoutY="264.0" mnemonicParsing="false" onAction="#generateReportBtnActionClicked" prefHeight="34.0" prefWidth="404.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Generate Report">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="fineDateLbl" layoutX="37.0" layoutY="163.0" text="Date">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="fineDateShowLbl" layoutX="147.0" layoutY="163.0" prefHeight="20.0" prefWidth="224.0">
+         <font>
+            <Font name="Serif Bold" size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="fineIdCombo" layoutX="143.0" layoutY="94.0" onAction="#fineIdComboActionClicked" prefHeight="26.0" prefWidth="224.0" style="-fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20;" visibleRowCount="5">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Label fx:id="fineIdLbl" layoutX="37.0" layoutY="98.0" text="Fne ID">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="generateTodayReportBtn" layoutX="33.0" layoutY="310.0" mnemonicParsing="false" onAction="#generateTodayReportBtnActionClicked" prefHeight="34.0" prefWidth="404.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Generate Today Report">
+         <font>
+            <Font name="Serif Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="dashBoardAnchPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="1101.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.gdse71.library.controller.DashBoardController">
+   <children>
+      <AnchorPane fx:id="dashBoardHeaderAnchPane" layoutX="6.0" layoutY="8.0" prefHeight="66.0" prefWidth="1087.0" style="-fx-background-color: #0B5D1E; -fx-border-color: black;">
+         <children>
+            <Label fx:id="headerLbl" layoutX="318.0" layoutY="10.0" text="Library Management System" textFill="WHITE">
+               <font>
+                  <Font name="Serif Bold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="userImg" fitHeight="46.0" fitWidth="44.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/user1Icon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="userIdLbl" layoutX="61.0" layoutY="33.0" text="User Id" textFill="WHITE">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dashBoardNavigationAnchPane" layoutX="6.0" layoutY="80.0" prefHeight="626.0" prefWidth="205.0" style="-fx-background-color: #606748; -fx-border-color: black;">
+         <children>
+            <Button fx:id="memberManageBtn" layoutX="21.0" layoutY="18.0" mnemonicParsing="false" onAction="#memberManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Member Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="reservationManageBtn" layoutX="21.0" layoutY="377.0" mnemonicParsing="false" onAction="#reservationManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Reservation Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="paymentManageBtn" layoutX="21.0" layoutY="337.0" mnemonicParsing="false" onAction="#paymentManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Payment Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="userManageBtn" layoutX="21.0" layoutY="455.0" mnemonicParsing="false" onAction="#userManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="User Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="generateReportsBtn" layoutX="21.0" layoutY="495.0" mnemonicParsing="false" onAction="#generateReportsBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Generate Reports">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="authorManageBtn" layoutX="21.0" layoutY="57.0" mnemonicParsing="false" onAction="#authorManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Author Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="publisherManageBtn" layoutX="21.0" layoutY="97.0" mnemonicParsing="false" onAction="#publisherManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Publisher Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="categoryManageBtn" layoutX="21.0" layoutY="137.0" mnemonicParsing="false" onAction="#categoryManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Category Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="bookshelfManageBtn" layoutX="21.0" layoutY="177.0" mnemonicParsing="false" onAction="#bookshelfManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Bookshelf Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="loanManageBtn" layoutX="21.0" layoutY="217.0" mnemonicParsing="false" onAction="#loanManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Loan Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="returnManageBtn" layoutX="21.0" layoutY="257.0" mnemonicParsing="false" onAction="#returnManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Return Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="fineManageBtn" layoutX="21.0" layoutY="297.0" mnemonicParsing="false" onAction="#fineManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Fine Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="signOutBtn" layoutX="21.0" layoutY="538.0" mnemonicParsing="false" onAction="#signOutBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Sign out">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="bookManageBtn" layoutX="20.0" layoutY="415.0" mnemonicParsing="false" onAction="#bookManageBtnActionClicked" prefHeight="26.0" prefWidth="165.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;" text="Book Manage">
+               <font>
+                  <Font name="Serif Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dashBoardDateCountAnchPane" layoutX="218.0" layoutY="647.0" prefHeight="59.0" prefWidth="875.0" style="-fx-background-color: #0B5D1E; -fx-border-color: black;">
+         <children>
+            <Label fx:id="dateLbl" layoutX="38.0" layoutY="19.0" text="Date : " textFill="WHITE">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="dateShowLbl" layoutX="98.0" layoutY="14.0" prefHeight="30.0" prefWidth="102.0" style="-fx-background-color: white;">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeLbl" layoutX="681.0" layoutY="19.0" text="Time : " textFill="WHITE">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeShowLbl" layoutX="745.0" layoutY="14.0" prefHeight="30.0" prefWidth="89.0" style="-fx-background-color: white;">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane fx:id="dashBoardBodyAnchPane" layoutX="218.0" layoutY="81.0" prefHeight="560.0" prefWidth="875.0" style="-fx-background-color: black;" />
+   </children>
+</AnchorPane>

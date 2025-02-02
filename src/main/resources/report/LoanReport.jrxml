@@ -1,0 +1,204 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="LoanReport" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95e56fac-e789-4aa0-a921-b8682e7c0052">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LibraryDBConnection"/>
+	<parameter name="P_Date" class="java.lang.String"/>
+	<parameter name="P_Loan_Id" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[
+
+select l.Loan_Id,
+    l.Loan_Date,
+       l.Due_Date,
+       l.State,
+       l.User_Id,
+       u.Name as User_Name,
+       l.Member_Id,
+       m.Name as Member_Name,
+       l.Book_Id,
+       b.Title
+from Loan l
+         join Book b on b.Book_Id = l.Book_Id
+         join Member m on m.Member_id = l.Member_id
+         join User u on u.User_Id = l.User_Id
+where l.Loan_Id = $P{P_Loan_Id};]]></query>
+	<field name="Loan_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Loan_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Loan_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="Loan_Date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Loan_Date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Loan_Date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="Due_Date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Due_Date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Due_Date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="State" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="State"/>
+		<property name="com.jaspersoft.studio.field.label" value="State"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="User_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="User_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="User_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="User_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="user"/>
+	</field>
+	<field name="Member_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Member_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="Member_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Member_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="member"/>
+	</field>
+	<field name="Book_Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Book_Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Book_Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="loan"/>
+	</field>
+	<field name="Title" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Title"/>
+		<property name="com.jaspersoft.studio.field.label" value="Title"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="book"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="6b708a52-10c5-427f-a6eb-f63bab6aae50" x="180" y="10" width="199" height="53" fontName="Serif" fontSize="24.0" bold="true" underline="true" italic="false" strikeThrough="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Loan Report]]></text>
+		</element>
+		<element kind="staticText" uuid="b5874671-e110-4553-b751-57dc1c162153" x="434" y="10" width="40" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Date : ]]></text>
+		</element>
+		<element kind="textField" uuid="75a19886-fc91-48d5-951f-2a95b4dc231b" x="480" y="10" width="78" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{P_Date}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="144" splitType="Stretch">
+		<element kind="staticText" uuid="23f71587-3dc6-4685-90e7-409e50b26dc1" x="0" y="1" width="80" height="30" fontName="Serif" fontSize="16.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Loan ID : ]]></text>
+		</element>
+		<element kind="staticText" uuid="933596be-e855-49d8-8da2-7eef548cdcf8" x="0" y="33" width="80" height="30" fontName="Serif" fontSize="16.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Loan Date : ]]></text>
+		</element>
+		<element kind="staticText" uuid="d03c05e4-ddc3-430f-95c8-6fd2bc3bf1d4" x="0" y="66" width="80" height="30" fontName="Serif" fontSize="16.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Due Date : ]]></text>
+		</element>
+		<element kind="staticText" uuid="8c92dab4-d1d4-46e3-ac48-b48b01e65a7f" x="0" y="100" width="80" height="30" fontName="Serif" fontSize="16.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[State : ]]></text>
+		</element>
+		<element kind="textField" uuid="0e2cb0f6-11dd-4bee-b9cb-75669f2a1656" x="80" y="1" width="198" height="30" fontSize="14.0" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Loan_Id}]]></expression>
+		</element>
+		<element kind="textField" uuid="2f051e44-a420-41af-b6ab-6509f2f3610b" x="80" y="33" width="198" height="30" fontSize="14.0" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Loan_Date}]]></expression>
+		</element>
+		<element kind="textField" uuid="33f333cc-e61d-4d08-811a-0c22736b4337" x="80" y="66" width="198" height="30" fontSize="14.0" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{Due_Date}]]></expression>
+		</element>
+		<element kind="textField" uuid="06f02410-9be0-4b5d-9199-4763ee0f8e88" x="80" y="100" width="198" height="30" fontSize="14.0" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[$F{State}]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="1" splitType="Stretch"/>
+	<detail>
+		<band height="210" splitType="Stretch">
+			<element kind="textField" uuid="cbe84888-120b-4b3f-8e77-ef549202b726" x="1" y="56" width="98" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{User_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="bce2e59d-9853-4116-b7f2-252aa48e9912" x="99" y="56" width="136" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{User_Name}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="0436d094-e716-4ee2-9bce-cbbaeecbc648" x="0" y="130" width="100" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Member_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98285c55-becf-4f9e-ad0e-29b8ba68bfba"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="e4b7c982-81d1-4fe7-bcd1-970fe44f3ba4" x="100" y="130" width="136" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Member_Name}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8c52114-228d-4058-b186-acac57cc7ec9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="35b99dc7-c6d8-4774-ac3e-1cc070e1cba0" x="295" y="56" width="98" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Book_Id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5bafdb8c-14b9-485e-a706-730727c94dbe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="4e76b528-72e5-4bef-ac1f-95e51f74607b" x="393" y="56" width="152" height="30" fontName="SansSerif" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{Title}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36b0bb3c-7ce0-45a6-aceb-0651884773ef"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="dd98f9b6-ac01-41e1-b6d6-d0ffa422c9d6" x="100" y="100" width="136" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Member_Name]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8c52114-228d-4058-b186-acac57cc7ec9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="96da1912-7377-4ea0-9f2b-d37b9a7d7649" x="0" y="100" width="100" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Member_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="98285c55-becf-4f9e-ad0e-29b8ba68bfba"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="ea554a6b-3825-4eb1-8e8d-5665f08493b9" x="1" y="26" width="98" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[User_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="11a82022-526a-4cc4-9258-3ae944ab1ba1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="51998215-e6af-4457-8086-7d56ea75c28e" x="99" y="26" width="136" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[User_Name]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a78c1555-6503-4a21-8f4e-6586c59317fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="9c95c0ea-157e-44ca-be44-fbd677acbb10" x="295" y="26" width="98" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Book_Id]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5bafdb8c-14b9-485e-a706-730727c94dbe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="c2ac9615-6b94-451b-bcac-c29834c3e2f2" x="393" y="26" width="152" height="30" fontName="Serif" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Title]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36b0bb3c-7ce0-45a6-aceb-0651884773ef"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="60" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

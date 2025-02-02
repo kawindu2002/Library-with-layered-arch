@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="getStartedAnchPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="714.0" prefWidth="1101.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.gdse71.library.controller.GetStartedController">
+   <children>
+      <ImageView fx:id="getStartedImg" fitHeight="699.0" fitWidth="1087.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/getStartedJpg.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="welcomeLbl" layoutX="224.0" layoutY="73.0" text="Welcome">
+         <font>
+            <Font name="Serif Bold" size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="toTheLbl" layoutX="256.0" layoutY="139.0" prefHeight="51.0" prefWidth="134.0" text="To The">
+         <font>
+            <Font name="Serif Bold" size="42.0" />
+         </font>
+      </Label>
+      <Label fx:id="lmsLbl" layoutX="62.0" layoutY="201.0" text="Library Management System">
+         <font>
+            <Font name="Serif Bold" size="46.0" />
+         </font>
+      </Label>
+      <Button fx:id="getStartedBtn" layoutX="187.0" layoutY="379.0" mnemonicParsing="false" onAction="#getStartedBtnActionClicked" prefHeight="46.0" prefWidth="326.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2px;" text="Get Started">
+         <font>
+            <Font name="Serif Bold" size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
