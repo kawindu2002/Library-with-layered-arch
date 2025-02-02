@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.FineBO;
 import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dto.FineDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FineBOImpl implements FineDAO {
+public class FineBOImpl implements FineBO {
 
     static String getNextFineId() throws SQLException {
         String query = "select Fine_Id from Fine order by Fine_Id desc limit 1";

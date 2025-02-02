@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.ReservationBO;
 import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ReservationBOImpl implements ReservationDAO {
+public class ReservationBOImpl implements ReservationBO {
 
     static String getNextReservationId() throws SQLException {
         String query = "select Reservation_Id from Reservation order by Reservation_Id desc limit 1";

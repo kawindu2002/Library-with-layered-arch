@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.PublisherBO;
 import edu.ijse.gdse71.library.dao.custom.PublisherDAO;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PublisherBOImpl implements PublisherDAO {
+public class PublisherBOImpl implements PublisherBO {
 
     static String getNextPublisherId() throws SQLException {
         String query = "select Publisher_Id from Publisher order by Publisher_Id desc limit 1";

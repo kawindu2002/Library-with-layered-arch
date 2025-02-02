@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.LoanBO;
 import edu.ijse.gdse71.library.dao.custom.LoanDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.LoanDTO;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class LoanBOImpl implements LoanDAO {
+public class LoanBOImpl implements LoanBO {
 
     static String getNextLoanId() throws SQLException {
         String query = "select Loan_Id from Loan order by Loan_Id desc limit 1";

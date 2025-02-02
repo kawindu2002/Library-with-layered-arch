@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.AuthorBO;
 import edu.ijse.gdse71.library.dao.custom.AuthorDAO;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AuthorBOImpl implements AuthorDAO {
+public class AuthorBOImpl implements AuthorBO {
 
     public static String getNextAuthorId() throws SQLException {
         String query = "select Author_Id from Author order by Author_Id desc limit 1";

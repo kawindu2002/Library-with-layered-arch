@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.AuthorDetailsBO;
 import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
 import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AuthorDetailsBOImpl implements AuthorDetailsDAO {
+public class AuthorDetailsBOImpl implements AuthorDetailsBO {
 
     @Override
     public boolean saveAuthorDetailsList(ArrayList<AuthorDetailsDTO> authorDetailsDTOS) throws SQLException {

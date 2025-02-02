@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.dao.custom.MemberDAO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MemberBOImpl implements MemberDAO {
+public class MemberBOImpl implements MemberBO {
 
     static String getNextMemberId() throws SQLException {
         String query = "select Member_Id from Member order by Member_Id desc limit 1";

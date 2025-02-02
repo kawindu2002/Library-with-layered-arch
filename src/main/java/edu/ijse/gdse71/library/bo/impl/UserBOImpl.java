@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.impl;
 
+import edu.ijse.gdse71.library.bo.custom.UserBO;
 import edu.ijse.gdse71.library.dao.custom.UserDAO;
 import edu.ijse.gdse71.library.dto.UserDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserBOImpl implements UserDAO {
+public class UserBOImpl implements UserBO {
 
     static String getNextUserId() throws SQLException {
         String query = "select User_Id from User order by User_Id desc limit 1";
