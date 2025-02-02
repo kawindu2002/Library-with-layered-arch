@@ -1,5 +1,4 @@
 package edu.ijse.gdse71.library.bo;
 
-public interface CommonBO {
-
+public interface SuperBO {
 }
