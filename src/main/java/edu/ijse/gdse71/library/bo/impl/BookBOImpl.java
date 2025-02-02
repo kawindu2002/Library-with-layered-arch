@@ -1,4 +1,4 @@
-package edu.ijse.gdse71.library.dao.custom.impl;
+package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookDAOImpl implements BookDAO {
+public class BookBOImpl implements BookDAO {
 
     static String getNextBookId() throws SQLException {
         String query = "select Book_Id from Book order by Book_Id desc limit 1";
