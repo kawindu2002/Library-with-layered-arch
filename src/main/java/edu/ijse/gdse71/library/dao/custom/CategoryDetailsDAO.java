@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.dao.custom;
 
+import edu.ijse.gdse71.library.dao.SuperDAO;
 import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface CategoryDetailsDAO{
+public interface CategoryDetailsDAO extends SuperDAO {
 
     boolean saveCategoryDetailsList(ArrayList<CategoryDetailsDTO> categoryDetailsDTOS) throws SQLException;
 
