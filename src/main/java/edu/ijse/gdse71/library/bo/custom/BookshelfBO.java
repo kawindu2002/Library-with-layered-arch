@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface BookshelfBO {
+public interface BookshelfBO extends SuperBO {
 
     static String getNextBookshelfId() throws SQLException {
         return null;

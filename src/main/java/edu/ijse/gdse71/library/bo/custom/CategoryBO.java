@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface CategoryBO {
+public interface CategoryBO extends SuperBO {
 
     static String getNextCategoryId() throws SQLException {
         return null;

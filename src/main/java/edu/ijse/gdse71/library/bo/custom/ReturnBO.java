@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.ReturnDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface ReturnBO {
+public interface ReturnBO extends SuperBO {
     static String getNextReturnId() throws SQLException {
         return null;
     }

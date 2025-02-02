@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.BookDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface BookBO {
+public interface BookBO extends SuperBO {
 
     static String getNextBookId() throws SQLException {
         return null;

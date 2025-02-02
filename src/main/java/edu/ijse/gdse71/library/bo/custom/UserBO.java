@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.UserDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface UserBO {
+public interface UserBO extends SuperBO {
     static String getNextUserId() throws SQLException {
         return null;
     }

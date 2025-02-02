@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface ReservationBO {
+public interface ReservationBO extends SuperBO {
     static String getNextReservationId() throws SQLException {
         return null;
     }

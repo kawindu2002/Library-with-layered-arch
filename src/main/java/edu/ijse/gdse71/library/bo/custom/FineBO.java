@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.FineDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface FineBO {
+public interface FineBO extends SuperBO {
 
     static String getNextFineId() throws SQLException {
         return null;

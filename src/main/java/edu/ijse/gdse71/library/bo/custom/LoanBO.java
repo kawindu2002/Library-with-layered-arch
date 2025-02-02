@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface LoanBO {
+public interface LoanBO extends SuperBO {
     static String getNextLoanId() throws SQLException {
         return null;
     }

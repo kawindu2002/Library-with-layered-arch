@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface PaymentBO {
+public interface PaymentBO extends SuperBO {
     static String getNextPaymentId() throws SQLException {
         return null;
     }
@@ -16,3 +17,4 @@ public interface PaymentBO {
     ArrayList<String> getAllIds() throws SQLException;
     PaymentDTO findById(String selectedId) throws SQLException;
 }
+

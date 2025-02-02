@@ -1,11 +1,12 @@
 package edu.ijse.gdse71.library.bo.custom;
 
+import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface AuthorBO {
+public interface AuthorBO extends SuperBO {
     boolean save(AuthorDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(AuthorDTO dto) throws SQLException;
@@ -13,4 +14,3 @@ public interface AuthorBO {
     ArrayList<String> getAllIds() throws SQLException;
     AuthorDTO findById(String selectedId) throws SQLException;
 }
-
