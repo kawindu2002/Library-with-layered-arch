@@ -8,6 +8,7 @@ import edu.ijse.gdse71.library.dao.custom.LoanDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
+import edu.ijse.gdse71.library.entity.Book;
 import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.entity.Loan;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -22,7 +23,6 @@ public class LoanBOImpl implements LoanBO {
     LoanDAO loanDAO= (LoanDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.LOAN);
     BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
 
-
     public String getNextId() throws SQLException {
         return loanDAO.getNextId();
 
@@ -30,37 +30,35 @@ public class LoanBOImpl implements LoanBO {
 
     @Override
     public boolean save(LoanDTO dto) throws SQLException {
-//        Connection connection = DBConnection.getInstance().getConnection();
-//        try {
-//            connection.setAutoCommit(false);
-//
-//            boolean isLoanSaved = CrudUtil.execute(
-//                    "insert into Loan values (?,?,?,?,?,?)",
-//                    dto.getLoanID(),
-//                    dto.getUserID(),
-//                    dto.getMemberID(),
-//                    dto.getBookID(),
-//                    dto.getLoanDate(),
-//                    dto.getDueDate()
-//
-//            );
-//
-//            if (isLoanSaved) {
-//                boolean isBookStateSaved = bookModel.setBookState("Checked Out",dto.getBookID());
-//                if (isBookStateSaved) {
-//                    connection.commit();
-//                    return true;
-//                }
-//            }
-//
-//            connection.rollback();
-//            return false;
-//        } catch (Exception e) {
-//            connection.rollback();
-//            return false;
-//        } finally {
-//            connection.setAutoCommit(true);
-//        }
+        Connection connection = DBConnection.getInstance().getConnection();
+        try {
+            connection.setAutoCommit(false);
+
+            boolean isLoanSaved =  loanDAO.save(new Loan(
+                    dto.getLoanID(),
+                    dto.getUserID(),
+                    dto.getMemberID(),
+                    dto.getBookID(),
+                    dto.getLoanDate(),
+                    dto.getDueDate()
+            ));
+
+            if (isLoanSaved) {
+                boolean isBookStateSaved = bookDAO.setBookState("Checked Out",dto.getBookID());
+                if (isBookStateSaved) {
+                    connection.commit();
+                    return true;
+                }
+            }
+
+            connection.rollback();
+            return false;
+        } catch (Exception e) {
+            connection.rollback();
+            return false;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     @Override
@@ -70,38 +68,35 @@ public class LoanBOImpl implements LoanBO {
 
     @Override
     public boolean update(LoanDTO dto) throws SQLException {
-//        Connection connection = DBConnection.getInstance().getConnection();
-//        try {
-//            connection.setAutoCommit(false);
-//
-//            boolean isLoanUpdated = CrudUtil.execute(
-//
-//                    "update Loan set User_Id=?, Member_Id=?, Book_Id=?, Loan_Date=?,Due_Date=? where Loan_Id=?",
-//                    dto.getUserID(),
-//                    dto.getMemberID(),
-//                    dto.getBookID(),
-//                    dto.getLoanDate(),
-//                    dto.getDueDate(),
-//                    dto.getLoanID()
-//
-//            );
-//
-//            if (isLoanUpdated) {
-//                boolean isBookStateSaved = bookModel.setBookState("Checked Out",dto.getBookID());
-//                if (isBookStateSaved) {
-//                    connection.commit();
-//                    return true;
-//                }
-//            }
-//
-//            connection.rollback();
-//            return false;
-//        } catch (Exception e) {
-//            connection.rollback();
-//            return false;
-//        } finally {
-//            connection.setAutoCommit(true);
-//        }
+        Connection connection = DBConnection.getInstance().getConnection();
+        try {
+            connection.setAutoCommit(false);
+
+            boolean isLoanUpdated =  loanDAO.update(new Loan(
+                    dto.getLoanID(),
+                    dto.getUserID(),
+                    dto.getMemberID(),
+                    dto.getBookID(),
+                    dto.getLoanDate(),
+                    dto.getDueDate()
+            ));
+
+            if (isLoanUpdated) {
+                boolean isBookStateSaved = bookDAO.setBookState("Checked Out",dto.getBookID());
+                if (isBookStateSaved) {
+                    connection.commit();
+                    return true;
+                }
+            }
+
+            connection.rollback();
+            return false;
+        } catch (Exception e) {
+            connection.rollback();
+            return false;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     @Override

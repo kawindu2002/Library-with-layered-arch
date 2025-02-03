@@ -7,12 +7,12 @@ import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
+import edu.ijse.gdse71.library.entity.Book;
 import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.entity.Reservation;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -28,34 +28,34 @@ public class ReservationBOImpl implements ReservationBO {
 
     @Override
     public boolean save(ReservationDTO dto) throws SQLException {
-//        Connection connection = DBConnection.getInstance().getConnection();
-//        try {
-//            connection.setAutoCommit(false);
-//
-//            boolean isReservationSaved = reservationDAO.save(new Reservation(
-//                    dto.getReservationID(),
-//                    dto.getMemberID(),
-//                    dto.getBookID(),
-//                    dto.getUserID(),
-//                    dto.getReservationDate()
-//            ));
-//
-//            if (isReservationSaved) {
-//                boolean isBookStateSaved = bookModel.setBookState("Reserved",dto.getBookID());
-//                if (isBookStateSaved) {
-//                    connection.commit();
-//                    return true;
-//                }
-//            }
-//
-//            connection.rollback();
-//            return false;
-//        } catch (Exception e) {
-//            connection.rollback();
-//            return false;
-//        } finally {
-//            connection.setAutoCommit(true);
-//        }
+        Connection connection = DBConnection.getInstance().getConnection();
+        try {
+            connection.setAutoCommit(false);
+
+            boolean isReservationSaved = reservationDAO.save(new Reservation(
+                    dto.getReservationID(),
+                    dto.getMemberID(),
+                    dto.getBookID(),
+                    dto.getUserID(),
+                    dto.getReservationDate()
+            ));
+
+            if (isReservationSaved) {
+                boolean isBookStateSaved = bookDAO.setBookState("Reserved",dto.getBookID());
+                if (isBookStateSaved) {
+                    connection.commit();
+                    return true;
+                }
+            }
+
+            connection.rollback();
+            return false;
+        } catch (Exception e) {
+            connection.rollback();
+            return false;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     @Override
@@ -65,36 +65,34 @@ public class ReservationBOImpl implements ReservationBO {
 
     @Override
     public boolean update(ReservationDTO dto) throws SQLException {
-//        Connection connection = DBConnection.getInstance().getConnection();
-//        try {
-//            connection.setAutoCommit(false);
-//
-//            boolean isReservationUpdated = CrudUtil.execute(
-//                    "update Reservation set Member_Id=?, Book_Id=?, User_Id=?, Reservation_date=? where Reservation_Id=?",
-//                    dto.getMemberID(),
-//                    dto.getBookID(),
-//                    dto.getUserID(),
-//                    dto.getReservationDate(),
-//                    dto.getReservationID()
-//
-//            );
-//
-//            if (isReservationUpdated) {
-//                boolean isBookStateSaved = bookModel.setBookState("Reserved",dto.getBookID());
-//                if (isBookStateSaved) {
-//                    connection.commit();
-//                    return true;
-//                }
-//            }
-//
-//            connection.rollback();
-//            return false;
-//        } catch (Exception e) {
-//            connection.rollback();
-//            return false;
-//        } finally {
-//            connection.setAutoCommit(true);
-//        }
+        Connection connection = DBConnection.getInstance().getConnection();
+        try {
+            connection.setAutoCommit(false);
+
+            boolean isReservationUpdated = reservationDAO.update(new Reservation(
+                    dto.getReservationID(),
+                    dto.getMemberID(),
+                    dto.getBookID(),
+                    dto.getUserID(),
+                    dto.getReservationDate()
+            ));
+
+            if (isReservationUpdated) {
+                boolean isBookStateSaved = bookDAO.setBookState("Reserved",dto.getBookID());
+                if (isBookStateSaved) {
+                    connection.commit();
+                    return true;
+                }
+            }
+
+            connection.rollback();
+            return false;
+        } catch (Exception e) {
+            connection.rollback();
+            return false;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     @Override
