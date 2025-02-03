@@ -1,12 +1,9 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.ReturnDAO;
-import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.ReturnDTO;
-import edu.ijse.gdse71.library.entity.Return;
+import edu.ijse.gdse71.library.entity.Returns;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +16,7 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public boolean save(Return entity) throws SQLException {
+    public boolean save(Returns entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Returns values (?,?,?,?,?,?)",
                 entity.getReturnID(),
@@ -38,7 +35,7 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public boolean update(Return entity) throws SQLException {
+    public boolean update(Returns entity) throws SQLException {
 
         return CrudUtil.execute(
                 "update Returns set User_Id=?, Member_Id=?, Loan_Id=?, Book_Id=?,Returns_Date=? where Returns_Id=?",
@@ -52,13 +49,13 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public ArrayList<Return> getAll() throws SQLException {
+    public ArrayList<Returns> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Returns");
 
-        ArrayList<Return> allReturns = new ArrayList<>();
+        ArrayList<Returns> allReturns = new ArrayList<>();
 
         while (rst.next()) {
-            Return entity = new Return(
+            Returns entity = new Returns(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -84,11 +81,11 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public Return findById(String selectedId) throws SQLException {
+    public Returns findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Returns where Returns_Id=?", selectedId);
 
         if (rst.next()) {
-            return new Return(
+            return new Returns(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

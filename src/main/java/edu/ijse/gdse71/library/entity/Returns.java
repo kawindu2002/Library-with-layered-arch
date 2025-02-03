@@ -10,7 +10,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @ToString
 
-public class Return {
+public class Returns {
     private String returnID;
     private String userID;
     private String memberID;
