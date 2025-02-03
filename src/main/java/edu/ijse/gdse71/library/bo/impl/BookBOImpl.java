@@ -1,7 +1,10 @@
 package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.dao.DAOFactory;
+import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
+import edu.ijse.gdse71.library.dao.custom.CategoryDetailsDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -12,6 +15,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BookBOImpl implements BookBO {
+
+    BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
+    AuthorDetailsDAO AuthorDetailsDAO= (AuthorDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
+    CategoryDetailsDAO categoryDetailsDAO= (CategoryDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
 
     static String getNextBookId() throws SQLException {
         String query = "select Book_Id from Book order by Book_Id desc limit 1";

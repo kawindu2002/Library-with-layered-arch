@@ -1,7 +1,10 @@
 package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
+import edu.ijse.gdse71.library.dao.DAOFactory;
+import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
+import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -10,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PaymentBOImpl implements PaymentBO {
+
+    PaymentDAO paymentDAO= (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PAYMENT);
 
     static String getNextPaymentId() throws SQLException {
         String query = "select Payment_Id from Payment order by Payment_Id desc limit 1";
@@ -37,7 +42,7 @@ public class PaymentBOImpl implements PaymentBO {
     @Override
     public boolean update(PaymentDTO dto) throws SQLException {
         return CrudUtil.execute(
-                "update Reservation set Member_Id=?, Purpose=?, Price=?, Payment_date=?,User_Id=?  where Payment_Id=?",
+                "update Payment set Member_Id=?, Purpose=?, Price=?, Payment_date=?,User_Id=?  where Payment_Id=?",
                 dto.getMemberID(),
                 dto.getPurpose(),
                 dto.getPrice(),

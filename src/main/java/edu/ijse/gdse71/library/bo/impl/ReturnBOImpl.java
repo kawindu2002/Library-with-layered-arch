@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.ReturnBO;
+import edu.ijse.gdse71.library.dao.DAOFactory;
+import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.ReturnDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReturnDTO;
@@ -12,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ReturnBOImpl implements ReturnBO {
+
+    ReturnDAO returnDAO= (ReturnDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.RETURN);
+    BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
 
     static String getNextReturnId() throws SQLException {
         String query = "select Returns_Id from Returns order by Returns_Id desc limit 1";

@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
+import edu.ijse.gdse71.library.dao.DAOFactory;
+import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -10,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BookshelfBOImpl implements BookshelfBO {
+
+    BookshelfDAO bookshelfDAO= (BookshelfDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKSHELF);
 
     static String getNextBookshelfId() throws SQLException {
         String query = "select Bookshelf_Id from Bookshelf order by Bookshelf_Id desc limit 1";

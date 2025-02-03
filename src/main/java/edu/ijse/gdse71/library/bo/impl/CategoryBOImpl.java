@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
+import edu.ijse.gdse71.library.dao.DAOFactory;
+import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDAO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -10,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoryBOImpl implements CategoryBO {
+
+    CategoryDAO categoryDAO= (CategoryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY);
 
     static String getNextCategoryId() throws SQLException {
         String query = "select Category_Id from Category order by Category_Id desc limit 1";
