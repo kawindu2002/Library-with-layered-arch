@@ -5,7 +5,10 @@ import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
 import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
+import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
+import edu.ijse.gdse71.library.entity.Member;
+import edu.ijse.gdse71.library.entity.Payment;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,90 +19,82 @@ public class PaymentBOImpl implements PaymentBO {
 
     PaymentDAO paymentDAO= (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PAYMENT);
 
-    static String getNextPaymentId() throws SQLException {
-        String query = "select Payment_Id from Payment order by Payment_Id desc limit 1";
-        return CrudUtil.getNextId(query,"PY%03d","PY001");
+    public String getNextId() throws SQLException {
+        return paymentDAO.getNextId();
+
     }
 
     @Override
     public boolean save(PaymentDTO dto) throws SQLException {
-        return CrudUtil.execute(
-                "insert into Payment values (?,?,?,?,?,?)",
+
+        return paymentDAO.save(new Payment(
                 dto.getPaymentID(),
                 dto.getMemberID(),
                 dto.getPurpose(),
                 dto.getPrice(),
                 dto.getPaymentDate(),
                 dto.getUserID()
-        );
+        ));
     }
 
     @Override
     public boolean delete(String id) throws SQLException {
-        return CrudUtil.execute("delete from Payment where Payment_Id=?", id);
+        return paymentDAO.delete(id);
     }
 
     @Override
     public boolean update(PaymentDTO dto) throws SQLException {
-        return CrudUtil.execute(
-                "update Payment set Member_Id=?, Purpose=?, Price=?, Payment_date=?,User_Id=?  where Payment_Id=?",
+
+        return paymentDAO.update(new Payment(
+                dto.getPaymentID(),
                 dto.getMemberID(),
                 dto.getPurpose(),
                 dto.getPrice(),
                 dto.getPaymentDate(),
-                dto.getUserID(),
-                dto.getPaymentID()
-        );
+                dto.getUserID()
+        ));
     }
 
     @Override
     public ArrayList<PaymentDTO> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Payment");
 
+        ArrayList<Payment> payments = paymentDAO.getAll();
         ArrayList<PaymentDTO> paymentDTOS = new ArrayList<>();
+        for (Payment payment:payments) {
+            paymentDTOS.add(new PaymentDTO(
+                    payment.getPaymentID(),
+                    payment.getMemberID(),
+                    payment.getPurpose(),
+                    payment.getPrice(),
+                    payment.getPaymentDate(),
+                    payment.getUserID()
 
-        while (rst.next()) {
-            PaymentDTO paymentDTO = new PaymentDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getDouble(4),
-                    rst.getDate(5),
-                    rst.getString(6)
-
-            );
-            paymentDTOS.add(paymentDTO);
+            ));
         }
         return paymentDTOS;
+
     }
 
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select Payment_Id from Payment");
+        return paymentDAO.getAllIds();
 
-        ArrayList<String> paymentIds = new ArrayList<>();
-
-        while (rst.next()) {
-            paymentIds.add(rst.getString(1));
-        }
-
-        return paymentIds;
     }
 
     @Override
     public PaymentDTO findById(String selectedId) throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Payment where Payment_Id=?", selectedId);
-
-        if (rst.next()) {
-            return new PaymentDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getDouble(4),
-                    rst.getDate(5),
-                    rst.getString(6)
-            );
-        }
+//        ResultSet rst = CrudUtil.execute("select * from Payment where Payment_Id=?", selectedId);
+//
+//        if (rst.next()) {
+//            return new PaymentDTO(
+//                    rst.getString(1),
+//                    rst.getString(2),
+//                    rst.getString(3),
+//                    rst.getDouble(4),
+//                    rst.getDate(5),
+//                    rst.getString(6)
+//            );
+//        }
         return null;
     }
 

@@ -60,28 +60,23 @@ public class CategoryBOImpl implements CategoryBO {
 
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select Category_Id from Category");
+        return categoryDAO.getAllIds();
 
-        ArrayList<String> categoryIds = new ArrayList<>();
-
-        while (rst.next()) {
-            categoryIds.add(rst.getString(1));
-        }
-
-        return categoryIds;
     }
 
     @Override
     public CategoryDTO findById(String selectedId) throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Category where Category_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new CategoryDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getDate(3)
-            );
-        }
+//        ResultSet rst = CrudUtil.execute("select * from Category where Category_Id=?", selectedId);
+//
+//        if (rst.next()) {
+//            return new CategoryDTO(
+//                    rst.getString(1),
+//                    rst.getString(2),
+//                    rst.getDate(3)
+//            );
+//        }
+
         return null;
     }
 

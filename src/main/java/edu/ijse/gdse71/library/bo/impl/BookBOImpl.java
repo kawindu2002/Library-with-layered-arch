@@ -20,102 +20,102 @@ public class BookBOImpl implements BookBO {
     AuthorDetailsDAO AuthorDetailsDAO= (AuthorDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
     CategoryDetailsDAO categoryDetailsDAO= (CategoryDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
 
-    static String getNextBookId() throws SQLException {
-        String query = "select Book_Id from Book order by Book_Id desc limit 1";
-        return CrudUtil.getNextId(query,"BK%03d","BK001");
+    public String getNextBookId() throws SQLException {
+        return bookDAO.getNextId();
+
     }
 
 
     @Override
     public boolean save(BookDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            // @autoCommit: Disables auto-commit to manually control the transaction
-            connection.setAutoCommit(false);
-
-            // @isBookSaved: Saves the book details into the book table
-            boolean isBookSaved = CrudUtil.execute(
-                    "insert into Book values (?,?,?,?,?,?,?,?)",
-                    dto.getBookID(),
-                    dto.getTitle(),
-                    dto.getIsbn(),
-                    dto.getRegDate(),
-                    dto.getPublisherID(),
-                    dto.getPrice(),
-                    dto.getState(),
-                    dto.getBookshelfID()
-            );
-
-
-            // If the book is saved successfully
-            if (isBookSaved) {
-               // @isAuthorSaved: Saves the author details into the Author table
-                boolean isAuthorDetailsListSaved = authorDetailsModel.saveAuthorDetailsList(dto.getAuthorDetailsDTOS()); // Save Author details
-                if (isAuthorDetailsListSaved) {
-                    // @isCategoryDetailListSaved: Saves the list of category details
-                    boolean isCategoryDetailListSaved = categoryDetailsModel.saveCategoryDetailsList(dto.getCategoryDetailsDTOS());
-                    if (isCategoryDetailListSaved) {
-                        // @commit: Commits the transaction if book, author, and category details are saved successfully
-                        connection.commit();
-                        return true;
-                    }
-                }
-            }
-
-            // @rollback: Rolls back the transaction if author details or category details saving fails
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            // @catch: Rolls back the transaction in case of any exception
-            connection.rollback();
-            return false;
-        } finally {
-            // @finally: Resets auto-commit to true after the operation
-            connection.setAutoCommit(true);
-        }
+//        Connection connection = DBConnection.getInstance().getConnection();
+//        try {
+//            // @autoCommit: Disables auto-commit to manually control the transaction
+//            connection.setAutoCommit(false);
+//
+//            // @isBookSaved: Saves the book details into the book table
+//            boolean isBookSaved = CrudUtil.execute(
+//                    "insert into Book values (?,?,?,?,?,?,?,?)",
+//                    dto.getBookID(),
+//                    dto.getTitle(),
+//                    dto.getIsbn(),
+//                    dto.getRegDate(),
+//                    dto.getPublisherID(),
+//                    dto.getPrice(),
+//                    dto.getState(),
+//                    dto.getBookshelfID()
+//            );
+//
+//
+//            // If the book is saved successfully
+//            if (isBookSaved) {
+//               // @isAuthorSaved: Saves the author details into the Author table
+//                boolean isAuthorDetailsListSaved = authorDetailsModel.saveAuthorDetailsList(dto.getAuthorDetailsDTOS()); // Save Author details
+//                if (isAuthorDetailsListSaved) {
+//                    // @isCategoryDetailListSaved: Saves the list of category details
+//                    boolean isCategoryDetailListSaved = categoryDetailsModel.saveCategoryDetailsList(dto.getCategoryDetailsDTOS());
+//                    if (isCategoryDetailListSaved) {
+//                        // @commit: Commits the transaction if book, author, and category details are saved successfully
+//                        connection.commit();
+//                        return true;
+//                    }
+//                }
+//            }
+//
+//            // @rollback: Rolls back the transaction if author details or category details saving fails
+//            connection.rollback();
+//            return false;
+//        } catch (Exception e) {
+//            // @catch: Rolls back the transaction in case of any exception
+//            connection.rollback();
+//            return false;
+//        } finally {
+//            // @finally: Resets auto-commit to true after the operation
+//            connection.setAutoCommit(true);
+//        }
 
    }
 
     @Override
     public boolean delete(String id) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            // @autoCommit: Disables auto-commit to manually control the transaction
-            connection.setAutoCommit(false);
-
-            // First, delete the Author_Book associations for the given Book_Id
-            boolean isAuthorBookDeleted = authorDetailsModel.deleteAuthorDetailsList(id);
-            if (!isAuthorBookDeleted) {
-                connection.rollback();  //(rollback if Author_Book deletion fails)
-                return false;
-            }
-
-            // Then, delete the Category_Book associations for the given Book_Id
-            boolean isCategoryBookDeleted = categoryDetailsModel.deleteCategoryDetailsList(id);
-            if (!isCategoryBookDeleted) {
-                connection.rollback();  //(rollback if Category_Book deletion fails)
-                return false;
-            }
-
-            // After successful deletions of Author_Book and Category_Book, delete the Book record
-            boolean isBookDeleted = CrudUtil.execute("delete from Book where Book_Id = ?", id);
-            if (isBookDeleted) {
-                // @commit: Commit the transaction if all deletions were successful
-                connection.commit();
-                return true;
-            } else {
-                connection.rollback(); //  (rollback if Book deletion fails)
-                return false;
-            }
-
-        } catch (Exception e) {
-            // @catch: Rolls back the transaction in case of any exception
-            connection.rollback();
-            return false;
-        } finally {
-            // @finally: Resets auto-commit to true after the operation
-            connection.setAutoCommit(true); //
-        }
+//        Connection connection = DBConnection.getInstance().getConnection();
+//        try {
+//            // @autoCommit: Disables auto-commit to manually control the transaction
+//            connection.setAutoCommit(false);
+//
+//            // First, delete the Author_Book associations for the given Book_Id
+//            boolean isAuthorBookDeleted = authorDetailsModel.deleteAuthorDetailsList(id);
+//            if (!isAuthorBookDeleted) {
+//                connection.rollback();  //(rollback if Author_Book deletion fails)
+//                return false;
+//            }
+//
+//            // Then, delete the Category_Book associations for the given Book_Id
+//            boolean isCategoryBookDeleted = categoryDetailsModel.deleteCategoryDetailsList(id);
+//            if (!isCategoryBookDeleted) {
+//                connection.rollback();  //(rollback if Category_Book deletion fails)
+//                return false;
+//            }
+//
+//            // After successful deletions of Author_Book and Category_Book, delete the Book record
+//            boolean isBookDeleted = CrudUtil.execute("delete from Book where Book_Id = ?", id);
+//            if (isBookDeleted) {
+//                // @commit: Commit the transaction if all deletions were successful
+//                connection.commit();
+//                return true;
+//            } else {
+//                connection.rollback(); //  (rollback if Book deletion fails)
+//                return false;
+//            }
+//
+//        } catch (Exception e) {
+//            // @catch: Rolls back the transaction in case of any exception
+//            connection.rollback();
+//            return false;
+//        } finally {
+//            // @finally: Resets auto-commit to true after the operation
+//            connection.setAutoCommit(true); //
+//        }
     }
 
     @Override

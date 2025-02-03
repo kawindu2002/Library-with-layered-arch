@@ -66,6 +66,7 @@ public class BookshelfBOImpl implements BookshelfBO {
 
     }
 
+
     @Override
     public BookshelfDTO findById(String selectedId) throws SQLException {
 //        ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
@@ -78,6 +79,9 @@ public class BookshelfBOImpl implements BookshelfBO {
 //                    rst.getString(4)
 //            );
 //        }
+//        .......................
+//        BookshelfDTO bookshelfDTO = bookshelfDAO.findById(selectedId);
+//        return bookshelfDTO;
         return null;
     }
 
