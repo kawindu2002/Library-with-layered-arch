@@ -1,15 +1,11 @@
 package edu.ijse.gdse71.library.dao.custom;
 
 import edu.ijse.gdse71.library.dao.CrudDAO;
-import edu.ijse.gdse71.library.dto.PublisherDTO;
+import edu.ijse.gdse71.library.entity.Publisher;
 
-import java.sql.SQLException;
 
-public interface PublisherDAO extends CrudDAO<PublisherDTO> {
+public interface PublisherDAO extends CrudDAO<Publisher> {
 
-    static String getNextPublisherId() throws SQLException {
-        return null;
-    }
 
 }
 

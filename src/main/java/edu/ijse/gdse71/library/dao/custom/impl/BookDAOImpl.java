@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class BookDAOImpl implements BookDAO {
 
-    static String getNextBookId() throws SQLException {
+     public String getNextId() throws SQLException {
         String query = "select Book_Id from Book order by Book_Id desc limit 1";
         return CrudUtil.getNextId(query,"BK%03d","BK001");
     }

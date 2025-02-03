@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PaymentDAOImpl implements PaymentDAO {
 
-    static String getNextPaymentId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Payment_Id from Payment order by Payment_Id desc limit 1";
         return CrudUtil.getNextId(query,"PY%03d","PY001");
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PublisherDAOImpl implements PublisherDAO {
 
-    static String getNextPublisherId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Publisher_Id from Publisher order by Publisher_Id desc limit 1";
         return CrudUtil.getNextId(query,"PU%03d","PU001");
     }

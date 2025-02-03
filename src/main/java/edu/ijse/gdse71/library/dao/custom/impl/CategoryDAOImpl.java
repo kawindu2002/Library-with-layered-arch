@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CategoryDAOImpl implements CategoryDAO {
 
-    static String getNextCategoryId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Category_Id from Category order by Category_Id desc limit 1";
         return CrudUtil.getNextId(query,"CT%03d","CT001");
     }

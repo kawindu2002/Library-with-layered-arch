@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class BookshelfDAOImpl implements BookshelfDAO {
 
-    static String getNextBookshelfId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Bookshelf_Id from Bookshelf order by Bookshelf_Id desc limit 1";
         return CrudUtil.getNextId(query,"BS%03d","BS001");
     }

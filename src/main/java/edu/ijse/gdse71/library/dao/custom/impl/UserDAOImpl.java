@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class UserDAOImpl implements UserDAO {
 
-    static String getNextUserId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select User_Id from User order by User_Id desc limit 1";
         return CrudUtil.getNextId(query, "US%03d", "US001");
 

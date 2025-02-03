@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MemberDAOImpl implements MemberDAO {
 
-    static String getNextMemberId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Member_Id from Member order by Member_Id desc limit 1";
         return CrudUtil.getNextId(query,"ME%03d","ME001");
     }

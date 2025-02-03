@@ -1,15 +1,11 @@
 package edu.ijse.gdse71.library.dao.custom;
 
 import edu.ijse.gdse71.library.dao.CrudDAO;
-import edu.ijse.gdse71.library.dto.PaymentDTO;
+import edu.ijse.gdse71.library.entity.Payment;
 
-import java.sql.SQLException;
 
-public interface PaymentDAO extends CrudDAO<PaymentDTO> {
+public interface PaymentDAO extends CrudDAO<Payment> {
 
-     static String getNextPaymentId() throws SQLException {
-        return null;
-    }
 
 }
 

@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
 import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
+import edu.ijse.gdse71.library.entity.AuthorDetails;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class AuthorDetailsDAOImpl implements AuthorDetailsDAO {
         // Iterate through each author detail in the list
         for (AuthorDetailsDTO authorDetailsDTO : authorDetailsDTOS) {
             // @isAuthorDetailsSaved: Saves the individual author detail
-            boolean isAuthorDetailsSaved = saveAuthorDetail(authorDetailsDTO);
+            boolean isAuthorDetailsSaved = saveAuthorDetail(authorDetails);
             if (!isAuthorDetailsSaved) {
                 // Return false if saving any author detail fails
                 return false;
@@ -27,12 +28,12 @@ public class AuthorDetailsDAOImpl implements AuthorDetailsDAO {
     }
 
     @Override
-    public boolean saveAuthorDetail(AuthorDetailsDTO authorDetailsDTO) throws SQLException {
+    public boolean saveAuthorDetail(AuthorDetails entity) throws SQLException {
         // Executes an insert query to save the author detail into the database
         return CrudUtil.execute(
                 "insert into Author_Book values (?,?)",
-                authorDetailsDTO.getBookID(),
-                authorDetailsDTO.getAuthorID()
+                entity.getBookID(),
+                entity.getAuthorID()
         );
     }
 

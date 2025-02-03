@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.AuthorDAO;
-import edu.ijse.gdse71.library.dto.AuthorDTO;
+import edu.ijse.gdse71.library.entity.Author;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -10,20 +10,20 @@ import java.util.ArrayList;
 
 public class AuthorDAOImpl implements AuthorDAO {
 
-    public static String getNextAuthorId() throws SQLException {
+    public String getNextId() throws SQLException {
         String query = "select Author_Id from Author order by Author_Id desc limit 1";
         return CrudUtil.getNextId(query,"AU%03d","AU001");
 
     }
 
     @Override
-    public boolean save(AuthorDTO dto) throws SQLException {
+    public boolean save(Author entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Author values (?,?,?,?)",
-                dto.getAuthorID(),
-                dto.getName(),
-                dto.getBiography(),
-                dto.getRegDate()
+                entity.getAuthorID(),
+                entity.getName(),
+                entity.getBiography(),
+                entity.getRegDate()
         );
     }
 
@@ -34,34 +34,35 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public boolean update(AuthorDTO dto) throws SQLException {
+    public boolean update(Author entity) throws SQLException {
         return CrudUtil.execute(
                 "update Author set Name=?, Biography=?,Reg_date=? where Author_Id=?",
-                dto.getName(),
-                dto.getBiography(),
-                dto.getRegDate(),
-                dto.getAuthorID()
+                entity.getName(),
+                entity.getBiography(),
+                entity.getRegDate(),
+                entity.getAuthorID()
         );
     }
 
 
     @Override
-    public ArrayList<AuthorDTO> getAll() throws SQLException {
+    public ArrayList<Author> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Author");
 
-        ArrayList<AuthorDTO> authorDTOS = new ArrayList<>();
+        ArrayList<Author> allAuthors = new ArrayList<>();
 
         while (rst.next()) {
-            AuthorDTO authorDTO = new AuthorDTO(
+            Author entity = new Author(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getDate(4)
             );
-            authorDTOS.add(authorDTO);
+            allAuthors.add(entity);
         }
-        return authorDTOS;
+        return allAuthors;
     }
+
 
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
@@ -77,11 +78,11 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public AuthorDTO findById(String selectedId) throws SQLException {
+    public Author findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Author where Author_Id=?", selectedId);
 
         if (rst.next()) {
-            return new AuthorDTO(
+            return new Author(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

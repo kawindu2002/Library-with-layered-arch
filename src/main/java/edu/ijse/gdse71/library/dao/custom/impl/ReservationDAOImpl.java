@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ReservationDAOImpl implements ReservationDAO {
 
-    static String getNextReservationId() throws SQLException {
+    public String getNextId() throws SQLException {
         String query = "select Reservation_Id from Reservation order by Reservation_Id desc limit 1";
         return CrudUtil.getNextId(query, "RE%03d", "RE001");
     }

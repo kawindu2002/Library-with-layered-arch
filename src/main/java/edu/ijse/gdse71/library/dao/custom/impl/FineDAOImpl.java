@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class FineDAOImpl implements FineDAO {
 
-    static String getNextFineId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Fine_Id from Fine order by Fine_Id desc limit 1";
         return CrudUtil.getNextId(query,"FN%03d","FN001");
     }

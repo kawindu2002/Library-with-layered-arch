@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class LoanDAOImpl implements LoanDAO {
 
-    static String getNextLoanId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Loan_Id from Loan order by Loan_Id desc limit 1";
         return CrudUtil.getNextId(query,"LN%03d","LN001");
     }

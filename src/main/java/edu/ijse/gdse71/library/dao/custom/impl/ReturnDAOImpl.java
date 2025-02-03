@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ReturnDAOImpl implements ReturnDAO {
 
-    static String getNextReturnId() throws SQLException {
+    public String getNextId()  throws SQLException {
         String query = "select Returns_Id from Returns order by Returns_Id desc limit 1";
         return CrudUtil.getNextId(query,"RT%03d","RT001");
     }

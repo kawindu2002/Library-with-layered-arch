@@ -20,6 +20,8 @@ public class UserBOImpl implements UserBO {
 
     }
 
+
+
     @Override
     public boolean save(UserDTO dto) throws SQLException {
         return CrudUtil.execute(
@@ -70,6 +72,7 @@ public class UserBOImpl implements UserBO {
         }
         return userDTOS;
     }
+
 
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
