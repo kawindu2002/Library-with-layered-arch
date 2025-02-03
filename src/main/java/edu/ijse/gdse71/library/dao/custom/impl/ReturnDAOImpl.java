@@ -3,6 +3,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 import edu.ijse.gdse71.library.dao.custom.ReturnDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReturnDTO;
+import edu.ijse.gdse71.library.entity.Return;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.Connection;
@@ -18,38 +19,17 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public boolean save(ReturnDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean save(Return entity) throws SQLException {
+        return CrudUtil.execute(
+                "insert into Returns values (?,?,?,?,?,?)",
+                entity.getReturnID(),
+                entity.getUserID(),
+                entity.getMemberID(),
+                entity.getLoanID(),
+                entity.getBookID(),
+                entity.getReturnDate()
 
-            boolean isReturnSaved = CrudUtil.execute(
-                    "insert into Returns values (?,?,?,?,?,?)",
-                    dto.getReturnID(),
-                    dto.getUserID(),
-                    dto.getMemberID(),
-                    dto.getLoanID(),
-                    dto.getBookID(),
-                    dto.getReturnDate()
-
-            );
-
-            if (isReturnSaved) {
-                boolean isBookStateSaved = bookModel.setBookState("Available",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
+        );
     }
 
     @Override
@@ -58,48 +38,27 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
     @Override
-    public boolean update(ReturnDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean update(Return entity) throws SQLException {
 
-            boolean isReturnUpdated = CrudUtil.execute(
-                    "update Returns set User_Id=?, Member_Id=?, Loan_Id=?, Book_Id=?,Returns_Date=? where Returns_Id=?",
-                    dto.getUserID(),
-                    dto.getMemberID(),
-                    dto.getLoanID(),
-                    dto.getBookID(),
-                    dto.getReturnDate(),
-                    dto.getReturnID()
-
-            );
-
-            if (isReturnUpdated) {
-                boolean isBookStateSaved = bookModel.setBookState("Available",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
+        return CrudUtil.execute(
+                "update Returns set User_Id=?, Member_Id=?, Loan_Id=?, Book_Id=?,Returns_Date=? where Returns_Id=?",
+                entity.getUserID(),
+                entity.getMemberID(),
+                entity.getLoanID(),
+                entity.getBookID(),
+                entity.getReturnDate(),
+                entity.getReturnID()
+        );
     }
 
     @Override
-    public ArrayList<ReturnDTO> getAll() throws SQLException {
+    public ArrayList<Return> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Returns");
 
-        ArrayList<ReturnDTO> returnDTOS = new ArrayList<>();
+        ArrayList<Return> allReturns = new ArrayList<>();
 
         while (rst.next()) {
-            ReturnDTO returnDTO = new ReturnDTO(
+            Return entity = new Return(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -107,9 +66,9 @@ public class ReturnDAOImpl implements ReturnDAO {
                     rst.getString(5),
                     rst.getDate(6)
             );
-            returnDTOS.add(returnDTO);
+            allReturns.add(entity);
         }
-        return returnDTOS;
+        return allReturns;
     }
 
     @Override
@@ -121,16 +80,15 @@ public class ReturnDAOImpl implements ReturnDAO {
         while (rst.next()) {
             returnIds.add(rst.getString(1));
         }
-
         return returnIds;
     }
 
     @Override
-    public ReturnDTO findById(String selectedId) throws SQLException {
+    public Return findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Returns where Returns_Id=?", selectedId);
 
         if (rst.next()) {
-            return new ReturnDTO(
+            return new Return(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -143,4 +101,5 @@ public class ReturnDAOImpl implements ReturnDAO {
     }
 
 }
+
 

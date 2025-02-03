@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.PublisherDAO;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
+import edu.ijse.gdse71.library.entity.Publisher;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,13 +17,13 @@ public class PublisherDAOImpl implements PublisherDAO {
     }
 
     @Override
-    public boolean save(PublisherDTO dto) throws SQLException {
+    public boolean save(Publisher entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Publisher values (?,?,?,?)",
-                dto.getPublisherID(),
-                dto.getName(),
-                dto.getAddress(),
-                dto.getRegDate()
+                entity.getPublisherID(),
+                entity.getName(),
+                entity.getAddress(),
+                entity.getRegDate()
         );
     }
 
@@ -32,32 +33,32 @@ public class PublisherDAOImpl implements PublisherDAO {
     }
 
     @Override
-    public boolean update(PublisherDTO dto) throws SQLException {
+    public boolean update(Publisher entity) throws SQLException {
         return CrudUtil.execute(
                 "update Publisher set Name=?, Address=?,Reg_date=? where Publisher_Id=?",
-                dto.getName(),
-                dto.getAddress(),
-                dto.getRegDate(),
-                dto.getPublisherID()
+                entity.getName(),
+                entity.getAddress(),
+                entity.getRegDate(),
+                entity.getPublisherID()
         );
     }
 
     @Override
-    public ArrayList<PublisherDTO> getAll() throws SQLException {
+    public ArrayList<Publisher> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Publisher");
 
-        ArrayList<PublisherDTO> publisherDTOS = new ArrayList<>();
+        ArrayList<Publisher> allPublishers = new ArrayList<>();
 
         while (rst.next()) {
-            PublisherDTO publisherDTO = new PublisherDTO(
+            Publisher entity = new Publisher(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getDate(4)
             );
-            publisherDTOS.add(publisherDTO);
+            allPublishers.add(entity);
         }
-        return publisherDTOS;
+        return allPublishers;
     }
 
     @Override
@@ -74,11 +75,11 @@ public class PublisherDAOImpl implements PublisherDAO {
     }
 
     @Override
-    public PublisherDTO findById(String selectedId) throws SQLException {
+    public Publisher findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Publisher where Publisher_Id=?", selectedId);
 
         if (rst.next()) {
-            return new PublisherDTO(
+            return new Publisher(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

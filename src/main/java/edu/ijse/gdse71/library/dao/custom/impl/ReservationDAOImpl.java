@@ -3,6 +3,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
+import edu.ijse.gdse71.library.entity.Reservation;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.Connection;
@@ -18,38 +19,18 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public boolean save(ReservationDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean save(Reservation entity) throws SQLException {
 
-            boolean isReservationSaved = CrudUtil.execute(
-                    "insert into Reservation values (?,?,?,?,?)",
-                    dto.getReservationID(),
-                    dto.getMemberID(),
-                    dto.getBookID(),
-                    dto.getUserID(),
-                    dto.getReservationDate()
+        return CrudUtil.execute(
+                "insert into Reservation values (?,?,?,?,?)",
+                entity.getReservationID(),
+                entity.getMemberID(),
+                entity.getBookID(),
+                entity.getUserID(),
+                entity.getReservationDate()
 
-            );
-
-            if (isReservationSaved) {
-                boolean isBookStateSaved = bookModel.setBookState("Reserved",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
-    }
+        );
+  }
 
     @Override
     public boolean delete(String id) throws SQLException {
@@ -57,56 +38,36 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public boolean update(ReservationDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean update(Reservation entity) throws SQLException {
 
-            boolean isReservationUpdated = CrudUtil.execute(
-                    "update Reservation set Member_Id=?, Book_Id=?, User_Id=?, Reservation_date=? where Reservation_Id=?",
-                    dto.getMemberID(),
-                    dto.getBookID(),
-                    dto.getUserID(),
-                    dto.getReservationDate(),
-                    dto.getReservationID()
+        return CrudUtil.execute(
+                "update Reservation set Member_Id=?, Book_Id=?, User_Id=?, Reservation_date=? where Reservation_Id=?",
+                entity.getMemberID(),
+                entity.getBookID(),
+                entity.getUserID(),
+                entity.getReservationDate(),
+                entity.getReservationID()
 
-            );
-
-            if (isReservationUpdated) {
-                boolean isBookStateSaved = bookModel.setBookState("Reserved",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
+        );
     }
 
     @Override
-    public ArrayList<ReservationDTO> getAll() throws SQLException {
+    public ArrayList<Reservation> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Reservation");
 
-        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        ArrayList<Reservation> allReservations = new ArrayList<>();
 
         while (rst.next()) {
-            ReservationDTO reservationDTO = new ReservationDTO(
+            Reservation entity = new Reservation(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
                     rst.getDate(5)
             );
-            reservationDTOS.add(reservationDTO);
+            allReservations.add(entity);
         }
-        return reservationDTOS;
+        return allReservations;
     }
 
     @Override
@@ -123,11 +84,11 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public ReservationDTO findById(String selectedId) throws SQLException {
+    public Reservation findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Reservation where Reservation_Id=?", selectedId);
 
         if (rst.next()) {
-            return new ReservationDTO(
+            return new Reservation(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

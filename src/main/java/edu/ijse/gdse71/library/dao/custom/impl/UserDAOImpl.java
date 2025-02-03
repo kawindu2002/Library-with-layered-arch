@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.UserDAO;
 import edu.ijse.gdse71.library.dto.UserDTO;
+import edu.ijse.gdse71.library.entity.User;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -17,15 +18,15 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean save(UserDTO dto) throws SQLException {
+    public boolean save(User entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into User values (?,?,?,?,?,?)",
-                dto.getUserID(),
-                dto.getName(),
-                dto.getPassword(),
-                dto.getRole(),
-                dto.getRegDate(),
-                dto.getState()
+                entity.getUserID(),
+                entity.getName(),
+                entity.getPassword(),
+                entity.getRole(),
+                entity.getRegDate(),
+                entity.getState()
         );
     }
 
@@ -35,26 +36,26 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(UserDTO dto) throws SQLException {
+    public boolean update(User entity) throws SQLException {
         return CrudUtil.execute(
                 "update User set Name=?, Password=?, Role=?, Reg_date=?,State=? where User_Id=?",
-                dto.getName(),
-                dto.getPassword(),
-                dto.getRole(),
-                dto.getRegDate(),
-                dto.getState(),
-                dto.getUserID()
+                entity.getName(),
+                entity.getPassword(),
+                entity.getRole(),
+                entity.getRegDate(),
+                entity.getState(),
+                entity.getUserID()
         );
     }
 
     @Override
-    public ArrayList<UserDTO> getAll() throws SQLException {
+    public ArrayList<User> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from User");
 
-        ArrayList<UserDTO> userDTOS = new ArrayList<>();
+        ArrayList<User> allUsers = new ArrayList<>();
 
         while (rst.next()) {
-            UserDTO userDTO = new UserDTO(
+            User entity = new User(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -62,9 +63,9 @@ public class UserDAOImpl implements UserDAO {
                     rst.getDate(5),
                     rst.getString(6)
             );
-            userDTOS.add(userDTO);
+            allUsers.add(entity);
         }
-        return userDTOS;
+        return allUsers;
     }
 
     @Override
@@ -81,11 +82,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public UserDTO findById(String selectedId) throws SQLException {
+    public User findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from User where User_Id=?", selectedId);
 
         if (rst.next()) {
-            return new UserDTO(
+            return new User(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

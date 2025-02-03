@@ -1,11 +1,9 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.LoanDAO;
-import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.LoanDTO;
+import edu.ijse.gdse71.library.entity.Loan;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,38 +16,19 @@ public class LoanDAOImpl implements LoanDAO {
     }
 
     @Override
-    public boolean save(LoanDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean save(Loan entity) throws SQLException {
 
-            boolean isLoanSaved = CrudUtil.execute(
+            return CrudUtil.execute(
                     "insert into Loan values (?,?,?,?,?,?)",
-                    dto.getLoanID(),
-                    dto.getUserID(),
-                    dto.getMemberID(),
-                    dto.getBookID(),
-                    dto.getLoanDate(),
-                    dto.getDueDate()
+                    entity.getLoanID(),
+                    entity.getUserID(),
+                    entity.getMemberID(),
+                    entity.getBookID(),
+                    entity.getLoanDate(),
+                    entity.getDueDate()
 
             );
 
-            if (isLoanSaved) {
-                boolean isBookStateSaved = bookModel.setBookState("Checked Out",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
     }
 
     @Override
@@ -58,49 +37,29 @@ public class LoanDAOImpl implements LoanDAO {
     }
 
     @Override
-    public boolean update(LoanDTO dto) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            connection.setAutoCommit(false);
+    public boolean update(Loan entity) throws SQLException {
 
-            boolean isLoanUpdated = CrudUtil.execute(
+        return CrudUtil.execute(
 
-                    "update Loan set User_Id=?, Member_Id=?, Book_Id=?, Loan_Date=?,Due_Date=? where Loan_Id=?",
-                    dto.getUserID(),
-                    dto.getMemberID(),
-                    dto.getBookID(),
-                    dto.getLoanDate(),
-                    dto.getDueDate(),
-                    dto.getLoanID()
+                "update Loan set User_Id=?, Member_Id=?, Book_Id=?, Loan_Date=?,Due_Date=? where Loan_Id=?",
+                entity.getUserID(),
+                entity.getMemberID(),
+                entity.getBookID(),
+                entity.getLoanDate(),
+                entity.getDueDate(),
+                entity.getLoanID()
 
-            );
-
-            if (isLoanUpdated) {
-                boolean isBookStateSaved = bookModel.setBookState("Checked Out",dto.getBookID());
-                if (isBookStateSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
+        );
     }
 
     @Override
-    public ArrayList<LoanDTO> getAll() throws SQLException {
+    public ArrayList<Loan> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Loan");
 
-        ArrayList<LoanDTO> loanDTOS = new ArrayList<>();
+        ArrayList<Loan> allLoans = new ArrayList<>();
 
         while (rst.next()) {
-            LoanDTO loanDTO = new LoanDTO(
+            Loan entity = new Loan(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -108,9 +67,9 @@ public class LoanDAOImpl implements LoanDAO {
                     rst.getDate(5),
                     rst.getDate(6)
             );
-            loanDTOS.add(loanDTO);
+            allLoans.add(entity);
         }
-        return loanDTOS;
+        return allLoans;
     }
 
     @Override
@@ -126,11 +85,11 @@ public class LoanDAOImpl implements LoanDAO {
     }
 
     @Override
-    public LoanDTO findById(String selectedId) throws SQLException {
+    public Loan findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Loan where Loan_Id=?", selectedId);
 
         if (rst.next()) {
-            return new LoanDTO(
+            return new Loan(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dto.FineDTO;
+import edu.ijse.gdse71.library.entity.Fine;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,16 +17,16 @@ public class FineDAOImpl implements FineDAO {
     }
 
     @Override
-    public boolean save(FineDTO dto) throws SQLException {
+    public boolean save(Fine entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Fine values (?,?,?,?,?,?,?)",
-                dto.getFineID(),
-                dto.getUserID(),
-                dto.getMemberID(),
-                dto.getLoanID(),
-                dto.getPrice(),
-                dto.getFineDate(),
-                dto.getReason()
+                entity.getFineID(),
+                entity.getUserID(),
+                entity.getMemberID(),
+                entity.getLoanID(),
+                entity.getPrice(),
+                entity.getFineDate(),
+                entity.getReason()
         );
     }
 
@@ -35,27 +36,27 @@ public class FineDAOImpl implements FineDAO {
     }
 
     @Override
-    public boolean update(FineDTO dto) throws SQLException {
+    public boolean update(Fine entity) throws SQLException {
         return CrudUtil.execute(
                 "update Fine set User_Id=?, Member_Id=?, Loan_Id=?, Price=?,Fine_date=?,Reason=? where Fine_Id=?",
-                dto.getUserID(),
-                dto.getMemberID(),
-                dto.getLoanID(),
-                dto.getPrice(),
-                dto.getFineDate(),
-                dto.getReason(),
-                dto.getFineID()
+                entity.getUserID(),
+                entity.getMemberID(),
+                entity.getLoanID(),
+                entity.getPrice(),
+                entity.getFineDate(),
+                entity.getReason(),
+                entity.getFineID()
         );
     }
 
     @Override
-    public ArrayList<FineDTO> getAll() throws SQLException {
+    public ArrayList<Fine> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Fine");
 
-        ArrayList<FineDTO> fineDTOS = new ArrayList<>();
+        ArrayList<Fine> allFines = new ArrayList<>();
 
         while (rst.next()) {
-            FineDTO fineDTO = new FineDTO(
+            Fine entity = new Fine(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -64,9 +65,9 @@ public class FineDAOImpl implements FineDAO {
                     rst.getDate(6),
                     rst.getString(7)
             );
-            fineDTOS.add(fineDTO);
+            allFines.add(entity);
         }
-        return fineDTOS;
+        return allFines;
     }
 
     @Override
@@ -83,11 +84,11 @@ public class FineDAOImpl implements FineDAO {
     }
 
     @Override
-    public FineDTO findById(String selectedId) throws SQLException {
+    public Fine findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Fine where Fine_Id=?", selectedId);
 
         if (rst.next()) {
-            return new FineDTO(
+            return new Fine(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

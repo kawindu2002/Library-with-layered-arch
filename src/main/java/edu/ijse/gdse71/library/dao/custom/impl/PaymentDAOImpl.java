@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
+import edu.ijse.gdse71.library.entity.Payment;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,15 +17,15 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean save(PaymentDTO dto) throws SQLException {
+    public boolean save(Payment entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Payment values (?,?,?,?,?,?)",
-                dto.getPaymentID(),
-                dto.getMemberID(),
-                dto.getPurpose(),
-                dto.getPrice(),
-                dto.getPaymentDate(),
-                dto.getUserID()
+                entity.getPaymentID(),
+                entity.getMemberID(),
+                entity.getPurpose(),
+                entity.getPrice(),
+                entity.getPaymentDate(),
+                entity.getUserID()
         );
     }
 
@@ -34,26 +35,26 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean update(PaymentDTO dto) throws SQLException {
+    public boolean update(Payment entity) throws SQLException {
         return CrudUtil.execute(
                 "update Reservation set Member_Id=?, Purpose=?, Price=?, Payment_date=?,User_Id=?  where Payment_Id=?",
-                dto.getMemberID(),
-                dto.getPurpose(),
-                dto.getPrice(),
-                dto.getPaymentDate(),
-                dto.getUserID(),
-                dto.getPaymentID()
+                entity.getMemberID(),
+                entity.getPurpose(),
+                entity.getPrice(),
+                entity.getPaymentDate(),
+                entity.getUserID(),
+                entity.getPaymentID()
         );
     }
 
     @Override
-    public ArrayList<PaymentDTO> getAll() throws SQLException {
+    public ArrayList<Payment> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Payment");
 
-        ArrayList<PaymentDTO> paymentDTOS = new ArrayList<>();
+        ArrayList<Payment> allPayments = new ArrayList<>();
 
         while (rst.next()) {
-            PaymentDTO paymentDTO = new PaymentDTO(
+            Payment entity = new Payment(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -62,9 +63,9 @@ public class PaymentDAOImpl implements PaymentDAO {
                     rst.getString(6)
 
             );
-            paymentDTOS.add(paymentDTO);
+            allPayments.add(entity);
         }
-        return paymentDTOS;
+        return allPayments;
     }
 
     @Override
@@ -81,11 +82,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public PaymentDTO findById(String selectedId) throws SQLException {
+    public Payment findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Payment where Payment_Id=?", selectedId);
 
         if (rst.next()) {
-            return new PaymentDTO(
+            return new Payment(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

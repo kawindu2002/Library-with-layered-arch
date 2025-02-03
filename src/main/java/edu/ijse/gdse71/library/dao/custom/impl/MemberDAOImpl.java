@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.MemberDAO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
+import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,16 +17,16 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public boolean save(MemberDTO dto) throws SQLException {
+    public boolean save(Member entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Member values (?,?,?,?,?,?,?)",
-                dto.getMemberID(),
-                dto.getName(),
-                dto.getAddress(),
-                dto.getEmail(),
-                dto.getContact(),
-                dto.getRegDate(),
-                dto.getState()
+                entity.getMemberID(),
+                entity.getName(),
+                entity.getAddress(),
+                entity.getEmail(),
+                entity.getContact(),
+                entity.getRegDate(),
+                entity.getState()
         );
     }
 
@@ -35,27 +36,27 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public boolean update(MemberDTO dto) throws SQLException {
+    public boolean update(Member entity) throws SQLException {
         return CrudUtil.execute(
                 "update Member set Name=?, Address=?, Email=?, Contact=?,Reg_date=?,State=? where Member_Id=?",
-                dto.getName(),
-                dto.getAddress(),
-                dto.getEmail(),
-                dto.getContact(),
-                dto.getRegDate(),
-                dto.getState(),
-                dto.getMemberID()
+                entity.getName(),
+                entity.getAddress(),
+                entity.getEmail(),
+                entity.getContact(),
+                entity.getRegDate(),
+                entity.getState(),
+                entity.getMemberID()
         );
     }
 
     @Override
-    public ArrayList<MemberDTO> getAll() throws SQLException {
+    public ArrayList<Member> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Member");
 
-        ArrayList<MemberDTO> memberDTOS = new ArrayList<>();
+        ArrayList<Member> allMembers = new ArrayList<>();
 
         while (rst.next()) {
-            MemberDTO memberDTO = new MemberDTO(
+            Member entity = new Member(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -64,9 +65,9 @@ public class MemberDAOImpl implements MemberDAO {
                     rst.getDate(6),
                     rst.getString(7)
             );
-            memberDTOS.add(memberDTO);
+            allMembers.add(entity);
         }
-        return memberDTOS;
+        return allMembers;
     }
 
     @Override
@@ -83,11 +84,11 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public MemberDTO findById(String selectedId) throws SQLException {
+    public Member findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Member where Member_Id=?", selectedId);
 
         if (rst.next()) {
-            return new MemberDTO(
+            return new Member(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

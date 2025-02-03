@@ -13,8 +13,8 @@ public class AuthorBOImpl implements AuthorBO {
 
     AuthorDAO authorDAO= (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
 
-    public static String getNextAuthorId() throws SQLException {
-        return AuthorDAO.getNextAuthorId();
+    public String getNextId() throws SQLException {
+        return AuthorDAO.getNextId();
 
     }
 

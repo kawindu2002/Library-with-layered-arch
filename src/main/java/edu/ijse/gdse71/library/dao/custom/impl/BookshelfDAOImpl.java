@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
+import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,13 +17,13 @@ public class BookshelfDAOImpl implements BookshelfDAO {
     }
 
     @Override
-    public boolean save(BookshelfDTO dto) throws SQLException {
+    public boolean save(Bookshelf entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Bookshelf values (?,?,?,?)",
-                dto.getBookshelfID(),
-                dto.getCategoryID(),
-                dto.getCapacity(),
-                dto.getLocation()
+                entity.getBookshelfID(),
+                entity.getCategoryID(),
+                entity.getCapacity(),
+                entity.getLocation()
         );
     }
 
@@ -32,33 +33,33 @@ public class BookshelfDAOImpl implements BookshelfDAO {
     }
 
     @Override
-    public boolean update(BookshelfDTO dto) throws SQLException {
+    public boolean update(Bookshelf entity) throws SQLException {
         return CrudUtil.execute(
             "update Bookshelf set Category_Id =?, Capacity=?, Location=? where Bookshelf_Id=?",
-            dto.getCategoryID(),
-            dto.getCapacity(),
-            dto.getLocation(),
-            dto.getBookshelfID()
+                entity.getCategoryID(),
+                entity.getCapacity(),
+                entity.getLocation(),
+                entity.getBookshelfID()
         );
     }
 
     @Override
-    public ArrayList<BookshelfDTO> getAll() throws SQLException {
+    public ArrayList<Bookshelf> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Bookshelf");
 
-        ArrayList<BookshelfDTO> bookshelfDTOS = new ArrayList<>();
+        ArrayList<Bookshelf> allBookshelfs = new ArrayList<>();
 
         while (rst.next()) {
-            BookshelfDTO bookshelfDTO = new BookshelfDTO(
+            Bookshelf entity = new Bookshelf(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getInt(3),
                     rst.getString(4)
 
             );
-            bookshelfDTOS.add(bookshelfDTO);
+            allBookshelfs.add(entity);
         }
-        return bookshelfDTOS;
+        return allBookshelfs;
     }
 
     @Override
@@ -75,11 +76,11 @@ public class BookshelfDAOImpl implements BookshelfDAO {
     }
 
     @Override
-    public BookshelfDTO findById(String selectedId) throws SQLException {
+    public Bookshelf findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
 
         if (rst.next()) {
-            return new BookshelfDTO(
+            return new Bookshelf(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getInt(3),

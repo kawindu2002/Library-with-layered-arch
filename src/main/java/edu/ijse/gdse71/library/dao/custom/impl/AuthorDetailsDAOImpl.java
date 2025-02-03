@@ -16,7 +16,7 @@ public class AuthorDetailsDAOImpl implements AuthorDetailsDAO {
         // Iterate through each author detail in the list
         for (AuthorDetailsDTO authorDetailsDTO : authorDetailsDTOS) {
             // @isAuthorDetailsSaved: Saves the individual author detail
-            boolean isAuthorDetailsSaved = saveAuthorDetail(authorDetails);
+            boolean isAuthorDetailsSaved = saveAuthorDetail(authorDetailsDTO);
             if (!isAuthorDetailsSaved) {
                 // Return false if saving any author detail fails
                 return false;

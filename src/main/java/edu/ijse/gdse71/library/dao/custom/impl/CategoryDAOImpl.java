@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.CategoryDAO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
+import edu.ijse.gdse71.library.entity.Category;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -16,12 +17,12 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public boolean save(CategoryDTO dto) throws SQLException {
+    public boolean save(Category entity) throws SQLException {
         return CrudUtil.execute(
                 "insert into Category values (?,?,?)",
-                dto.getCategoryID(),
-                dto.getDescription(),
-                dto.getRegDate()
+                entity.getCategoryID(),
+                entity.getDescription(),
+                entity.getRegDate()
         );
     }
 
@@ -31,30 +32,30 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public boolean update(CategoryDTO dto) throws SQLException {
+    public boolean update(Category entity) throws SQLException {
         return CrudUtil.execute(
                 "update Category set Description=?,Reg_date=? where Category_Id=?",
-                dto.getDescription(),
-                dto.getRegDate(),
-                dto.getCategoryID()
+                entity.getDescription(),
+                entity.getRegDate(),
+                entity.getCategoryID()
         );
     }
 
     @Override
-    public ArrayList<CategoryDTO> getAll() throws SQLException {
+    public ArrayList<Category> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Category");
 
-        ArrayList<CategoryDTO> categoryDTOS = new ArrayList<>();
+        ArrayList<Category> allCategory = new ArrayList<>();
 
         while (rst.next()) {
-            CategoryDTO categoryDTO = new CategoryDTO(
+            Category entity = new Category(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getDate(3)
             );
-            categoryDTOS.add(categoryDTO);
+            allCategory.add(entity);
         }
-        return categoryDTOS;
+        return allCategory;
     }
 
     @Override
@@ -71,11 +72,11 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public CategoryDTO findById(String selectedId) throws SQLException {
+    public Category findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Category where Category_Id=?", selectedId);
 
         if (rst.next()) {
-            return new CategoryDTO(
+            return new Category(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getDate(3)
