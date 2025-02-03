@@ -4,7 +4,10 @@ import edu.ijse.gdse71.library.bo.custom.CategoryBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDAO;
+import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
+import edu.ijse.gdse71.library.entity.Bookshelf;
+import edu.ijse.gdse71.library.entity.Category;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -15,49 +18,42 @@ public class CategoryBOImpl implements CategoryBO {
 
     CategoryDAO categoryDAO= (CategoryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY);
 
-    static String getNextCategoryId() throws SQLException {
-        String query = "select Category_Id from Category order by Category_Id desc limit 1";
-        return CrudUtil.getNextId(query,"CT%03d","CT001");
+    public String getNextId() throws SQLException {
+        return categoryDAO.getNextId();
+
     }
 
     @Override
     public boolean save(CategoryDTO dto) throws SQLException {
-        return CrudUtil.execute(
-                "insert into Category values (?,?,?)",
+
+        return categoryDAO.save(new Category(
                 dto.getCategoryID(),
                 dto.getDescription(),
-                dto.getRegDate()
-        );
+                dto.getRegDate()));
     }
 
     @Override
     public boolean delete(String id) throws SQLException {
-        return CrudUtil.execute("delete from Category where Category_Id=?", id);
+        return categoryDAO.delete(id);
     }
 
     @Override
     public boolean update(CategoryDTO dto) throws SQLException {
-        return CrudUtil.execute(
-                "update Category set Description=?,Reg_date=? where Category_Id=?",
+        return categoryDAO.update(new Category(
+                dto.getCategoryID(),
                 dto.getDescription(),
-                dto.getRegDate(),
-                dto.getCategoryID()
-        );
+                dto.getRegDate()));
     }
 
     @Override
     public ArrayList<CategoryDTO> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Category");
-
-        ArrayList<CategoryDTO> categoryDTOS = new ArrayList<>();
-
-        while (rst.next()) {
-            CategoryDTO categoryDTO = new CategoryDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getDate(3)
-            );
-            categoryDTOS.add(categoryDTO);
+        ArrayList<Category> categories = categoryDAO.getAll();
+        ArrayList<CategoryDTO> categoryDTOS=new ArrayList<>();
+        for (Category category:categories) {
+            categoryDTOS.add(new CategoryDTO(
+                    category.getCategoryID(),
+                    category.getDescription(),
+                    category.getRegDate()));
         }
         return categoryDTOS;
     }

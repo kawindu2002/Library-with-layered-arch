@@ -5,7 +5,9 @@ import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.AuthorDAO;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.entity.Author;
+import edu.ijse.gdse71.library.util.CrudUtil;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -14,10 +16,8 @@ public class AuthorBOImpl implements AuthorBO {
     AuthorDAO authorDAO= (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
 
     public String getNextId() throws SQLException {
-        return AuthorDAO.getNextId();
-
+        return authorDAO.getNextId();
     }
-
 
     @Override
     public boolean save(AuthorDTO dto) throws SQLException {
@@ -46,7 +46,7 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public ArrayList<AuthorDTO> getAll() throws SQLException {
-        ArrayList<Author> customers=authorDAO.getAll();
+        ArrayList<Author> authors = authorDAO.getAll();
         ArrayList<AuthorDTO> authorDTOS=new ArrayList<>();
         for (Author author:authors) {
             authorDTOS.add(new AuthorDTO(
@@ -58,17 +58,29 @@ public class AuthorBOImpl implements AuthorBO {
         return authorDTOS;
     }
 
+
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
-
+        return authorDAO.getAllIds();
     }
+
 
     @Override
     public AuthorDTO findById(String selectedId) throws SQLException {
+//        ResultSet rst = CrudUtil.execute("select * from Author where Author_Id=?", selectedId);
 
+//        if (rst.next()) {
+//            return new Author(
+//                    rst.getString(1),
+//                    rst.getString(2),
+//                    rst.getString(3),
+//                    rst.getDate(4)
+//            );
+//        }
+
+        return null;
     }
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------
 

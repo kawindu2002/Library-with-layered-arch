@@ -5,6 +5,9 @@ import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
+import edu.ijse.gdse71.library.entity.Author;
+import edu.ijse.gdse71.library.entity.Book;
+import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -15,83 +18,68 @@ public class BookshelfBOImpl implements BookshelfBO {
 
     BookshelfDAO bookshelfDAO= (BookshelfDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKSHELF);
 
-    static String getNextBookshelfId() throws SQLException {
-        String query = "select Bookshelf_Id from Bookshelf order by Bookshelf_Id desc limit 1";
-        return CrudUtil.getNextId(query,"BS%03d","BS001");
+    public String getNextId() throws SQLException {
+        return bookshelfDAO.getNextId();
+
     }
 
     @Override
     public boolean save(BookshelfDTO dto) throws SQLException {
-        return CrudUtil.execute(
-                "insert into Bookshelf values (?,?,?,?)",
-                dto.getBookshelfID(),
-                dto.getCategoryID(),
-                dto.getCapacity(),
-                dto.getLocation()
-        );
+        return bookshelfDAO.save(new Bookshelf(
+            dto.getBookshelfID(),
+            dto.getCategoryID(),
+            dto.getCapacity(),
+            dto.getLocation()));
     }
 
     @Override
     public boolean delete(String id) throws SQLException {
-        return CrudUtil.execute("delete from Bookshelf where Bookshelf_Id=?", id);
+        return bookshelfDAO.delete(id);
     }
 
     @Override
     public boolean update(BookshelfDTO dto) throws SQLException {
-        return CrudUtil.execute(
-            "update Bookshelf set Category_Id =?, Capacity=?, Location=? where Bookshelf_Id=?",
-            dto.getCategoryID(),
-            dto.getCapacity(),
-            dto.getLocation(),
-            dto.getBookshelfID()
-        );
+        return bookshelfDAO.update(new Bookshelf(
+                dto.getBookshelfID(),
+                dto.getCategoryID(),
+                dto.getCapacity(),
+                dto.getLocation()));
     }
 
     @Override
     public ArrayList<BookshelfDTO> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Bookshelf");
-
-        ArrayList<BookshelfDTO> bookshelfDTOS = new ArrayList<>();
-
-        while (rst.next()) {
-            BookshelfDTO bookshelfDTO = new BookshelfDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getInt(3),
-                    rst.getString(4)
-
-            );
-            bookshelfDTOS.add(bookshelfDTO);
+        ArrayList<Bookshelf> bookshelfs = bookshelfDAO.getAll();
+        ArrayList<BookshelfDTO> bookshelfDTOS=new ArrayList<>();
+        for (Bookshelf bookshelf:bookshelfs) {
+            bookshelfDTOS.add(new BookshelfDTO(
+                    bookshelf.getBookshelfID(),
+                    bookshelf.getCategoryID(),
+                    bookshelf.getCapacity(),
+                    bookshelf.getLocation()));
         }
         return bookshelfDTOS;
     }
 
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select Bookshelf_Id from Bookshelf");
+        return bookshelfDAO.getAllIds();
 
-        ArrayList<String> bookshelfIds = new ArrayList<>();
-
-        while (rst.next()) {
-            bookshelfIds.add(rst.getString(1));
-        }
-
-        return bookshelfIds;
     }
 
     @Override
     public BookshelfDTO findById(String selectedId) throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
-
-        if (rst.next()) {
-            return new BookshelfDTO(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getInt(3),
-                    rst.getString(4)
-            );
-        }
+//        ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
+//
+//        if (rst.next()) {
+//            return new BookshelfDTO(
+//                    rst.getString(1),
+//                    rst.getString(2),
+//                    rst.getInt(3),
+//                    rst.getString(4)
+//            );
+//        }
         return null;
     }
 
 }
+

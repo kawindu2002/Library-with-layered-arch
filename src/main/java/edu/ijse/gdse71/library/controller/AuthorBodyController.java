@@ -82,7 +82,6 @@ public class AuthorBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-    final AuthorModel authorModel = new AuthorModel();
 
 
     //------------------------------------------------------------------------------------------------------------------
