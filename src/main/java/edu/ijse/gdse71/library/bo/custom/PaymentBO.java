@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface PaymentBO extends SuperBO {
-    static String getNextPaymentId() throws SQLException {
-        return null;
-    }
+    String getNextId() throws SQLException;
     boolean save(PaymentDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(PaymentDTO dto) throws SQLException;

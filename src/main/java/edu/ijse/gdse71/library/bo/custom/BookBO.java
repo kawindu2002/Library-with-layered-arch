@@ -8,9 +8,7 @@ import java.util.ArrayList;
 
 public interface BookBO extends SuperBO {
 
-    static String getNextBookId() throws SQLException {
-        return null;
-    }
+    String getNextId() throws SQLException;
     boolean save(BookDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(BookDTO dto) throws SQLException;

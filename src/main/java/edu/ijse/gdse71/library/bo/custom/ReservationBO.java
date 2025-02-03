@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ReservationBO extends SuperBO {
-    static String getNextReservationId() throws SQLException {
-        return null;
-    }
+    String getNextId() throws SQLException;
     boolean save(ReservationDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(ReservationDTO dto) throws SQLException;

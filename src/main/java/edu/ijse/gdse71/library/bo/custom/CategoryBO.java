@@ -8,10 +8,7 @@ import java.util.ArrayList;
 
 public interface CategoryBO extends SuperBO {
 
-    static String getNextCategoryId() throws SQLException {
-        return null;
-    }
-
+    String getNextId() throws SQLException;
     boolean save(CategoryDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(CategoryDTO dto) throws SQLException;

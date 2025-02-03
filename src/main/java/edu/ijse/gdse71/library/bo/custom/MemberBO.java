@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface MemberBO extends SuperBO {
-    static String getNextMemberId() throws SQLException {
-        return null;
-    }
+    String getNextId() throws SQLException;
     boolean save(MemberDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(MemberDTO dto) throws SQLException;

@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface UserBO extends SuperBO {
-    static String getNextUserId() throws SQLException {
-        return null;
-    }
-
+    String getNextId() throws SQLException;
     boolean save(UserDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(UserDTO dto) throws SQLException;

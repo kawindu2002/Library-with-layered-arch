@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface PublisherBO extends SuperBO {
-    static String getNextPublisherId() throws SQLException {
-        return null;
-    }
-
+    String getNextId() throws SQLException;
     boolean save(PublisherDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(PublisherDTO dto) throws SQLException;

@@ -8,9 +8,7 @@ import java.util.ArrayList;
 
 public interface BookshelfBO extends SuperBO {
 
-    static String getNextBookshelfId() throws SQLException {
-        return null;
-    }
+    String getNextId() throws SQLException;
     boolean save(BookshelfDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(BookshelfDTO dto) throws SQLException;

@@ -8,10 +8,7 @@ import java.util.ArrayList;
 
 public interface FineBO extends SuperBO {
 
-    static String getNextFineId() throws SQLException {
-        return null;
-    }
-
+    String getNextId() throws SQLException;
     boolean save(FineDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(FineDTO dto) throws SQLException;

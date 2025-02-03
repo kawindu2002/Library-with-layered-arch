@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface LoanBO extends SuperBO {
-    static String getNextLoanId() throws SQLException {
-        return null;
-    }
-
+    String getNextId() throws SQLException;
     boolean save(LoanDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(LoanDTO dto) throws SQLException;

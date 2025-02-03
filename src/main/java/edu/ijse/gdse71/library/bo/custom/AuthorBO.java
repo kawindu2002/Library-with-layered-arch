@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface AuthorBO extends SuperBO {
+    String getNextId() throws SQLException;
     boolean save(AuthorDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
     boolean update(AuthorDTO dto) throws SQLException;
