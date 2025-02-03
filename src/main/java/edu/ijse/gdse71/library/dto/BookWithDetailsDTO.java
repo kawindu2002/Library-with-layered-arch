@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @ToString
 
-public class BookWithoutDetailsDTO {
+public class BookWithDetailsDTO {
     private String bookID;
     private String title;
     private String isbn;
@@ -20,6 +20,8 @@ public class BookWithoutDetailsDTO {
     private double price;
     private String state;
     private String bookshelfID;
+    private ArrayList<CategoryDetailsDTO> categoryDetailsDTOS = new ArrayList<>();
+    private ArrayList<AuthorDetailsDTO> authorDetailsDTOS = new ArrayList<>();
+
 
 }
-

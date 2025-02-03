@@ -3,7 +3,6 @@ package edu.ijse.gdse71.library.dto;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -20,8 +19,6 @@ public class BookDTO {
     private double price;
     private String state;
     private String bookshelfID;
-    private ArrayList<CategoryDetailsDTO> categoryDetailsDTOS = new ArrayList<>();
-    private ArrayList<AuthorDetailsDTO> authorDetailsDTOS = new ArrayList<>();
-
 
 }
+

@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
-import edu.ijse.gdse71.library.dto.BookDTO;
+import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.entity.Book;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -97,7 +97,7 @@ public class BookDAOImpl implements BookDAO {
         ResultSet rst = CrudUtil.execute("select * from Book where Book_Id=?", selectedId);
 
         if (rst.next()) {
-            return new BookDTO(
+            return new BookWithDetailsDTO(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

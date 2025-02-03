@@ -1,7 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
-import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.BookDTO;
+import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.LoanTM;
@@ -9,7 +8,6 @@ import edu.ijse.gdse71.library.model.BookModel;
 import edu.ijse.gdse71.library.model.LoanModel;
 import edu.ijse.gdse71.library.model.MemberModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
-import edu.ijse.gdse71.library.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -213,7 +210,7 @@ public class LoanBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {

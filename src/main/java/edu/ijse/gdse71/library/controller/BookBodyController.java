@@ -200,7 +200,7 @@ public class BookBodyController implements Initializable {
     void bookSaveBtnActionClicked(ActionEvent event) throws SQLException {
 
         try{
-            BookDTO bookDTO = verifySave();
+            BookWithDetailsDTO bookDTO = verifySave();
             boolean isNullAuthorDTOS= bookDTO.getAuthorDetailsDTOS() == null || bookDTO.getAuthorDetailsDTOS().isEmpty();
             boolean isNullCategoryDTOS= bookDTO.getCategoryDetailsDTOS() == null || bookDTO.getCategoryDetailsDTOS().isEmpty();
             boolean isBookDTONull = bookDTO == null;
@@ -230,7 +230,7 @@ public class BookBodyController implements Initializable {
     }
 
     public void bookUpdateBtnActionClicked(ActionEvent actionEvent) throws SQLException {
-        BookWithoutDetailsDTO bookWithoutDetailsDTO = verifyUpdate();
+        BookDTO bookWithoutDetailsDTO = verifyUpdate();
         if (bookWithoutDetailsDTO != null) {
             boolean isUpdated = bookModel.updateBook(bookWithoutDetailsDTO);
             if (isUpdated) {
@@ -370,10 +370,10 @@ public class BookBodyController implements Initializable {
 
     private void loadTableData() throws SQLException {
 
-        ArrayList<BookDTO> bookDTOS = bookModel.getAllBooks();
+        ArrayList<BookWithDetailsDTO> bookDTOS = bookModel.getAllBooks();
         ObservableList<BookTM> bookTMS = FXCollections.observableArrayList();
 
-        for (BookDTO bookDTO : bookDTOS) {
+        for (BookWithDetailsDTO bookDTO : bookDTOS) {
             BookTM bookTM = new BookTM(
                     bookDTO.getBookID(),
                     bookDTO.getTitle(),
@@ -399,7 +399,7 @@ public class BookBodyController implements Initializable {
     }
 
 
-    public BookDTO verifySave() throws SQLException {
+    public BookWithDetailsDTO verifySave() throws SQLException {
 
         String bookId = bookIdShowLbl.getText();
         String publisherId = pubIdCombo.getSelectionModel().getSelectedItem();
@@ -479,7 +479,7 @@ public class BookBodyController implements Initializable {
         //validate and return object DTO
 
         if (!isNullBookshelfId && !isNullPublisherId && !isNullState && isValidPrice && !isNullTitle && !isNullIsbn ) {
-            BookDTO bookDTO = new BookDTO(
+            BookWithDetailsDTO bookDTO = new BookWithDetailsDTO(
                     bookId,
                     title,
                     isbn,
@@ -516,7 +516,7 @@ public class BookBodyController implements Initializable {
         isbnTxt.setStyle(isbnTxt.getStyle() + CommonUtil.defaultColorBorder);
     }
 
-    public BookWithoutDetailsDTO verifyUpdate() throws SQLException {
+    public BookDTO verifyUpdate() throws SQLException {
         String bookId = bookIdShowLbl.getText();
         String publisherId = pubIdCombo.getSelectionModel().getSelectedItem();
         String bookshelfId = bookshelfIdCombo.getSelectionModel().getSelectedItem();
@@ -592,7 +592,7 @@ public class BookBodyController implements Initializable {
         //validate and return object DTO
 
         if (!isNullBookshelfId && !isNullPublisherId && !isNullState && isValidPrice && !isNullTitle && !isNullIsbn ) {
-            BookWithoutDetailsDTO bookWithoutDetailsDTO = new BookWithoutDetailsDTO(
+            BookDTO bookWithoutDetailsDTO = new BookDTO(
                     bookId,
                     title,
                     isbn,

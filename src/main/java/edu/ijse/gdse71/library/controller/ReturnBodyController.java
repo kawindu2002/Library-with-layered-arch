@@ -218,7 +218,7 @@ public class ReturnBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {

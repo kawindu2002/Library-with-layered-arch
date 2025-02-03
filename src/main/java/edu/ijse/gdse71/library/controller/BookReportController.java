@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.BookDTO;
+import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.model.BookModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,7 +131,7 @@ public class BookReportController implements Initializable {
     @FXML
     void bookIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
         if (bookDTO != null) {
 
             titleShowLbl.setText(bookDTO.getTitle());
