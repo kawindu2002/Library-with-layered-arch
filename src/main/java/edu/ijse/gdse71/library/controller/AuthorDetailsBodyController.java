@@ -1,9 +1,11 @@
 package edu.ijse.gdse71.library.controller;
+import edu.ijse.gdse71.library.bo.custom.AuthorBO;
+import edu.ijse.gdse71.library.bo.custom.AuthorDetailsBO;
+import edu.ijse.gdse71.library.bo.impl.AuthorBOImpl;
+import edu.ijse.gdse71.library.bo.impl.AuthorDetailsBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.AuthorCartTM;
-import edu.ijse.gdse71.library.model.AuthorDetailsModel;
-import edu.ijse.gdse71.library.model.AuthorModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class AuthorDetailsBodyController implements Initializable {
 
@@ -72,6 +75,9 @@ public class AuthorDetailsBodyController implements Initializable {
     @FXML
     String selectedAuthorId;
 
+    //property injection (Dependency injection)
+    AuthorDetailsBO authorDetailsBO = new AuthorDetailsBOImpl();
+    AuthorBO authorBO = new AuthorBOImpl();
 
 
     // Observable list to manage cart items in TableView
@@ -171,7 +177,7 @@ public class AuthorDetailsBodyController implements Initializable {
 
     public void authorIdComboOnAction(ActionEvent actionEvent) throws SQLException {
         selectedAuthorId = authorIdCombo.getSelectionModel().getSelectedItem();
-        AuthorDTO authorDTO = authorModel.findById(selectedAuthorId);
+        AuthorDTO authorDTO = authorBO.findById(selectedAuthorId);
 
         // If author found (authorDTO not null)
         if (authorDTO != null) {
@@ -219,7 +225,7 @@ public class AuthorDetailsBodyController implements Initializable {
 
 
     private void loadAuthorId() throws SQLException {
-        ArrayList<String> authorIds = authorModel.getAllAuthorIds();
+        ArrayList<String> authorIds = authorBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(authorIds);
         authorIdCombo.setItems(observableList);
