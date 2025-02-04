@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.MemberTM;
-import edu.ijse.gdse71.library.model.MemberModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +112,7 @@ public class MemberBodyController implements Initializable {
     private Label stateLbl;
 
 
-    final MemberModel memberModel = new MemberModel();
+    MemberBO memberBO = new MemberBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -126,7 +127,7 @@ public class MemberBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = memberModel.deleteMember(memberId);
+            boolean isDeleted = memberBO.delete(memberId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Member deleted...!").show();
@@ -147,7 +148,7 @@ public class MemberBodyController implements Initializable {
     void memberSaveBtnActionClicked(ActionEvent event) throws SQLException {
         MemberDTO memberDTO = verifySaveUpdate();
         if (memberDTO != null) {
-            boolean isSaved = memberModel.saveMember(memberDTO);
+            boolean isSaved = memberBO.save(memberDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Member saved...!").show();
@@ -164,7 +165,7 @@ public class MemberBodyController implements Initializable {
     void memberUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         MemberDTO memberDTO = verifySaveUpdate();
         if (memberDTO != null) {
-            boolean isUpdated = memberModel.updateMember(memberDTO);
+            boolean isUpdated = memberBO.update(memberDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Member updated...!").show();
@@ -251,25 +252,8 @@ public class MemberBodyController implements Initializable {
     }
 
 
-//    private void loadAllCustomers() {
-//        tblCustomers.getItems().clear();
-//        /*Get all customers*/
-//        try {
-//            ArrayList<CustomerDTO> allCustomers = customerBO.getAll();
-//            for(CustomerDTO customer : allCustomers) {
-//                tblCustomers.getItems().add(new CustomerTM(customer.getId(), customer.getName(), customer.getAddress()));
-//            }
-//        } catch (SQLException e) {
-//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-//        } catch (ClassNotFoundException e) {
-//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-//        }
-//    }
-//
-
-
     private void loadTableData() throws SQLException {
-        ArrayList<MemberDTO> memberDTOS = memberModel.getAllMembers();
+        ArrayList<MemberDTO> memberDTOS = memberBO.getAll();
 
         ObservableList<MemberTM> memberTMS = FXCollections.observableArrayList();
 
@@ -291,7 +275,7 @@ public class MemberBodyController implements Initializable {
 
 
     public void loadNextMemberId() throws SQLException {
-        String nextMemberId = memberModel.getNextMemberId();
+        String nextMemberId = memberBO.getNextId();
         memIdShowLbl.setText(nextMemberId);
     }
 
