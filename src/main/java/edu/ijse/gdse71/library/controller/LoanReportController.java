@@ -1,9 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.LoanBO;
+import edu.ijse.gdse71.library.bo.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.LoanDTO;
-import edu.ijse.gdse71.library.dto.MemberDTO;
-import edu.ijse.gdse71.library.model.LoanModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,8 +55,8 @@ public class LoanReportController implements Initializable {
     @FXML
     private Label loanReportLbl;
 
-    @FXML
-    final LoanModel loanModel = new LoanModel();
+
+    LoanBO loanBO = new LoanBOImpl();
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
@@ -131,7 +131,7 @@ public class LoanReportController implements Initializable {
     @FXML
     void loanIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedLoanId = loanIdCombo.getSelectionModel().getSelectedItem();
-        LoanDTO loanDTO = loanModel.findById(selectedLoanId);
+        LoanDTO loanDTO = loanBO.findById(selectedLoanId);
         if (loanDTO != null) {
 
             loanDateShowLbl.setText(String.valueOf(loanDTO.getLoanDate()));
@@ -152,7 +152,7 @@ public class LoanReportController implements Initializable {
     }
 
     private void loadLoanId() throws SQLException {
-        ArrayList<String> loanIds = loanModel.getAllLoanIds();
+        ArrayList<String> loanIds = loanBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(loanIds);
         loanIdCombo.setItems(observableList);

@@ -1,7 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.UserBO;
+import edu.ijse.gdse71.library.bo.impl.UserBOImpl;
 import edu.ijse.gdse71.library.dto.UserDTO;
-import edu.ijse.gdse71.library.model.UserModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,6 +52,7 @@ public class LoginController  {
     private String password;
     private String role;
 
+    UserBO userBO = new UserBOImpl();
 
     @FXML
     void backBtnActionClicked(ActionEvent event) {
@@ -87,7 +89,7 @@ public class LoginController  {
 
     void validateUserDetails() throws SQLException {
         String selectedUserId = userIdTxt.getText();
-        UserDTO userDTO = userModel.findById(selectedUserId);
+        UserDTO userDTO = userBO.findById(selectedUserId);
 
         if (userDTO != null) {
             userId = userDTO.getUserID();
