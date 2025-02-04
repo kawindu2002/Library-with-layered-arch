@@ -1,8 +1,15 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.bo.custom.LoanBO;
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.custom.ReturnBO;
+import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.impl.LoanBOImpl;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.impl.ReturnBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.ReturnTM;
-import edu.ijse.gdse71.library.model.*;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -93,7 +100,6 @@ public class ReturnBodyController implements Initializable {
     @FXML
     private Button returnUpdateBtn;
 
-
     @FXML
     private TableColumn<ReturnTM, String> userIdCol;
 
@@ -116,10 +122,10 @@ public class ReturnBodyController implements Initializable {
     private Label memberNameShowLbl;
 
 
-    final MemberModel memberModel = new MemberModel();
-    final BookModel bookModel = new BookModel();
-    final LoanModel loanModel = new LoanModel();
-    final ReturnModel returnModel = new ReturnModel();
+    final MemberBO memberBO = new MemberBOImpl();
+    final BookBO bookBO = new BookBOImpl();
+    final LoanBO loanBO = new LoanBOImpl();
+    final ReturnBO returnBO = new ReturnBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -134,7 +140,7 @@ public class ReturnBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = returnModel.deleteReturn(returnId);
+            boolean isDeleted = returnBO.delete(returnId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Return deleted...!").show();
@@ -155,7 +161,7 @@ public class ReturnBodyController implements Initializable {
     void returnSaveBtnActionClicked(ActionEvent event) throws SQLException {
         ReturnDTO returnDTO = verifySaveUpdate();
         if (returnDTO != null) {
-            boolean isSaved = returnModel.saveReturn(returnDTO);
+            boolean isSaved = returnBO.save(returnDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Return saved...!").show();
@@ -172,7 +178,7 @@ public class ReturnBodyController implements Initializable {
     void returnUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         ReturnDTO returnDTO = verifySaveUpdate();
         if (returnDTO != null) {
-            boolean isUpdated = returnModel.updateReturn(returnDTO);
+            boolean isUpdated = returnBO.update(returnDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Return updated...!").show();
@@ -205,7 +211,7 @@ public class ReturnBodyController implements Initializable {
 
     public void memberIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
 
         // If bookshelf found
         if (memberDTO != null) {
@@ -218,7 +224,7 @@ public class ReturnBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {
@@ -231,7 +237,7 @@ public class ReturnBodyController implements Initializable {
 
     public void loanIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedLoanId = loanIdCombo.getSelectionModel().getSelectedItem();
-        LoanDTO loanDTO =loanModel.findById(selectedLoanId);
+        LoanDTO loanDTO =loanBO.findById(selectedLoanId);
 
         // If loan found
         if (loanDTO != null) {
@@ -243,7 +249,6 @@ public class ReturnBodyController implements Initializable {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -258,7 +263,6 @@ public class ReturnBodyController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Fail to refresh page").show();
         }
     }
-
 
     private void refreshPage() throws SQLException {
         loadNextReturnId();
@@ -283,7 +287,7 @@ public class ReturnBodyController implements Initializable {
     }
 
     private void loadBookId() throws SQLException {
-        ArrayList<String> bookIds = bookModel.getAllBookIdsByState("Checked Out");
+        ArrayList<String> bookIds = bookBO.getAllBookIdsByState("Checked Out");
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(bookIds);
         bookIdCombo.setItems(observableList);
@@ -291,13 +295,13 @@ public class ReturnBodyController implements Initializable {
 
 
     private void loadMemberId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
 
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
         for (String memberId : memberIds) {
 
-            String state = memberModel.getMemberState(memberId);
+            String state = memberBO.getState(memberId);
             if (state.equals("Active")) {
                 observableList.add(memberId);
             }
@@ -307,7 +311,7 @@ public class ReturnBodyController implements Initializable {
 
 
     private void loadLoanId() throws SQLException {
-        ArrayList<String> loanIds = loanModel.getAllLoanIds();
+        ArrayList<String> loanIds = loanBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(loanIds);
         loanIdCombo.setItems(observableList);
@@ -326,7 +330,7 @@ public class ReturnBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<ReturnDTO> returnDTOS = returnModel.getAllReturns();
+        ArrayList<ReturnDTO> returnDTOS = returnBO.getAll();
 
         ObservableList<ReturnTM> returnTMS = FXCollections.observableArrayList();
 
@@ -347,7 +351,7 @@ public class ReturnBodyController implements Initializable {
 
 
     public void loadNextReturnId() throws SQLException {
-        String nextReturnId = returnModel.getNextReturnId();
+        String nextReturnId = returnBO.getNextId();
         returnIdShowLbl.setText(nextReturnId);
     }
 
