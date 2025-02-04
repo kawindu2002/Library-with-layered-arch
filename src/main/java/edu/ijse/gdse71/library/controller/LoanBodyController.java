@@ -1,12 +1,15 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.bo.custom.LoanBO;
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.impl.LoanBOImpl;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.LoanTM;
-import edu.ijse.gdse71.library.model.BookModel;
-import edu.ijse.gdse71.library.model.LoanModel;
-import edu.ijse.gdse71.library.model.MemberModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,9 +113,9 @@ public class LoanBodyController implements Initializable {
     @FXML
     private Label memberNameShowLbl;
 
-    final MemberModel memberModel = new MemberModel();
-    final BookModel bookModel = new BookModel();
-    final LoanModel loanModel = new LoanModel();
+     MemberBO memberBO = new MemberBOImpl();
+     BookBO bookBO = new BookBOImpl();
+     LoanBO loanBO = new LoanBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -127,7 +130,7 @@ public class LoanBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = loanModel.deleteLoan(loanId);
+            boolean isDeleted = loanBO.delete(loanId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Loan deleted...!").show();
@@ -147,7 +150,7 @@ public class LoanBodyController implements Initializable {
     void loanSaveBtnActionClicked(ActionEvent event) throws SQLException {
         LoanDTO loanDTO = verifySaveUpdate();
         if (loanDTO != null) {
-            boolean isSaved = loanModel.saveLoan(loanDTO);
+            boolean isSaved = loanBO.save(loanDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Loan saved...!").show();
@@ -163,7 +166,7 @@ public class LoanBodyController implements Initializable {
     void loanUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         LoanDTO loanDTO = verifySaveUpdate();
         if (loanDTO != null) {
-            boolean isUpdated = loanModel.updateLoan(loanDTO);
+            boolean isUpdated = loanBO.update(loanDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Loan updated...!").show();
@@ -197,7 +200,7 @@ public class LoanBodyController implements Initializable {
 
     public void memberIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
 
         // If bookshelf found
         if (memberDTO != null) {
@@ -210,7 +213,7 @@ public class LoanBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {
@@ -263,7 +266,7 @@ public class LoanBodyController implements Initializable {
 
 
     private void loadBookId() throws SQLException {
-        ArrayList<String> bookIds = bookModel.getAllBookIdsByState("Available");
+        ArrayList<String> bookIds = bookBO.getAllBookIdsByState("Available");
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(bookIds);
         bookIdCombo.setItems(observableList);
@@ -271,13 +274,13 @@ public class LoanBodyController implements Initializable {
 
 
     private void loadMemberId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
 
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
         for (String memberId : memberIds) {
 
-            String state = memberModel.getMemberState(memberId);
+            String state = memberBO.getState(memberId);
             if (state.equals("Active")) {
                 observableList.add(memberId);
             }
@@ -298,7 +301,7 @@ public class LoanBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<LoanDTO> loanDTOS = loanModel.getAllLoans();
+        ArrayList<LoanDTO> loanDTOS = loanBO.getAll();
 
         ObservableList<LoanTM> loanTMS = FXCollections.observableArrayList();
 
@@ -319,7 +322,7 @@ public class LoanBodyController implements Initializable {
 
 
     public void loadNextLoanId() throws SQLException {
-        String nextLoanId = loanModel.getNextLoanId();
+        String nextLoanId = loanBO.getNextId();
         loanIdShowLbl.setText(nextLoanId);
     }
 
