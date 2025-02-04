@@ -76,7 +76,6 @@ public class AuthorDetailsBodyController implements Initializable {
     String selectedAuthorId;
 
     //property injection (Dependency injection)
-    AuthorDetailsBO authorDetailsBO = new AuthorDetailsBOImpl();
     AuthorBO authorBO = new AuthorBOImpl();
 
 

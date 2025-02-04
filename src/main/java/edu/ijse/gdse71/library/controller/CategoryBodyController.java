@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.CategoryBO;
+import edu.ijse.gdse71.library.bo.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 import edu.ijse.gdse71.library.dto.tm.CategoryTM;
-import edu.ijse.gdse71.library.model.CategoryModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,7 +75,7 @@ public class CategoryBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-    final CategoryModel categoryModel = new CategoryModel();
+    CategoryBO categoryBO = new CategoryBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ public class CategoryBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = categoryModel.deleteCategory(categoryId);
+            boolean isDeleted = categoryBO.delete(categoryId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Category deleted...!").show();
@@ -110,7 +111,7 @@ public class CategoryBodyController implements Initializable {
     void categorySaveBtnActionClicked(ActionEvent event) throws SQLException {
         CategoryDTO categoryDTO = verifySaveUpdate();
         if (categoryDTO != null) {
-            boolean isSaved = categoryModel.saveCategory(categoryDTO);
+            boolean isSaved = categoryBO.save(categoryDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Category saved...!").show();
@@ -126,7 +127,7 @@ public class CategoryBodyController implements Initializable {
     void categoryUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         CategoryDTO categoryDTO = verifySaveUpdate();
         if (categoryDTO != null) {
-            boolean isUpdated = categoryModel.updateCategory(categoryDTO);
+            boolean isUpdated = categoryBO.update(categoryDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Category updated...!").show();
@@ -196,7 +197,7 @@ public class CategoryBodyController implements Initializable {
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<CategoryDTO> categoryDTOS = categoryModel.getAllCategories();
+        ArrayList<CategoryDTO> categoryDTOS = categoryBO.getAll();
 
         ObservableList<CategoryTM> categoryTMS = FXCollections.observableArrayList();
 
@@ -214,7 +215,7 @@ public class CategoryBodyController implements Initializable {
 
 
     public void loadNextCategoryId() throws SQLException {
-        String nextCategoryId = categoryModel.getNextCategoryId();
+        String nextCategoryId = categoryBO.getNextId();
         categoryIdShowLbl.setText(nextCategoryId);
 
     }

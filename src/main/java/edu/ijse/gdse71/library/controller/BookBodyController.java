@@ -1,5 +1,13 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.AuthorBO;
+import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
+import edu.ijse.gdse71.library.bo.custom.PublisherBO;
+import edu.ijse.gdse71.library.bo.impl.AuthorBOImpl;
+import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.impl.BookshelfBOImpl;
+import edu.ijse.gdse71.library.bo.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.BookTM;
 import edu.ijse.gdse71.library.model.BookModel;
@@ -142,9 +150,14 @@ public class BookBodyController implements Initializable {
     private TextField titleTxt;
 
 
-    final BookModel bookModel = new BookModel();
-    final PublisherModel publisherModel = new PublisherModel();
-    final BookshelfModel bookshelfModel = new BookshelfModel();
+//    final BookModel bookModel = new BookModel();
+//    final PublisherModel publisherModel = new PublisherModel();
+//    final BookshelfModel bookshelfModel = new BookshelfModel();
+
+
+    BookBO bookBO = new BookBOImpl();
+    PublisherBO publisherBO = new PublisherBOImpl();
+    BookshelfBO bookshelfBO = new BookshelfBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -181,7 +194,7 @@ public class BookBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted =bookModel.deleteBook(bookId);
+            boolean isDeleted = bookBO.delete(bookId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Book deleted...!").show();
@@ -214,7 +227,7 @@ public class BookBodyController implements Initializable {
             }
 
             if (!isBookDTONull && !isNullAuthorDTOS && !isNullCategoryDTOS) {
-                boolean isSaved = bookModel.saveBook(bookDTO);
+                boolean isSaved = bookBO.save(bookDTO);
                 if (isSaved) {
                     refreshPage();
                     new Alert(Alert.AlertType.INFORMATION, "Book saved...!").show();
@@ -232,7 +245,7 @@ public class BookBodyController implements Initializable {
     public void bookUpdateBtnActionClicked(ActionEvent actionEvent) throws SQLException {
         BookDTO bookWithoutDetailsDTO = verifyUpdate();
         if (bookWithoutDetailsDTO != null) {
-            boolean isUpdated = bookModel.updateBook(bookWithoutDetailsDTO);
+            boolean isUpdated = bookModel.update(bookWithoutDetailsDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Book updated...!").show();

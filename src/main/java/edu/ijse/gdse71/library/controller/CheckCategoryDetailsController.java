@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.CategoryDetailsBO;
+import edu.ijse.gdse71.library.bo.impl.CategoryDetailsBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.CategoryDetailsTM;
-import edu.ijse.gdse71.library.model.CategoryDetailsModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,7 +42,7 @@ public class CheckCategoryDetailsController implements Initializable {
     private TableView<CategoryDetailsTM> checkCategoryDetailsTbl;
 
 
-    final CategoryDetailsModel categoryDetailsModel = new CategoryDetailsModel();
+    final CategoryDetailsBO categoryDetailsBO = new CategoryDetailsBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -78,7 +79,7 @@ public class CheckCategoryDetailsController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<CategoryDetailsDTO> categoryDetailsDTOS = categoryDetailsModel.getAllCategoryDetails();
+        ArrayList<CategoryDetailsDTO> categoryDetailsDTOS = categoryDetailsBO.getAllCategoryDetails();
 
         ObservableList<CategoryDetailsTM> categoryDetailsTMS = FXCollections.observableArrayList();
 

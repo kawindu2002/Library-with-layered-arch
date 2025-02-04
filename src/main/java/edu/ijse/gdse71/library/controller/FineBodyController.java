@@ -1,8 +1,13 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.FineBO;
+import edu.ijse.gdse71.library.bo.custom.LoanBO;
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.impl.FineBOImpl;
+import edu.ijse.gdse71.library.bo.impl.LoanBOImpl;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.FineTM;
-import edu.ijse.gdse71.library.model.*;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -118,6 +123,10 @@ public class FineBodyController implements Initializable {
     private Label memberNameShowLbl;
 
 
+    FineBO fineBO = new FineBOImpl();
+    MemberBO memberBO = new MemberBOImpl();
+    LoanBO loanBO = new LoanBOImpl();
+
     //------------------------------------------------------------------------------------------------------------------
 
 
@@ -130,7 +139,7 @@ public class FineBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = fineModel.deleteFine(fineId);
+            boolean isDeleted = fineBO.delete(fineId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Fine deleted...!").show();
@@ -151,7 +160,7 @@ public class FineBodyController implements Initializable {
     void fineSaveBtnActionClicked(ActionEvent event) throws SQLException{
         FineDTO fineDTO = verifySaveUpdate();
         if (fineDTO != null) {
-            boolean isSaved = fineModel.saveFine(fineDTO);
+            boolean isSaved = fineBO.save(fineDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Fine saved...!").show();
@@ -168,7 +177,7 @@ public class FineBodyController implements Initializable {
     void fineUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         FineDTO fineDTO = verifySaveUpdate();
         if (fineDTO != null) {
-            boolean isUpdated = fineModel.updateFine(fineDTO);
+            boolean isUpdated = fineBO.update(fineDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Fine updated...!").show();
@@ -203,7 +212,7 @@ public class FineBodyController implements Initializable {
 
     public void memberIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
 
         // If member found (memberTO not null)
         if (memberDTO != null) {
@@ -216,7 +225,7 @@ public class FineBodyController implements Initializable {
 
     public void loanIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedLoanId = loanIdCombo.getSelectionModel().getSelectedItem();
-        LoanDTO loanDTO =loanModel.findById(selectedLoanId);
+        LoanDTO loanDTO = loanBO.findById(selectedLoanId);
 
         // If loan found
         if (loanDTO != null) {
@@ -269,20 +278,20 @@ public class FineBodyController implements Initializable {
 
 
     private void loadLoanId() throws SQLException {
-        ArrayList<String> loanIds = loanModel.getAllLoanIds();
+        ArrayList<String> loanIds = loanBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(loanIds);
         loanIdCombo.setItems(observableList);
     }
 
     private void loadMemberId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
 
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
         for (String memberId : memberIds) {
 
-            String state = memberModel.getMemberState(memberId);
+            String state = memberBO.getState(memberId);
             if (state.equals("Active")) {
                 observableList.add(memberId);
             }
@@ -302,7 +311,7 @@ public class FineBodyController implements Initializable {
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<FineDTO> fineDTOS = fineModel.getAllFines();
+        ArrayList<FineDTO> fineDTOS = fineBO.getAll();
 
         ObservableList<FineTM> fineTMS = FXCollections.observableArrayList();
 
@@ -324,7 +333,7 @@ public class FineBodyController implements Initializable {
 
 
     public void loadNextFineId() throws SQLException {
-        String nextFineId = fineModel.getNextFineId();
+        String nextFineId = fineBO.getNextId();
         fineIdShowLbl.setText(nextFineId);
     }
 

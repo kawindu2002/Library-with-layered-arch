@@ -48,7 +48,7 @@ public class BookBOImpl implements BookBO {
             // If the book is saved successfully
             if (isBookSaved) {
                // @isAuthorSaved: Saves the author details into the Author table
-                boolean isAuthorDetailsListSaved = authorDetailsDAO.saveAuthorDetailsList(dto.getAuthorDetailsDTOS()); // Save Author details
+                boolean isAuthorDetailsListSaved = authorDetailsDAO.saveAuthorDetail(dto.getAuthorDetailsDTOS()); // Save Author details
                 if (isAuthorDetailsListSaved) {
                     // @isCategoryDetailListSaved: Saves the list of category details
                     boolean isCategoryDetailListSaved = categoryDetailsDAO.saveCategoryDetailsList(dto.getCategoryDetailsDTOS());
@@ -82,7 +82,7 @@ public class BookBOImpl implements BookBO {
             connection.setAutoCommit(false);
 
             // First, delete the Author_Book associations for the given Book_Id
-            boolean isAuthorBookDeleted = authorDetailsDAO.deleteAuthorDetailsList(id);
+            boolean isAuthorBookDeleted = authorDetailsDAO.deleteAuthorDetail(id);
             if (!isAuthorBookDeleted) {
                 connection.rollback();  //(rollback if Author_Book deletion fails)
                 return false;

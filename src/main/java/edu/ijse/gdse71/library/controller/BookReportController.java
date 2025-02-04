@@ -1,5 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.model.BookModel;
@@ -54,8 +56,7 @@ public class BookReportController implements Initializable {
     @FXML
     private Label titleShowLbl;
 
-    @FXML
-    final BookModel bookModel = new BookModel();
+    BookBO bookBO = new BookBOImpl();
 
 
     @FXML
@@ -131,7 +132,7 @@ public class BookReportController implements Initializable {
     @FXML
     void bookIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
         if (bookDTO != null) {
 
             titleShowLbl.setText(bookDTO.getTitle());
@@ -154,7 +155,7 @@ public class BookReportController implements Initializable {
     }
 
     private void loadBookId() throws SQLException {
-        ArrayList<String> bookIds = bookModel.getAllBookIds();
+        ArrayList<String> bookIds = bookBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(bookIds);
         bookIdCombo.setItems(observableList);

@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.FineBO;
+import edu.ijse.gdse71.library.bo.impl.FineBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.FineDTO;
-import edu.ijse.gdse71.library.model.FineModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +27,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class FineReportController implements Initializable {
-
 
     @FXML
     private Button generateTodayReportBtn;
@@ -55,7 +55,7 @@ public class FineReportController implements Initializable {
     @FXML
     private Button generateReportBtn;
 
-    final FineModel fineModel = new FineModel();
+    FineBO fineBO = new FineBOImpl();
 
 
     @FXML
@@ -131,7 +131,7 @@ public class FineReportController implements Initializable {
     @FXML
     void fineIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedFineId = fineIdCombo.getSelectionModel().getSelectedItem();
-        FineDTO fineDTO = fineModel.findById(selectedFineId);
+        FineDTO fineDTO = fineBO.findById(selectedFineId);
 
         if (fineDTO != null) {
 
@@ -155,7 +155,7 @@ public class FineReportController implements Initializable {
     }
 
     private void loadFineId() throws SQLException {
-        ArrayList<String> fineIds = fineModel.getAllFineIds();
+        ArrayList<String> fineIds = fineBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(fineIds);
         fineIdCombo.setItems(observableList);

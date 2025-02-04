@@ -1,11 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.AuthorDetailsBO;
+import edu.ijse.gdse71.library.bo.impl.AuthorDetailsBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
-import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.AuthorDetailsTM;
-import edu.ijse.gdse71.library.dto.tm.CategoryDetailsTM;
-import edu.ijse.gdse71.library.model.AuthorDetailsModel;
-import edu.ijse.gdse71.library.model.CategoryDetailsModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +44,8 @@ public class CheckAuthorDetailsController implements Initializable {
     private TableView<AuthorDetailsTM> checkAuthorDetailsTbl;
 
 
+    AuthorDetailsBO authorDetailsBO = new AuthorDetailsBOImpl();
+
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ public class CheckAuthorDetailsController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<AuthorDetailsDTO> authorDetailsDTOS = authorDetailsModel.getAllAuthorDetails();
+        ArrayList<AuthorDetailsDTO> authorDetailsDTOS = authorDetailsBO.getAllAuthorDetails();
 
         ObservableList<AuthorDetailsTM> authorDetailsTMS = FXCollections.observableArrayList();
 

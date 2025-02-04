@@ -1,10 +1,12 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
+import edu.ijse.gdse71.library.bo.custom.CategoryBO;
+import edu.ijse.gdse71.library.bo.impl.BookshelfBOImpl;
+import edu.ijse.gdse71.library.bo.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 import edu.ijse.gdse71.library.dto.tm.BookshelfTM;
-import edu.ijse.gdse71.library.model.BookshelfModel;
-import edu.ijse.gdse71.library.model.CategoryModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -90,8 +92,8 @@ public class BookshelfBodyController implements Initializable {
     @FXML
     private Label descriptionShowLbl;
 
-    final BookshelfModel bookshelfModel = new BookshelfModel();
-    final CategoryModel categoryModel = new CategoryModel();
+    BookshelfBO bookshelfBO = new BookshelfBOImpl();
+    CategoryBO categoryBO = new CategoryBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -105,7 +107,7 @@ public class BookshelfBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = bookshelfModel.deleteBookshelf(bookshelfId);
+            boolean isDeleted = bookshelfBO.delete(bookshelfId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Bookshelf deleted...!").show();
@@ -125,7 +127,7 @@ public class BookshelfBodyController implements Initializable {
     void bookshelfSaveBtnActionClicked(ActionEvent event) throws SQLException {
         BookshelfDTO bookshelfDTO = verifySaveUpdate();
         if (bookshelfDTO != null) {
-            boolean isSaved = bookshelfModel.saveBookshelf(bookshelfDTO);
+            boolean isSaved = bookshelfBO.save(bookshelfDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Bookshelf saved...!").show();
@@ -141,7 +143,7 @@ public class BookshelfBodyController implements Initializable {
     void bookshelfUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         BookshelfDTO bookshelfDTO = verifySaveUpdate();
         if (bookshelfDTO != null) {
-            boolean isUpdated = bookshelfModel.updateBookshelf(bookshelfDTO);
+            boolean isUpdated = bookshelfBO.update(bookshelfDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Bookshelf updated...!").show();
@@ -176,7 +178,7 @@ public class BookshelfBodyController implements Initializable {
     @FXML
     void categoryComboOnAction(ActionEvent event) throws SQLException {
         String selectedCategoryId = categoryIdCombo.getSelectionModel().getSelectedItem();
-        CategoryDTO categoryDTO = categoryModel.findById(selectedCategoryId);
+        CategoryDTO categoryDTO = categoryBO.findById(selectedCategoryId);
 
         // If category found (categoryDTO not null)
         if (categoryDTO != null) {
@@ -226,7 +228,7 @@ public class BookshelfBodyController implements Initializable {
 
 
     private void loadCategoryId() throws SQLException {
-        ArrayList<String> categoryIds = categoryModel.getAllCategoryIds();
+        ArrayList<String> categoryIds = categoryBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(categoryIds);
         categoryIdCombo.setItems(observableList);
@@ -243,7 +245,7 @@ public class BookshelfBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<BookshelfDTO> bookshelfDTOS = bookshelfModel.getAllBookshelfs();
+        ArrayList<BookshelfDTO> bookshelfDTOS = bookshelfBO.getAll();
 
         ObservableList<BookshelfTM> bookshelfTMS = FXCollections.observableArrayList();
 
@@ -262,7 +264,7 @@ public class BookshelfBodyController implements Initializable {
 
 
     public void loadNextBookshelfId() throws SQLException {
-        String nextBookshelfId = bookshelfModel.getNextBookshelfId();
+        String nextBookshelfId = bookshelfBO.getNextId();
         bookshelfIdShowLbl.setText(nextBookshelfId);
     }
 
