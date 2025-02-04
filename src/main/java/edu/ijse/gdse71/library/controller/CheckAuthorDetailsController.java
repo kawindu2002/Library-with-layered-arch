@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.AuthorDetailsBO;
-import edu.ijse.gdse71.library.bo.impl.AuthorDetailsBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.AuthorDetailsBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.AuthorDetailsTM;
 import edu.ijse.gdse71.library.util.CommonUtil;

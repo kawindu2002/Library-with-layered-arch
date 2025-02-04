@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
-import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import javafx.collections.FXCollections;

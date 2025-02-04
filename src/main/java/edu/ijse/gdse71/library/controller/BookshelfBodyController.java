@@ -2,8 +2,8 @@ package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
-import edu.ijse.gdse71.library.bo.impl.BookshelfBOImpl;
-import edu.ijse.gdse71.library.bo.impl.CategoryBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.BookshelfBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 import edu.ijse.gdse71.library.dto.tm.BookshelfTM;

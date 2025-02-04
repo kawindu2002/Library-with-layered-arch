@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
-import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.MemberTM;
 import edu.ijse.gdse71.library.util.CommonUtil;

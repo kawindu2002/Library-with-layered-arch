@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.ReservationBO;
-import edu.ijse.gdse71.library.bo.impl.ReservationBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.ReservationBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
 import javafx.collections.FXCollections;

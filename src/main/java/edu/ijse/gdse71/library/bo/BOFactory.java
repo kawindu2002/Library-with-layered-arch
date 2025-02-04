@@ -1,6 +1,6 @@
 package edu.ijse.gdse71.library.bo;
 
-import edu.ijse.gdse71.library.bo.impl.*;
+import edu.ijse.gdse71.library.bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory boFactory;

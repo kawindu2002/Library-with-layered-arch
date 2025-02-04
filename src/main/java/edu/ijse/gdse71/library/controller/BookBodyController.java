@@ -1,13 +1,11 @@
 package edu.ijse.gdse71.library.controller;
 
-import edu.ijse.gdse71.library.bo.custom.AuthorBO;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
 import edu.ijse.gdse71.library.bo.custom.PublisherBO;
-import edu.ijse.gdse71.library.bo.impl.AuthorBOImpl;
-import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
-import edu.ijse.gdse71.library.bo.impl.BookshelfBOImpl;
-import edu.ijse.gdse71.library.bo.impl.PublisherBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.BookshelfBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.BookTM;
 import edu.ijse.gdse71.library.model.BookModel;

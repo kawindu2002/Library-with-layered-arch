@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
-import edu.ijse.gdse71.library.bo.impl.LoanBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.LoanDTO;
 import javafx.collections.FXCollections;

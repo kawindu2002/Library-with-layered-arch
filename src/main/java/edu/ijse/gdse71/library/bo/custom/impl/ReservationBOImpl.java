@@ -1,16 +1,12 @@
-package edu.ijse.gdse71.library.bo.impl;
+package edu.ijse.gdse71.library.bo.custom.impl;
 
 import edu.ijse.gdse71.library.bo.custom.ReservationBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
-import edu.ijse.gdse71.library.entity.Book;
-import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.entity.Reservation;
-import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;

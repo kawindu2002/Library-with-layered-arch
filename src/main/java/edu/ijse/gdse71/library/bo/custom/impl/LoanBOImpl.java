@@ -1,20 +1,14 @@
-package edu.ijse.gdse71.library.bo.impl;
+package edu.ijse.gdse71.library.bo.custom.impl;
 
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
-import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dao.custom.LoanDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
-import edu.ijse.gdse71.library.entity.Book;
-import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.entity.Loan;
-import edu.ijse.gdse71.library.util.CrudUtil;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

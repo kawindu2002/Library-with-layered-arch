@@ -1,4 +1,4 @@
-package edu.ijse.gdse71.library.bo.impl;
+package edu.ijse.gdse71.library.bo.custom.impl;
 
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;

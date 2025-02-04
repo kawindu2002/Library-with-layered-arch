@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.UserBO;
-import edu.ijse.gdse71.library.bo.impl.UserBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.UserBOImpl;
 import edu.ijse.gdse71.library.dto.UserDTO;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.event.ActionEvent;

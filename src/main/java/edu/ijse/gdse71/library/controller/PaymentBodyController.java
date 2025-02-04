@@ -2,8 +2,8 @@ package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
-import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
-import edu.ijse.gdse71.library.bo.impl.PaymentBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
 import edu.ijse.gdse71.library.dto.tm.PaymentTM;

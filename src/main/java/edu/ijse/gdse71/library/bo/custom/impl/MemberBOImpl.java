@@ -1,16 +1,11 @@
-package edu.ijse.gdse71.library.bo.impl;
+package edu.ijse.gdse71.library.bo.custom.impl;
 
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
-import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dao.custom.MemberDAO;
-import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
-import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.entity.Member;
-import edu.ijse.gdse71.library.util.CrudUtil;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

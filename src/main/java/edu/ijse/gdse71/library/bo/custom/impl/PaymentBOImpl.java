@@ -1,17 +1,11 @@
-package edu.ijse.gdse71.library.bo.impl;
+package edu.ijse.gdse71.library.bo.custom.impl;
 
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
-import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
-import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
-import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
-import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.entity.Payment;
-import edu.ijse.gdse71.library.util.CrudUtil;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.FineBO;
-import edu.ijse.gdse71.library.bo.impl.FineBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.FineBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.FineDTO;
 import javafx.collections.FXCollections;

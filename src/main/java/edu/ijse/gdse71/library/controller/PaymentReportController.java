@@ -1,7 +1,7 @@
 package edu.ijse.gdse71.library.controller;
 
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
-import edu.ijse.gdse71.library.bo.impl.PaymentBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
 import javafx.collections.FXCollections;
