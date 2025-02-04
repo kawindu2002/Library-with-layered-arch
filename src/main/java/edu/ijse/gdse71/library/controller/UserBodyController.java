@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.UserBO;
+import edu.ijse.gdse71.library.bo.impl.UserBOImpl;
 import edu.ijse.gdse71.library.dto.UserDTO;
 import edu.ijse.gdse71.library.dto.tm.UserTM;
-import edu.ijse.gdse71.library.model.UserModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,8 +105,7 @@ public class UserBodyController implements Initializable {
     @FXML
     private ComboBox<String> roleCombo;
 
-
-    final UserModel userModel = new UserModel();
+    final UserBO userBO = new UserBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ public class UserBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = userModel.deleteUser(userId);
+            boolean isDeleted = userBO.delete(userId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "User deleted...!").show();
@@ -138,7 +138,7 @@ public class UserBodyController implements Initializable {
     void userSaveBtnActionClicked(ActionEvent event) throws SQLException {
         UserDTO userDTO = verifySaveUpdate();
         if (userDTO != null) {
-            boolean isSaved = userModel.saveUser(userDTO);
+            boolean isSaved = userBO.save(userDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "User saved...!").show();
@@ -154,7 +154,7 @@ public class UserBodyController implements Initializable {
     void userUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         UserDTO userDTO = verifySaveUpdate();
         if (userDTO != null) {
-            boolean isUpdated = userModel.updateUser(userDTO);
+            boolean isUpdated = userBO.update(userDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "User updated...!").show();
@@ -237,7 +237,7 @@ public class UserBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<UserDTO> userDTOS = userModel.getAllUsers();
+        ArrayList<UserDTO> userDTOS = userBO.getAll();
 
         ObservableList<UserTM> userTMS = FXCollections.observableArrayList();
 
@@ -258,7 +258,7 @@ public class UserBodyController implements Initializable {
 
 
     public void loadNextUserId() throws SQLException {
-        String nextUserId = userModel.getNextUserId();
+        String nextUserId = userBO.getNextId();
         userIdShowLbl.setText(nextUserId);
     }
 
@@ -336,4 +336,5 @@ public class UserBodyController implements Initializable {
     }
 
 }
+
 
