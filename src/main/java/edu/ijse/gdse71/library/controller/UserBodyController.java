@@ -105,7 +105,7 @@ public class UserBodyController implements Initializable {
     @FXML
     private ComboBox<String> roleCombo;
 
-    final UserBO userBO = new UserBOImpl();
+    UserBO userBO = new UserBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 

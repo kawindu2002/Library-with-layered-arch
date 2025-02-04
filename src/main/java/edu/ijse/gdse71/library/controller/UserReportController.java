@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.UserBO;
+import edu.ijse.gdse71.library.bo.impl.UserBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.UserDTO;
-import edu.ijse.gdse71.library.model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +52,7 @@ public class UserReportController implements Initializable {
     @FXML
     private Label userReportLbl;
 
-    final UserModel userModel = new UserModel();
+    UserBO userBO = new UserBOImpl();
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
@@ -127,7 +128,7 @@ public class UserReportController implements Initializable {
     @FXML
     void userIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedUserId = userIdCombo.getSelectionModel().getSelectedItem();
-        UserDTO userDTO = userModel.findById(selectedUserId);
+        UserDTO userDTO = userBO.findById(selectedUserId);
 
         if (userDTO != null) {
 
@@ -149,7 +150,7 @@ public class UserReportController implements Initializable {
     }
 
     private void loadUserId() throws SQLException {
-        ArrayList<String> userIds = userModel.getAllUserIds();
+        ArrayList<String> userIds = userBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(userIds);
         userIdCombo.setItems(observableList);
@@ -162,3 +163,4 @@ public class UserReportController implements Initializable {
 
     }
 }
+
