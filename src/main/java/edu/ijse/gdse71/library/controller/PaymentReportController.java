@@ -1,9 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.PaymentBO;
+import edu.ijse.gdse71.library.bo.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
-import edu.ijse.gdse71.library.dto.LoanDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
-import edu.ijse.gdse71.library.model.PaymentModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,6 +55,7 @@ public class PaymentReportController implements Initializable {
     @FXML
     private Label paymentReportLbl;
 
+    PaymentBO paymentBO = new PaymentBOImpl();
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
@@ -129,7 +130,7 @@ public class PaymentReportController implements Initializable {
     @FXML
     void paymentIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedPaymentId = paymentIdCombo.getSelectionModel().getSelectedItem();
-        PaymentDTO paymentDTO = paymentModel.findById(selectedPaymentId);
+        PaymentDTO paymentDTO = paymentBO.findById(selectedPaymentId);
         if (paymentDTO != null) {
 
             paymentDateShowLbl.setText(String.valueOf(paymentDTO.getPaymentDate()));
@@ -150,7 +151,7 @@ public class PaymentReportController implements Initializable {
     }
 
     private void loadPaymentId() throws SQLException {
-        ArrayList<String> paymentIds = paymentModel.getAllPaymentIds();
+        ArrayList<String> paymentIds = paymentBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(paymentIds);
         paymentIdCombo.setItems(observableList);
