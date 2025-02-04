@@ -2,16 +2,10 @@ package edu.ijse.gdse71.library.bo.impl;
 
 import edu.ijse.gdse71.library.bo.custom.CategoryDetailsBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
-import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
-import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDetailsDAO;
-import edu.ijse.gdse71.library.dto.AuthorDetailsDTO;
 import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
-import edu.ijse.gdse71.library.entity.AuthorDetails;
 import edu.ijse.gdse71.library.entity.CategoryDetails;
-import edu.ijse.gdse71.library.util.CrudUtil;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
