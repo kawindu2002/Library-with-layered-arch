@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.PublisherBO;
+import edu.ijse.gdse71.library.bo.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
 import edu.ijse.gdse71.library.dto.tm.PublisherTM;
-import edu.ijse.gdse71.library.model.PublisherModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,7 +85,7 @@ public class PublisherBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-    final PublisherModel publisherModel = new PublisherModel();
+    PublisherBO publisherBO = new PublisherBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -98,7 +99,7 @@ public class PublisherBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = publisherModel.deletePublisher(publisherId);
+            boolean isDeleted = publisherBO.delete(publisherId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Publisher deleted...!").show();
@@ -118,7 +119,7 @@ public class PublisherBodyController implements Initializable {
     void publisherSaveBtnActionClicked(ActionEvent event) throws SQLException {
         PublisherDTO publisherDTO = verifySaveUpdate();
         if (publisherDTO != null) {
-            boolean isSaved = publisherModel.savePublisher(publisherDTO);
+            boolean isSaved = publisherBO.save(publisherDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Publisher saved...!").show();
@@ -135,7 +136,7 @@ public class PublisherBodyController implements Initializable {
     void publisherUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         PublisherDTO publisherDTO = verifySaveUpdate();
         if (publisherDTO != null) {
-            boolean isUpdated = publisherModel.updatePublisher(publisherDTO);
+            boolean isUpdated = publisherBO.update(publisherDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Publisher updated...!").show();
@@ -212,7 +213,7 @@ public class PublisherBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<PublisherDTO> publisherDTOS = publisherModel.getAllPublishers();
+        ArrayList<PublisherDTO> publisherDTOS = publisherBO.getAll();
 
         ObservableList<PublisherTM> publisherTMS = FXCollections.observableArrayList();
 
@@ -232,7 +233,7 @@ public class PublisherBodyController implements Initializable {
 
 
     public void loadNextPublisherId() throws SQLException {
-        String nextAuthorId = publisherModel.getNextPublisherId();
+        String nextAuthorId = publisherBO.getNextId();
         publisherIdShowLbl.setText(nextAuthorId);
     }
 
