@@ -1,10 +1,12 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.custom.PaymentBO;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
 import edu.ijse.gdse71.library.dto.tm.PaymentTM;
-import edu.ijse.gdse71.library.model.MemberModel;
-import edu.ijse.gdse71.library.model.PaymentModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,11 +105,8 @@ public class PaymentBodyController implements Initializable {
     @FXML
     private TableColumn<PaymentTM, String> userIdCol;
 
-
-
-    final PaymentModel paymentModel = new PaymentModel();
-    final MemberModel memberModel = new MemberModel();
-
+    PaymentBO paymentBO = new PaymentBOImpl();
+    MemberBO memberBO = new MemberBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -121,7 +120,7 @@ public class PaymentBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = paymentModel.deletePayment(paymentId);
+            boolean isDeleted = paymentBO.delete(paymentId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Payment deleted...!").show();
@@ -142,7 +141,7 @@ public class PaymentBodyController implements Initializable {
     void paymentSaveBtnActionClicked(ActionEvent event) throws SQLException {
         PaymentDTO paymentDTO = verifySaveUpdate();
         if (paymentDTO != null) {
-            boolean isSaved = paymentModel.savePayment(paymentDTO);
+            boolean isSaved = paymentBO.save(paymentDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Payment saved...!").show();
@@ -160,7 +159,7 @@ public class PaymentBodyController implements Initializable {
     void paymentUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         PaymentDTO paymentDTO = verifySaveUpdate();
         if (paymentDTO != null) {
-            boolean isUpdated = paymentModel.updatePayment(paymentDTO);
+            boolean isUpdated = paymentBO.update(paymentDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Payment updated...!").show();
@@ -198,7 +197,7 @@ public class PaymentBodyController implements Initializable {
     @FXML
     void memberIdComboOnAction(ActionEvent event) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
 
         // If member found (memberTO not null)
         if (memberDTO != null) {
@@ -250,13 +249,13 @@ public class PaymentBodyController implements Initializable {
     }
 
     private void loadMemberId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
 
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
         for (String memberId : memberIds) {
 
-            String state = memberModel.getMemberState(memberId);
+            String state = memberBO.getState(memberId);
             if (state.equals("Active")) {
                 observableList.add(memberId);
             }
@@ -276,7 +275,7 @@ public class PaymentBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<PaymentDTO> paymentDTOS = paymentModel.getAllPayments();
+        ArrayList<PaymentDTO> paymentDTOS = paymentBO.getAll();
 
         ObservableList<PaymentTM> paymentTMS = FXCollections.observableArrayList();
 
@@ -297,7 +296,7 @@ public class PaymentBodyController implements Initializable {
 
 
     public void loadNextPaymentId() throws SQLException {
-        String nextPaymentId = paymentModel.getNextPaymentId();
+        String nextPaymentId = paymentBO.getNextId();
         paymentIdShowLbl.setText(nextPaymentId);
     }
 
