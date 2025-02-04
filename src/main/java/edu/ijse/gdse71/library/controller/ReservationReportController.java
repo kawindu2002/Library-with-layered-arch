@@ -1,10 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.ReservationBO;
+import edu.ijse.gdse71.library.bo.impl.ReservationBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
-import edu.ijse.gdse71.library.dto.UserDTO;
-import edu.ijse.gdse71.library.model.ReservationModel;
-import edu.ijse.gdse71.library.model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,7 +56,7 @@ public class ReservationReportController implements Initializable {
     private Label reservationReportLbl;
 
 
-    final ReservationModel reservationModel = new ReservationModel();
+    final ReservationBO reservationBO = new ReservationBOImpl();
 
 
     @FXML
@@ -132,7 +131,7 @@ public class ReservationReportController implements Initializable {
     @FXML
     void reservationIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedReservationId = reservationIdCombo.getSelectionModel().getSelectedItem();
-        ReservationDTO reservationDTO = reservationModel.findById(selectedReservationId);
+        ReservationDTO reservationDTO = reservationBO.findById(selectedReservationId);
 
         if (reservationDTO != null) {
 
@@ -156,7 +155,7 @@ public class ReservationReportController implements Initializable {
     }
 
     private void loadReservationId() throws SQLException {
-        ArrayList<String> reservationIds = reservationModel.getAllReservationIds();
+        ArrayList<String> reservationIds = reservationBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(reservationIds);
         reservationIdCombo.setItems(observableList);
