@@ -6,4 +6,3 @@ import edu.ijse.gdse71.library.entity.Author;
 
 public interface AuthorDAO extends CrudDAO<Author> {
 }
-

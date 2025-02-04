@@ -11,5 +11,7 @@ import lombok.*;
 public class AuthorDetailsDTO {
     private String bookID;
     private String authorID;
+
+
 }
 

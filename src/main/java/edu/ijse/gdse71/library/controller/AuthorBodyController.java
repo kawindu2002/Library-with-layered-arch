@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.AuthorBO;
+import edu.ijse.gdse71.library.bo.impl.AuthorBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.dto.tm.AuthorTM;
-import edu.ijse.gdse71.library.model.AuthorModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,7 +83,8 @@ public class AuthorBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-
+    //property injection (Dependency injection)
+    AuthorBO authorBO = new AuthorBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +97,7 @@ public class AuthorBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = authorModel.deleteAuthor(authorId);
+            boolean isDeleted = authorBO.delete(authorId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Author deleted...!").show();
@@ -115,7 +117,7 @@ public class AuthorBodyController implements Initializable {
     void authorSaveBtnActionClicked(ActionEvent event) throws SQLException {
         AuthorDTO authorDTO = verifySaveUpdate();
         if (authorDTO != null) {
-            boolean isSaved = authorModel.saveAuthor(authorDTO);
+            boolean isSaved = authorBO.save(authorDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Author saved...!").show();
@@ -131,7 +133,7 @@ public class AuthorBodyController implements Initializable {
     void authorUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         AuthorDTO authorDTO = verifySaveUpdate();
         if (authorDTO != null) {
-            boolean isUpdated = authorModel.updateAuthor(authorDTO);
+            boolean isUpdated = authorBO.update(authorDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Author updated...!").show();
@@ -204,7 +206,7 @@ public class AuthorBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<AuthorDTO> authorDTOS = authorModel.getAllAuthors();
+        ArrayList<AuthorDTO> authorDTOS = authorBO.getAll();
 
         ObservableList<AuthorTM> authorTMS = FXCollections.observableArrayList();
 
@@ -223,7 +225,7 @@ public class AuthorBodyController implements Initializable {
     }
 
     public void loadNextAuthorId() throws SQLException {
-        String nextAuthorId = authorModel.getNextAuthorId();
+        String nextAuthorId = authorBO.getNextId();
         authorIdShowLbl.setText(nextAuthorId);
     }
 
