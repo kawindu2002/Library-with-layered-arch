@@ -1,8 +1,13 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.BookBO;
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.custom.ReservationBO;
+import edu.ijse.gdse71.library.bo.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.impl.ReservationBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.ReservationTM;
-import edu.ijse.gdse71.library.model.*;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,9 +103,9 @@ public class ReservationBodyController implements Initializable {
     @FXML
     private Label memberNameShowLbl;
 
-    final MemberModel memberModel = new MemberModel();
-    final BookModel bookModel = new BookModel();
-    final ReservationModel reservationModel = new ReservationModel();
+    final MemberBO memberBO = new MemberBOImpl();
+    final BookBO bookBO = new BookBOImpl();
+    final ReservationBO reservationBO = new ReservationBOImpl();
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -115,7 +120,7 @@ public class ReservationBodyController implements Initializable {
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = reservationModel.deleteReservation(reservationId);
+            boolean isDeleted = reservationBO.delete(reservationId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Reservation deleted...!").show();
@@ -136,7 +141,7 @@ public class ReservationBodyController implements Initializable {
     void reservationSaveBtnActionClicked(ActionEvent event) throws SQLException {
         ReservationDTO reservationDTO = verifySaveUpdate();
         if (reservationDTO != null) {
-            boolean isSaved = reservationModel.saveReservation(reservationDTO);
+            boolean isSaved = reservationBO.save(reservationDTO);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Reservation saved...!").show();
@@ -146,7 +151,6 @@ public class ReservationBodyController implements Initializable {
         }else{
             new Alert(Alert.AlertType.ERROR, "Fail to save reservation...").show();
         }
-
     }
 
 
@@ -154,7 +158,7 @@ public class ReservationBodyController implements Initializable {
     void reservationUpdateBtnActionClicked(ActionEvent event) throws SQLException {
         ReservationDTO reservationDTO = verifySaveUpdate();
         if (reservationDTO != null) {
-            boolean isUpdated = reservationModel.updateReservation(reservationDTO);
+            boolean isUpdated = reservationBO.update(reservationDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Reservation updated...!").show();
@@ -190,7 +194,7 @@ public class ReservationBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookModel.findById(selectedBookId);
+        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {
@@ -204,7 +208,7 @@ public class ReservationBodyController implements Initializable {
 
     public void memberIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
 
         // If bookshelf found
         if (memberDTO != null) {
@@ -255,7 +259,7 @@ public class ReservationBodyController implements Initializable {
 
 
     private void loadBookId() throws SQLException {
-        ArrayList<String> bookIds = bookModel.getAllBookIdsByState("Available");
+        ArrayList<String> bookIds = bookBO.getAllBookIdsByState("Available");
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(bookIds);
         bookIdCombo.setItems(observableList);
@@ -263,13 +267,13 @@ public class ReservationBodyController implements Initializable {
 
 
     private void loadMemberId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
 
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
         for (String memberId : memberIds) {
 
-            String state = memberModel.getMemberState(memberId);
+            String state = memberBO.getState(memberId);
             if (state.equals("Active")) {
                 observableList.add(memberId);
             }
@@ -289,7 +293,7 @@ public class ReservationBodyController implements Initializable {
 
 
     private void loadTableData() throws SQLException {
-        ArrayList<ReservationDTO> reservationDTOS = reservationModel.getAllReservations();
+        ArrayList<ReservationDTO> reservationDTOS = reservationBO.getAll();
 
         ObservableList<ReservationTM> reservationTMS = FXCollections.observableArrayList();
 
@@ -309,7 +313,7 @@ public class ReservationBodyController implements Initializable {
 
 
     public void loadNextReservationId() throws SQLException {
-        String nextReservationId = reservationModel.getNextReservationId();
+        String nextReservationId = reservationBO.getNextId();
         reservationIdShowLbl.setText(nextReservationId);
     }
 
