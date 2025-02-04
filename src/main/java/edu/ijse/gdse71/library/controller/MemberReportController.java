@@ -1,8 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.MemberDTO;
-import edu.ijse.gdse71.library.model.MemberModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class MemberReportController implements Initializable {
     @FXML
     private Label memberReportLbl;
 
-    final MemberModel memberModel = new MemberModel();
+    MemberBO memberBO = new MemberBOImpl();
 
 
     @FXML
@@ -131,7 +132,7 @@ public class MemberReportController implements Initializable {
     @FXML
     void memberIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedMemberId = memberIdCombo.getSelectionModel().getSelectedItem();
-        MemberDTO memberDTO = memberModel.findById(selectedMemberId);
+        MemberDTO memberDTO = memberBO.findById(selectedMemberId);
         if (memberDTO != null) {
 
             memberNameShowLbl.setText(memberDTO.getName());
@@ -152,7 +153,7 @@ public class MemberReportController implements Initializable {
     }
 
     private void loadUserId() throws SQLException {
-        ArrayList<String> memberIds = memberModel.getAllMemberIds();
+        ArrayList<String> memberIds = memberBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(memberIds);
         memberIdCombo.setItems(observableList);
@@ -164,5 +165,5 @@ public class MemberReportController implements Initializable {
         memberNameShowLbl.setText("");
 
     }
-
 }
+
