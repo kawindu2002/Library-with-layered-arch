@@ -89,7 +89,7 @@ public class BookBOImpl implements BookBO {
             }
 
             // Then, delete the Category_Book associations for the given Book_Id
-            boolean isCategoryBookDeleted = categoryDetailsDAO.deleteCategoryDetailsList(id);
+            boolean isCategoryBookDeleted = categoryDetailsDAO.deleteCategoryDetail(id);
             if (!isCategoryBookDeleted) {
                 connection.rollback();  //(rollback if Category_Book deletion fails)
                 return false;
