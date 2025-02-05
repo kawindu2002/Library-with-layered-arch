@@ -1,6 +1,7 @@
 package edu.ijse.gdse71.library.bo.custom;
 
 import edu.ijse.gdse71.library.bo.SuperBO;
+import edu.ijse.gdse71.library.dto.BookDTO;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ public interface BookBO extends SuperBO {
     String getNextId() throws SQLException;
     boolean save(BookWithDetailsDTO dto) throws SQLException;
     boolean delete(String id) throws SQLException;
-    boolean update(BookWithDetailsDTO dto) throws SQLException;
+    boolean update(BookDTO dto) throws SQLException;
     ArrayList<BookWithDetailsDTO> getAll() throws SQLException;
     ArrayList<String> getAllIds() throws SQLException;
     BookWithDetailsDTO findById(String selectedId) throws SQLException;

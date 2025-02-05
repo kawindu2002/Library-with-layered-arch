@@ -145,10 +145,6 @@ public class BookBodyController implements Initializable {
     private TextField titleTxt;
 
 
-//    final BookModel bookModel = new BookModel();
-//    final PublisherModel publisherModel = new PublisherModel();
-//    final BookshelfModel bookshelfModel = new BookshelfModel();
-
 
     BookBO bookBO = new BookBOImpl();
     PublisherBO publisherBO = new PublisherBOImpl();
@@ -238,9 +234,9 @@ public class BookBodyController implements Initializable {
     }
 
     public void bookUpdateBtnActionClicked(ActionEvent actionEvent) throws SQLException {
-        BookDTO bookWithoutDetailsDTO = verifyUpdate();
-        if (bookWithoutDetailsDTO != null) {
-            boolean isUpdated = bookBO.update(bookWithoutDetailsDTO);
+        BookDTO bookDTO = verifyUpdate();
+        if (bookDTO != null) {
+            boolean isUpdated = bookBO.update(bookDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Book updated...!").show();
@@ -349,14 +345,14 @@ public class BookBodyController implements Initializable {
 
 
     private void loadPublisherId() throws SQLException {
-        ArrayList<String> publisherIds = publisherModel.getAllPublisherIds();
+        ArrayList<String> publisherIds = publisherBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(publisherIds);
         pubIdCombo.setItems(observableList);
     }
 
     private void loadBookshelfId() throws SQLException {
-        ArrayList<String> bookshelfIds = bookshelfModel.getAllBookshelfIds();
+        ArrayList<String> bookshelfIds = bookshelfBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(bookshelfIds);
         bookshelfIdCombo.setItems(observableList);
@@ -378,7 +374,7 @@ public class BookBodyController implements Initializable {
 
     private void loadTableData() throws SQLException {
 
-        ArrayList<BookWithDetailsDTO> bookDTOS = bookModel.getAllBooks();
+        ArrayList<BookWithDetailsDTO> bookDTOS = bookBO.getAll();
         ObservableList<BookTM> bookTMS = FXCollections.observableArrayList();
 
         for (BookWithDetailsDTO bookDTO : bookDTOS) {
@@ -402,7 +398,7 @@ public class BookBodyController implements Initializable {
 
 
     public void loadNextBookId() throws SQLException {
-        String nextBookId = bookModel.getNextBookId();
+        String nextBookId = bookBO.getNextId();
         bookIdShowLbl.setText(nextBookId);
     }
 
@@ -501,16 +497,6 @@ public class BookBodyController implements Initializable {
 
             );
 
-
-//            boolean isNullAuthorDTOS= bookDTO.getAuthorDetailsDTOS() == null || bookDTO.getAuthorDetailsDTOS().isEmpty();
-//            boolean isNullCategoryDTOS= bookDTO.getCategoryDetailsDTOS() == null || bookDTO.getCategoryDetailsDTOS().isEmpty();
-//
-//            if (isNullAuthorDTOS){
-//                return null;
-//            }
-//            if (isNullCategoryDTOS){
-//                return null;
-//            }
 
             return bookDTO;
         }

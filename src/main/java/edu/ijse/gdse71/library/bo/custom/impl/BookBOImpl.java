@@ -6,6 +6,7 @@ import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDetailsDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
+import edu.ijse.gdse71.library.dto.BookDTO;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.entity.Book;
 
@@ -117,7 +118,7 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
-    public boolean update(BookWithDetailsDTO dto) throws SQLException {
+    public boolean update(BookDTO dto) throws SQLException {
 
         return bookDAO.update(new Book(
                 dto.getBookID(),
