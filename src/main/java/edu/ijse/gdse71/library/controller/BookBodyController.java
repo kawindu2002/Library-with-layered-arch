@@ -8,9 +8,6 @@ import edu.ijse.gdse71.library.bo.custom.impl.BookshelfBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.BookTM;
-import edu.ijse.gdse71.library.model.BookModel;
-import edu.ijse.gdse71.library.model.BookshelfModel;
-import edu.ijse.gdse71.library.model.PublisherModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -243,7 +240,7 @@ public class BookBodyController implements Initializable {
     public void bookUpdateBtnActionClicked(ActionEvent actionEvent) throws SQLException {
         BookDTO bookWithoutDetailsDTO = verifyUpdate();
         if (bookWithoutDetailsDTO != null) {
-            boolean isUpdated = bookModel.update(bookWithoutDetailsDTO);
+            boolean isUpdated = bookBO.update(bookWithoutDetailsDTO);
             if (isUpdated) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Book updated...!").show();
@@ -282,7 +279,7 @@ public class BookBodyController implements Initializable {
 
     public void pubIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedPublisherId = pubIdCombo.getSelectionModel().getSelectedItem();
-        PublisherDTO publisherDTO = publisherModel.findById(selectedPublisherId);
+        PublisherDTO publisherDTO = publisherBO.findById(selectedPublisherId);
 
         // If member found
         if (publisherDTO != null) {
@@ -295,7 +292,7 @@ public class BookBodyController implements Initializable {
 
     public void bookshelfIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookshelfId = bookshelfIdCombo.getSelectionModel().getSelectedItem();
-        BookshelfDTO bookshelfDTO = bookshelfModel.findById(selectedBookshelfId);
+        BookshelfDTO bookshelfDTO = bookshelfBO.findById(selectedBookshelfId);
 
         // If bookshelf found
         if (bookshelfDTO != null) {

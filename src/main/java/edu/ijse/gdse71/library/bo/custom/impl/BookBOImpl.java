@@ -51,7 +51,7 @@ public class BookBOImpl implements BookBO {
                 boolean isAuthorDetailsListSaved = authorDetailsDAO.saveAuthorDetail(dto.getAuthorDetailsDTOS()); // Save Author details
                 if (isAuthorDetailsListSaved) {
                     // @isCategoryDetailListSaved: Saves the list of category details
-                    boolean isCategoryDetailListSaved = categoryDetailsDAO.saveCategoryDetailsList(dto.getCategoryDetailsDTOS());
+                    boolean isCategoryDetailListSaved = categoryDetailsDAO.saveCategoryDetail(dto.getCategoryDetailsDTOS());
                     if (isCategoryDetailListSaved) {
                         // @commit: Commits the transaction if book, author, and category details are saved successfully
                         connection.commit();

@@ -1,10 +1,10 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.custom.CategoryBO;
+import edu.ijse.gdse71.library.bo.custom.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
 import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.CategoryCartTM;
-import edu.ijse.gdse71.library.model.CategoryDetailsModel;
-import edu.ijse.gdse71.library.model.CategoryModel;
 import edu.ijse.gdse71.library.util.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,6 +77,7 @@ public class CategoryDetailsBodyController implements Initializable {
     // Observable list to manage cart items in TableView
     private final ObservableList<CategoryCartTM> categoryCartTMS = FXCollections.observableArrayList();
 
+    CategoryBO categoryBO = new CategoryBOImpl();
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -172,7 +173,7 @@ public class CategoryDetailsBodyController implements Initializable {
 
     public void categoryIdComboOnAction(ActionEvent actionEvent) throws SQLException {
         selectedCategoryId = categoryIdCombo.getSelectionModel().getSelectedItem();
-        CategoryDTO categoryDTO = categoryModel.findById(selectedCategoryId);
+        CategoryDTO categoryDTO = categoryBO.findById(selectedCategoryId);
 
         // If category found (categoryDTO not null)
         if (categoryDTO != null) {
@@ -220,7 +221,7 @@ public class CategoryDetailsBodyController implements Initializable {
 
 
     private void loadCategoryId() throws SQLException {
-        ArrayList<String> categoryIds = categoryModel.getAllCategoryIds();
+        ArrayList<String> categoryIds = categoryBO.getAllIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(categoryIds);
         categoryIdCombo.setItems(observableList);

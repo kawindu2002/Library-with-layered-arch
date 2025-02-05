@@ -4,7 +4,6 @@ import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
-import edu.ijse.gdse71.library.model.BookModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
