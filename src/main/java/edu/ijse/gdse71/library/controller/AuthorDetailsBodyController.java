@@ -1,4 +1,5 @@
 package edu.ijse.gdse71.library.controller;
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.AuthorBO;
 import edu.ijse.gdse71.library.bo.custom.impl.AuthorBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
@@ -74,7 +75,7 @@ public class AuthorDetailsBodyController implements Initializable {
     String selectedAuthorId;
 
     //property injection (Dependency injection)
-    AuthorBO authorBO = new AuthorBOImpl();
+    AuthorBOImpl authorBO = (AuthorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.AUTHOR);
 
 
     // Observable list to manage cart items in TableView
