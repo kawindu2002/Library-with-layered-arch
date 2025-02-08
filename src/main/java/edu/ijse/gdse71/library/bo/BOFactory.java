@@ -5,14 +5,10 @@ import edu.ijse.gdse71.library.bo.custom.impl.*;
 public class BOFactory {
     private static BOFactory boFactory;
     private BOFactory(){
-
     }
 
-    public static BOFactory getBoFactory(){
-        return (boFactory==null)
-                ?boFactory= new BOFactory()
-                :boFactory;
-
+    public static BOFactory getInstance() {
+        return boFactory==null?boFactory=new BOFactory():boFactory;
     }
 
     public enum BOTypes{
@@ -67,5 +63,11 @@ public class BOFactory {
         }
     }
 }
+
+
+
+
+
+
 
 
