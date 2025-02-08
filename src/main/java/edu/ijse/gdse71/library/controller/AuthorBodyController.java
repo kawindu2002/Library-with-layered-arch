@@ -1,6 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
-import edu.ijse.gdse71.library.bo.custom.AuthorBO;
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.impl.AuthorBOImpl;
 import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.dto.tm.AuthorTM;
@@ -84,7 +84,8 @@ public class AuthorBodyController implements Initializable {
     private Label regDateLbl;
 
     //property injection (Dependency injection)
-    AuthorBO authorBO = new AuthorBOImpl();
+    AuthorBOImpl authorBO = (AuthorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOType.Author);
+
 
     //------------------------------------------------------------------------------------------------------------------
 

@@ -148,7 +148,7 @@ public class BookBOImpl implements BookBO {
                     book.getPrice(),
                     book.getState(),
                     book.getBookshelfID(),
-                    categoryDetailsDAO.getAllCategoryDetails(),
+                    bookDTO.getAllCategoryDetails(),
                     authorDetailsDAO.getAllAuthorDetails()
 
             ));
