@@ -84,7 +84,7 @@ public class AuthorBodyController implements Initializable {
     private Label regDateLbl;
 
     //property injection (Dependency injection)
-    AuthorBOImpl authorBO = (AuthorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOType.Author);
+    AuthorBOImpl authorBO = (AuthorBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.AUTHOR);
 
 
     //------------------------------------------------------------------------------------------------------------------
