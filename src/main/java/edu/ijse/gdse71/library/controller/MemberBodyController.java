@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.MemberTM;
@@ -111,9 +113,7 @@ public class MemberBodyController implements Initializable {
     @FXML
     private Label stateLbl;
 
-
-    MemberBO memberBO = new MemberBOImpl();
-
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
 
     //------------------------------------------------------------------------------------------------------------------
 
