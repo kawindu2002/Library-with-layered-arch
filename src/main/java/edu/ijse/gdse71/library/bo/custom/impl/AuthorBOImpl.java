@@ -65,13 +65,10 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public AuthorDTO findById(String selectedId) throws SQLException {
-        // Retrieve the author using the provided ID
         ArrayList<Author> authors = authorDAO.findById(selectedId);
 
-        // Check if any author was found, and then return the DTO
         if (!authors.isEmpty()) {
             Author author = authors.get(0);
-            // Assuming there's only one author with the given ID
             return new AuthorDTO(
                     author.getAuthorID(),
                     author.getName(),
@@ -79,11 +76,9 @@ public class AuthorBOImpl implements AuthorBO {
                     author.getRegDate()
             );
         } else {
-            // Handle the case where no author is found (optional)
             return null;
         }
     }
-
 }
 
 
