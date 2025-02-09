@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.ReservationBO;
 import edu.ijse.gdse71.library.bo.custom.impl.ReservationBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
@@ -56,7 +57,7 @@ public class ReservationReportController implements Initializable {
     private Label reservationReportLbl;
 
 
-    final ReservationBO reservationBO = new ReservationBOImpl();
+    ReservationBOImpl reservationBO = (ReservationBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.RESERVATION);
 
 
     @FXML
