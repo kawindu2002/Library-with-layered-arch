@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CategoryDetailsBOImpl implements CategoryDetailsBO {
 
 
-    CategoryDetailsDAO categoryDetailsDAO = (CategoryDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
+    CategoryDetailsDAO categoryDetailsDAO = (CategoryDetailsDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
 
     public boolean saveCategoryDetailsList(ArrayList<CategoryDetailsDTO> categoryDetailsDTOS) throws SQLException {
         for (CategoryDetailsDTO categoryDetailsDTO : categoryDetailsDTOS) {
