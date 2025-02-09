@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
+import edu.ijse.gdse71.library.entity.Author;
 import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -75,19 +76,24 @@ public class BookshelfDAOImpl implements BookshelfDAO {
         return bookshelfIds;
     }
 
+
     @Override
-    public Bookshelf findById(String selectedId) throws SQLException {
+    public ArrayList<Bookshelf> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Bookshelf(
+        ArrayList<Bookshelf> bookshelfs = new ArrayList<>();
+
+        while (rst.next()) {
+            Bookshelf bookshelf = new Bookshelf(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getInt(3),
                     rst.getString(4)
             );
+            bookshelfs.add(bookshelf);
         }
-        return null;
-    }
 
+        return bookshelfs;
+    }
 }
+
