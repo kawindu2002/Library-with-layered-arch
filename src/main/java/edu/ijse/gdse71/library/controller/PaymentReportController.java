@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
 import edu.ijse.gdse71.library.bo.custom.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
@@ -55,7 +56,7 @@ public class PaymentReportController implements Initializable {
     @FXML
     private Label paymentReportLbl;
 
-    PaymentBO paymentBO = new PaymentBOImpl();
+    PaymentBOImpl paymentBO = (PaymentBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
