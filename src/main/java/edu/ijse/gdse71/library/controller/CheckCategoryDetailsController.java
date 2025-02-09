@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.CategoryDetailsBO;
+import edu.ijse.gdse71.library.bo.custom.impl.AuthorDetailsBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.CategoryDetailsBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDetailsDTO;
 import edu.ijse.gdse71.library.dto.tm.CategoryDetailsTM;
@@ -42,7 +44,7 @@ public class CheckCategoryDetailsController implements Initializable {
     private TableView<CategoryDetailsTM> checkCategoryDetailsTbl;
 
 
-    final CategoryDetailsBO categoryDetailsBO = new CategoryDetailsBOImpl();
+    CategoryDetailsBOImpl categoryDetailsBO = (CategoryDetailsBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
 
     //------------------------------------------------------------------------------------------------------------------
