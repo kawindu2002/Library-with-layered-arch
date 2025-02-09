@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
+import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.LoanDTO;
@@ -55,8 +57,7 @@ public class LoanReportController implements Initializable {
     @FXML
     private Label loanReportLbl;
 
-
-    LoanBO loanBO = new LoanBOImpl();
+    LoanBOImpl loanBO = (LoanBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.LOAN);
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
