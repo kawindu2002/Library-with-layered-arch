@@ -80,7 +80,7 @@ public class CategoryDetailsBodyController implements Initializable {
 
     CategoryBOImpl categoryBO = (CategoryBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
-    
+
     //------------------------------------------------------------------------------------------------------------------
 
 
