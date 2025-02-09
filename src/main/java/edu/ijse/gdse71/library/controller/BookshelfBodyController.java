@@ -1,7 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
+import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.BookshelfBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
@@ -92,9 +94,8 @@ public class BookshelfBodyController implements Initializable {
     @FXML
     private Label descriptionShowLbl;
 
-    BookshelfBO bookshelfBO = new BookshelfBOImpl();
-    CategoryBO categoryBO = new CategoryBOImpl();
-
+    BookshelfBOImpl bookshelfBO = (BookshelfBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOKSHELF);
+    CategoryBOImpl categoryBO = (CategoryBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
     //------------------------------------------------------------------------------------------------------------------
 
