@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.UserDAO;
 import edu.ijse.gdse71.library.dto.UserDTO;
+import edu.ijse.gdse71.library.entity.Returns;
 import edu.ijse.gdse71.library.entity.User;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -81,12 +82,15 @@ public class UserDAOImpl implements UserDAO {
         return userIds;
     }
 
+
     @Override
-    public User findById(String selectedId) throws SQLException {
+    public ArrayList<User> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from User where User_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new User(
+        ArrayList<User> users = new ArrayList<>();
+
+        while (rst.next()) {
+            User user = new User(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -94,9 +98,11 @@ public class UserDAOImpl implements UserDAO {
                     rst.getDate(5),
                     rst.getString(6)
             );
+            users.add(user);
         }
-        return null;
+        return users;
     }
+
 
     @Override
     public String getState(String id) throws SQLException {
