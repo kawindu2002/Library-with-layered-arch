@@ -1,9 +1,11 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.FineBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
@@ -113,9 +115,9 @@ public class LoanBodyController implements Initializable {
     @FXML
     private Label memberNameShowLbl;
 
-     MemberBO memberBO = new MemberBOImpl();
-     BookBO bookBO = new BookBOImpl();
-     LoanBO loanBO = new LoanBOImpl();
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
+    BookBOImpl bookBO = (BookBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOK);
+    LoanBOImpl loanBO = (LoanBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.LOAN);
 
 
     //------------------------------------------------------------------------------------------------------------------
