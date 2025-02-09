@@ -3,7 +3,9 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookshelfDAO;
+import edu.ijse.gdse71.library.dto.AuthorDTO;
 import edu.ijse.gdse71.library.dto.BookshelfDTO;
+import edu.ijse.gdse71.library.entity.Author;
 import edu.ijse.gdse71.library.entity.Bookshelf;
 
 import java.sql.SQLException;
@@ -64,20 +66,19 @@ public class BookshelfBOImpl implements BookshelfBO {
 
     @Override
     public BookshelfDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new BookshelfDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getInt(3),
-//                    rst.getString(4)
-//            );
-//        }
-//        .......................
-//        BookshelfDTO bookshelfDTO = bookshelfDAO.findById(selectedId);
-//        return bookshelfDTO;
-        return null;
+        ArrayList<Bookshelf> bookshelfs = bookshelfDAO.findById(selectedId);
+
+        if (!bookshelfs.isEmpty()) {
+            Bookshelf bookshelf = bookshelfs.get(0);
+            return new BookshelfDTO(
+                bookshelf.getBookshelfID(),
+                    bookshelf.getCategoryID(),
+                    bookshelf.getCapacity(),
+                    bookshelf.getLocation()
+            );
+        } else {
+            return null;
+        }
     }
 
 }
