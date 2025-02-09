@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class MemberBOImpl implements MemberBO {
 
-    MemberDAO memberDAO= (MemberDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.MEMBER);
+    MemberDAO memberDAO= (MemberDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.MEMBER);
 
     public String getNextId() throws SQLException {
         return memberDAO.getNextId();
