@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class ReturnBOImpl implements ReturnBO {
 
-    ReturnDAO returnDAO= (ReturnDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.RETURN);
-    BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
+    ReturnDAO returnDAO= (ReturnDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.RETURN);
+    BookDAO bookDAO= (BookDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.BOOK);
 
     public String getNextId() throws SQLException {
         return returnDAO.getNextId();
