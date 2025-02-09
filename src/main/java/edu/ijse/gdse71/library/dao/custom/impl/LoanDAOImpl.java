@@ -1,6 +1,7 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.LoanDAO;
+import edu.ijse.gdse71.library.entity.Fine;
 import edu.ijse.gdse71.library.entity.Loan;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -84,12 +85,15 @@ public class LoanDAOImpl implements LoanDAO {
         return loanIds;
     }
 
+
     @Override
-    public Loan findById(String selectedId) throws SQLException {
+    public ArrayList<Loan> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Loan where Loan_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Loan(
+        ArrayList<Loan> loans = new ArrayList<>();
+
+        while (rst.next()) {
+            Loan loan = new Loan(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -97,8 +101,9 @@ public class LoanDAOImpl implements LoanDAO {
                     rst.getDate(5),
                     rst.getDate(6)
             );
+            loans.add(loan);
         }
-        return null;
+        return loans;
     }
 
 }
