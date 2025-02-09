@@ -11,12 +11,13 @@ import java.util.ArrayList;
 
 public class UserBOImpl implements UserBO {
 
-    UserDAO userDAO= (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
+    UserDAO userDAO= (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.USER);
 
     public String getNextId() throws SQLException {
         return userDAO.getNextId();
 
     }
+
 
 
     @Override
