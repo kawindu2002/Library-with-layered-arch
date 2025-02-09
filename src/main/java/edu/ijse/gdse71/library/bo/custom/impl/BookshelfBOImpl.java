@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class BookshelfBOImpl implements BookshelfBO {
 
-    BookshelfDAO bookshelfDAO= (BookshelfDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOKSHELF);
+    BookshelfDAO bookshelfDAO= (BookshelfDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.BOOKSHELF);
 
     public String getNextId() throws SQLException {
         return bookshelfDAO.getNextId();
