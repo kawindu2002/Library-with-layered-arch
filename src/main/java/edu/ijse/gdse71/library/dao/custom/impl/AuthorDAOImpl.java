@@ -77,19 +77,24 @@ public class AuthorDAOImpl implements AuthorDAO {
         return authorIds;
     }
 
-    @Override
-    public Author findById(String selectedId) throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from Author where Author_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Author(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getDate(4)
+    @Override
+    public ArrayList<Author> findById(String selectedId) throws SQLException {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Author WHERE AuthorID = ?", selectedId);
+
+        ArrayList<Author> authors = new ArrayList<>();
+
+        while (rst.next()) {
+            Author author = new Author(
+                    rst.getString(1), // AuthorID
+                    rst.getString(2), // Name
+                    rst.getString(3), // Biography
+                    rst.getDate(4)    // date
             );
+            authors.add(author);
         }
-        return null;
+
+        return authors;
     }
 
 }

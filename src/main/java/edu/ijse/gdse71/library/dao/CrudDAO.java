@@ -11,7 +11,7 @@ public interface CrudDAO<T>  extends SuperDAO{
     boolean update(T dto) throws SQLException;
     ArrayList<T> getAll() throws SQLException;
     ArrayList<String> getAllIds() throws SQLException;
-    T findById(String selectedId) throws SQLException;
+    ArrayList<T> findById(String selectedId) throws SQLException;
 
 }
 

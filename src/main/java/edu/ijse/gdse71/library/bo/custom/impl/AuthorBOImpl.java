@@ -65,18 +65,23 @@ public class AuthorBOImpl implements AuthorBO {
 
     @Override
     public AuthorDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Author where Author_Id=?", selectedId);
+        // Retrieve the author using the provided ID
+        ArrayList<Author> authors = authorDAO.findById(selectedId);
 
-//        if (rst.next()) {
-//            return new Author(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getDate(4)
-//            );
-//        }
-
-        return null;
+        // Check if any author was found, and then return the DTO
+        if (!authors.isEmpty()) {
+            Author author = authors.get(0);
+            // Assuming there's only one author with the given ID
+            return new AuthorDTO(
+                    author.getAuthorID(),
+                    author.getName(),
+                    author.getBiography(),
+                    author.getRegDate()
+            );
+        } else {
+            // Handle the case where no author is found (optional)
+            return null;
+        }
     }
 
 }
