@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.UserBO;
+import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.UserBOImpl;
 import edu.ijse.gdse71.library.dto.UserDTO;
 import edu.ijse.gdse71.library.util.CommonUtil;
@@ -52,7 +54,8 @@ public class LoginController  {
     private String password;
     private String role;
 
-    UserBO userBO = new UserBOImpl();
+    UserBOImpl userBO = (UserBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.USER);
+
 
     @FXML
     void backBtnActionClicked(ActionEvent event) {
