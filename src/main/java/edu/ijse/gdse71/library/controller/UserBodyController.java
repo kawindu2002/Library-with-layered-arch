@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.UserBO;
+import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.UserBOImpl;
 import edu.ijse.gdse71.library.dto.UserDTO;
 import edu.ijse.gdse71.library.dto.tm.UserTM;
@@ -105,7 +107,7 @@ public class UserBodyController implements Initializable {
     @FXML
     private ComboBox<String> roleCombo;
 
-    UserBO userBO = new UserBOImpl();
+    UserBOImpl userBO = (UserBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.USER);
 
     //------------------------------------------------------------------------------------------------------------------
 
