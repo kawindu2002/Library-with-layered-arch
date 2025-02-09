@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class FineBOImpl implements FineBO {
 
-    FineDAO fineDAO= (FineDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.FINE);
+    FineDAO fineDAO= (FineDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.FINE);
 
     public String getNextId() throws SQLException {
         return fineDAO.getNextId();
