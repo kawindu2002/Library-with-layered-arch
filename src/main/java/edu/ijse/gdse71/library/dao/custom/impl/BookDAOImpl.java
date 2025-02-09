@@ -1,6 +1,6 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
-import edu.ijse.gdse71.library.dao.custom.BookDAO;
+import edu.ijse.gdse71.library.dao.custom.*;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.entity.Book;
 import edu.ijse.gdse71.library.util.CrudUtil;
@@ -9,9 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookDAOImpl implements BookDAO {
 
-     public String getNextId() throws SQLException {
+public class BookDAOImpl implements BookDAO, QueryDAO {
+
+    public String getNextId() throws SQLException {
         String query = "select Book_Id from Book order by Book_Id desc limit 1";
         return CrudUtil.getNextId(query,"BK%03d","BK001");
     }

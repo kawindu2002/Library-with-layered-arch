@@ -5,3 +5,4 @@ import edu.ijse.gdse71.library.dao.SuperDAO;
 public interface QueryDAO extends SuperDAO {
 
 }
+
