@@ -3,6 +3,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 import edu.ijse.gdse71.library.dao.custom.ReservationDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.ReservationDTO;
+import edu.ijse.gdse71.library.entity.Publisher;
 import edu.ijse.gdse71.library.entity.Reservation;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -83,20 +84,24 @@ public class ReservationDAOImpl implements ReservationDAO {
         return reservationIds;
     }
 
+
     @Override
-    public Reservation findById(String selectedId) throws SQLException {
+    public ArrayList<Reservation> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Reservation where Reservation_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Reservation(
+        ArrayList<Reservation> reservations = new ArrayList<>();
+
+        while (rst.next()) {
+            Reservation reservation = new Reservation(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
                     rst.getDate(5)
             );
+            reservations.add(reservation);
         }
-        return null;
+        return reservations;
     }
 
 }
