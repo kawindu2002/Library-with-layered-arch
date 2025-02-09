@@ -1,13 +1,11 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.ReturnBO;
-import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
-import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
-import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
-import edu.ijse.gdse71.library.bo.custom.impl.ReturnBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.*;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.ReturnTM;
 import edu.ijse.gdse71.library.util.CommonUtil;
@@ -122,10 +120,10 @@ public class ReturnBodyController implements Initializable {
     private Label memberNameShowLbl;
 
 
-    final MemberBO memberBO = new MemberBOImpl();
-    final BookBO bookBO = new BookBOImpl();
-    final LoanBO loanBO = new LoanBOImpl();
-    final ReturnBO returnBO = new ReturnBOImpl();
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
+    BookBOImpl bookBO = (BookBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOK);
+    LoanBOImpl loanBO = (LoanBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.LOAN);
+    ReturnBOImpl returnBO = (ReturnBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.RETURN);
 
 
     //------------------------------------------------------------------------------------------------------------------
