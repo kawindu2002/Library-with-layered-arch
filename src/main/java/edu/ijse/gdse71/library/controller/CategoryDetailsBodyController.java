@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
 import edu.ijse.gdse71.library.bo.custom.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
@@ -77,8 +78,9 @@ public class CategoryDetailsBodyController implements Initializable {
     // Observable list to manage cart items in TableView
     private final ObservableList<CategoryCartTM> categoryCartTMS = FXCollections.observableArrayList();
 
-    CategoryBO categoryBO = new CategoryBOImpl();
+    CategoryBOImpl categoryBO = (CategoryBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
+    
     //------------------------------------------------------------------------------------------------------------------
 
 
