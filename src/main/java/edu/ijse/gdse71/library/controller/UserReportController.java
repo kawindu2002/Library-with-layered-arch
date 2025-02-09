@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.UserBO;
 import edu.ijse.gdse71.library.bo.custom.impl.UserBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
@@ -52,7 +53,8 @@ public class UserReportController implements Initializable {
     @FXML
     private Label userReportLbl;
 
-    UserBO userBO = new UserBOImpl();
+    UserBOImpl userBO = (UserBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.USER);
+
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
