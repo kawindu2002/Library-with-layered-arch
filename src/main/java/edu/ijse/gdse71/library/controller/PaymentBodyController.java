@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
@@ -105,8 +106,9 @@ public class PaymentBodyController implements Initializable {
     @FXML
     private TableColumn<PaymentTM, String> userIdCol;
 
-    PaymentBO paymentBO = new PaymentBOImpl();
-    MemberBO memberBO = new MemberBOImpl();
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
+    PaymentBOImpl paymentBO = (PaymentBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+
 
     //------------------------------------------------------------------------------------------------------------------
 
