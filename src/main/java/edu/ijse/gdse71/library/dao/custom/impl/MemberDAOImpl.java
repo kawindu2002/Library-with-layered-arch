@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.MemberDAO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
+import edu.ijse.gdse71.library.entity.Loan;
 import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -83,12 +84,15 @@ public class MemberDAOImpl implements MemberDAO {
         return memberIds;
     }
 
+
     @Override
-    public Member findById(String selectedId) throws SQLException {
+    public ArrayList<Member> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Member where Member_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Member(
+        ArrayList<Member> members = new ArrayList<>();
+
+        while (rst.next()) {
+            Member member = new Member(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -97,10 +101,11 @@ public class MemberDAOImpl implements MemberDAO {
                     rst.getDate(6),
                     rst.getString(7)
             );
+            members.add(member);
         }
-
-        return null;
+        return members;
     }
+
 
     @Override
     public String getState(String id) throws SQLException {
