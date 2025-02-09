@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.PublisherDAO;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
+import edu.ijse.gdse71.library.entity.Payment;
 import edu.ijse.gdse71.library.entity.Publisher;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -74,21 +75,24 @@ public class PublisherDAOImpl implements PublisherDAO {
         return publisherIds;
     }
 
+
     @Override
-    public Publisher findById(String selectedId) throws SQLException {
+    public ArrayList<Publisher> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Publisher where Publisher_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Publisher(
+        ArrayList<Publisher> publishers = new ArrayList<>();
+
+        while (rst.next()) {
+            Publisher publisher = new Publisher(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getDate(4)
             );
+            publishers.add(publisher);
         }
-        return null;
+        return publishers;
     }
-
 
 }
 
