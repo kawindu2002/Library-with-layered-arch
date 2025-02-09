@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
 import edu.ijse.gdse71.library.bo.custom.impl.CategoryBOImpl;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
@@ -75,7 +76,7 @@ public class CategoryBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-    CategoryBO categoryBO = new CategoryBOImpl();
+    CategoryBOImpl categoryBO = (CategoryBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
 
     //------------------------------------------------------------------------------------------------------------------
