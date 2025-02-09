@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.FineDAO;
 import edu.ijse.gdse71.library.dto.FineDTO;
+import edu.ijse.gdse71.library.entity.Category;
 import edu.ijse.gdse71.library.entity.Fine;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -83,12 +84,15 @@ public class FineDAOImpl implements FineDAO {
         return fineIds;
     }
 
+
     @Override
-    public Fine findById(String selectedId) throws SQLException {
+    public ArrayList<Fine> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Fine where Fine_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Fine(
+        ArrayList<Fine> fines = new ArrayList<>();
+
+        while (rst.next()) {
+            Fine fine = new Fine(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -97,8 +101,9 @@ public class FineDAOImpl implements FineDAO {
                     rst.getDate(6),
                     rst.getString(7)
             );
+            fines.add(fine);
         }
-        return null;
+        return fines;
     }
 
 }
