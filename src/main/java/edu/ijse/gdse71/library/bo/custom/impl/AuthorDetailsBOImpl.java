@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AuthorDetailsBOImpl implements AuthorDetailsBO {
 
-    AuthorDetailsDAO authorDetailsDAO = (AuthorDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
+    AuthorDetailsDAO authorDetailsDAO = (AuthorDetailsDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
 
     public boolean saveAuthorDetailsList(ArrayList<AuthorDetailsDTO> authorDetailsDTOS) throws SQLException {
         for (AuthorDetailsDTO authorDetailsDTO : authorDetailsDTOS) {
