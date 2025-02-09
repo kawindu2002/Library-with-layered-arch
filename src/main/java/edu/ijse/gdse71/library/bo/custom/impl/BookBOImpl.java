@@ -1,6 +1,5 @@
 package edu.ijse.gdse71.library.bo.custom.impl;
 
-import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
@@ -8,7 +7,6 @@ import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDetailsDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookDTO;
-import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.entity.Book;
 
 import java.sql.Connection;

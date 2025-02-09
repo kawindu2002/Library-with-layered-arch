@@ -2,7 +2,6 @@ package edu.ijse.gdse71.library.bo.custom;
 
 import edu.ijse.gdse71.library.bo.SuperBO;
 import edu.ijse.gdse71.library.dto.BookDTO;
-import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

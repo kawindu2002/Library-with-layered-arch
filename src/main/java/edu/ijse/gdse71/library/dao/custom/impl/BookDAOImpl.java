@@ -1,7 +1,6 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.*;
-import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import edu.ijse.gdse71.library.entity.Book;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -70,9 +69,7 @@ public class BookDAOImpl implements BookDAO, QueryDAO {
                     rst.getString(5),
                     rst.getDouble(6),
                     rst.getString(7),
-                    rst.getString(8),
-                    categoryDetailsModel.getAllCategoryDetails(),
-                    authorDetailsModel.getAllAuthorDetails()
+                    rst.getString(8)
             );
             allBooks.add(entity);
         }
@@ -98,7 +95,7 @@ public class BookDAOImpl implements BookDAO, QueryDAO {
         ResultSet rst = CrudUtil.execute("select * from Book where Book_Id=?", selectedId);
 
         if (rst.next()) {
-            return new BookWithDetailsDTO(
+            return new Book(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -106,9 +103,7 @@ public class BookDAOImpl implements BookDAO, QueryDAO {
                     rst.getString(5),
                     rst.getDouble(6),
                     rst.getString(7),
-                    rst.getString(8),
-                    categoryDetailsModel.getAllCategoryDetails(),
-                    authorDetailsModel.getAllAuthorDetails()
+                    rst.getString(8)
             );
         }
         return null;
