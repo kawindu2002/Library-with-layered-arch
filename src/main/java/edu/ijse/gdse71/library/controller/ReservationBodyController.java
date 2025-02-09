@@ -1,10 +1,12 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.ReservationBO;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.ReservationBOImpl;
 import edu.ijse.gdse71.library.dto.*;
 import edu.ijse.gdse71.library.dto.tm.ReservationTM;
@@ -103,9 +105,10 @@ public class ReservationBodyController implements Initializable {
     @FXML
     private Label memberNameShowLbl;
 
-    final MemberBO memberBO = new MemberBOImpl();
-    final BookBO bookBO = new BookBOImpl();
-    final ReservationBO reservationBO = new ReservationBOImpl();
+
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
+    BookBOImpl bookBO = (BookBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOK);
+    ReservationBOImpl reservationBO = (ReservationBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.RESERVATION);
 
 
     //------------------------------------------------------------------------------------------------------------------
