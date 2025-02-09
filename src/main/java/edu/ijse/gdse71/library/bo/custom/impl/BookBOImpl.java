@@ -149,7 +149,6 @@ public class BookBOImpl implements BookBO {
                     book.getPrice(),
                     book.getState(),
                     book.getBookshelfID()
-
             ));
         }
         return bookDTO;
@@ -159,29 +158,29 @@ public class BookBOImpl implements BookBO {
     @Override
     public ArrayList<String> getAllIds() throws SQLException {
         return bookDAO.getAllIds();
-
     }
 
     @Override
     public BookDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Book where Book_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new BookWithDetailsDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getDate(4),
-//                    rst.getString(5),
-//                    rst.getDouble(6),
-//                    rst.getString(7),
-//                    rst.getString(8),
-//                    categoryDetailsModel.getAllCategoryDetails(),
-//                    authorDetailsModel.getAllAuthorDetails()
-//            );
-//        }
-        return null;
+        ArrayList<Book> books = bookDAO.findById(selectedId);
+
+        if (!books.isEmpty()) {
+            Book book = books.get(0);
+            return new BookDTO(
+                book.getBookID(),
+                book.getTitle(),
+                book.getIsbn(),
+                book.getRegDate(),
+                book.getPublisherID(),
+                book.getPrice(),
+                book.getState(),
+                book.getBookshelfID()
+            );
+        } else {
+            return null;
+        }
     }
+
 
     @Override
     public String getState(String id) throws SQLException {
