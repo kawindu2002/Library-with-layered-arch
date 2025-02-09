@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class LoanBOImpl implements LoanBO {
 
-    LoanDAO loanDAO= (LoanDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.LOAN);
-    BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
+    LoanDAO loanDAO= (LoanDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.LOAN);
+    BookDAO bookDAO= (BookDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.BOOK);
 
     public String getNextId() throws SQLException {
         return loanDAO.getNextId();
