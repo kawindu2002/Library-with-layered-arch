@@ -1,7 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookWithDetailsDTO;
 import javafx.collections.FXCollections;
@@ -55,7 +57,7 @@ public class BookReportController implements Initializable {
     @FXML
     private Label titleShowLbl;
 
-    BookBO bookBO = new BookBOImpl();
+    BookBOImpl bookBO = (BookBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOK);
 
 
     @FXML

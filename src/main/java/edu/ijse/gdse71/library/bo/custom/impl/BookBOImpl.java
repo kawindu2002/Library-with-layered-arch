@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.bo.custom.impl;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.AuthorDetailsDAO;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 public class BookBOImpl implements BookBO {
 
+    PublisherBOImpl publisherBO = (PublisherBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PUBLISHER);
     BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
     AuthorDetailsDAO authorDetailsDAO= (AuthorDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
     CategoryDetailsDAO categoryDetailsDAO= (CategoryDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
