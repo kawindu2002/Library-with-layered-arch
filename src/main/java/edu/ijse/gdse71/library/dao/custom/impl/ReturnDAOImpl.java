@@ -1,6 +1,7 @@
 package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.ReturnDAO;
+import edu.ijse.gdse71.library.entity.Reservation;
 import edu.ijse.gdse71.library.entity.Returns;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -80,12 +81,15 @@ public class ReturnDAOImpl implements ReturnDAO {
         return returnIds;
     }
 
+
     @Override
-    public Returns findById(String selectedId) throws SQLException {
+    public ArrayList<Returns> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Returns where Returns_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Returns(
+        ArrayList<Returns> returnss = new ArrayList<>();
+
+        while (rst.next()) {
+            Returns returns = new Returns(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -93,10 +97,9 @@ public class ReturnDAOImpl implements ReturnDAO {
                     rst.getString(5),
                     rst.getDate(6)
             );
+            returnss.add(returns);
         }
-            return null;
+        return returnss;
     }
-
 }
-
 
