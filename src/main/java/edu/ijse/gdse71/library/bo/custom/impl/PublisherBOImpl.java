@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PublisherBOImpl implements PublisherBO {
 
-    PublisherDAO publisherDAO= (PublisherDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PUBLISHER);
+    PublisherDAO publisherDAO= (PublisherDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.PUBLISHER);
 
     public String getNextId() throws SQLException {
         return publisherDAO.getNextId();
