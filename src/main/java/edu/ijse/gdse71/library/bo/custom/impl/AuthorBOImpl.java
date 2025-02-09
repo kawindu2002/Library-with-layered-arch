@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AuthorBOImpl implements AuthorBO {
 
-    AuthorDAO authorDAO= (AuthorDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR);
+    AuthorDAO authorDAO= (AuthorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.AUTHOR);
 
     public String getNextId() throws SQLException {
         return authorDAO.getNextId();
