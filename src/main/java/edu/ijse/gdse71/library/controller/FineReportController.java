@@ -1,7 +1,9 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.FineBO;
 import edu.ijse.gdse71.library.bo.custom.impl.FineBOImpl;
+import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.FineDTO;
 import javafx.collections.FXCollections;
@@ -55,8 +57,7 @@ public class FineReportController implements Initializable {
     @FXML
     private Button generateReportBtn;
 
-    FineBO fineBO = new FineBOImpl();
-
+    FineBOImpl fineBO = (FineBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.FINE);
 
     @FXML
     void generateReportBtnActionClicked(ActionEvent event) {
