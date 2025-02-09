@@ -17,10 +17,9 @@ import java.util.ArrayList;
 
 public class BookBOImpl implements BookBO {
 
-    PublisherBOImpl publisherBO = (PublisherBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PUBLISHER);
-    BookDAO bookDAO= (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.BOOK);
-    AuthorDetailsDAO authorDetailsDAO= (AuthorDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
-    CategoryDetailsDAO categoryDetailsDAO= (CategoryDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
+    BookDAO bookDAO= (BookDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.BOOK);
+    AuthorDetailsDAO authorDetailsDAO= (AuthorDetailsDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.AUTHOR_DETAILS);
+    CategoryDetailsDAO categoryDetailsDAO= (CategoryDetailsDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CATEGORY_DETAILS);
 
     public String getNextId() throws SQLException {
         return bookDAO.getNextId();
@@ -150,7 +149,7 @@ public class BookBOImpl implements BookBO {
                     book.getPrice(),
                     book.getState(),
                     book.getBookshelfID(),
-                    bookDTO.getAllCategoryDetails(),
+                    categoryDetailsDAO.getAllCategoryDetails(),
                     authorDetailsDAO.getAllAuthorDetails()
 
             ));
