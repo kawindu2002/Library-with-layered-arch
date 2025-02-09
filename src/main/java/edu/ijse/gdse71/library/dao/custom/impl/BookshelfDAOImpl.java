@@ -76,7 +76,6 @@ public class BookshelfDAOImpl implements BookshelfDAO {
         return bookshelfIds;
     }
 
-
     @Override
     public ArrayList<Bookshelf> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Bookshelf where Bookshelf_Id=?", selectedId);
