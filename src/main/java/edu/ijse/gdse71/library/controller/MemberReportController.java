@@ -1,5 +1,6 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
@@ -55,7 +56,7 @@ public class MemberReportController implements Initializable {
     @FXML
     private Label memberReportLbl;
 
-    MemberBO memberBO = new MemberBOImpl();
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
 
 
     @FXML
