@@ -78,7 +78,6 @@ public class CategoryBodyController implements Initializable {
 
     CategoryBOImpl categoryBO = (CategoryBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.CATEGORY);
 
-
     //------------------------------------------------------------------------------------------------------------------
 
 
