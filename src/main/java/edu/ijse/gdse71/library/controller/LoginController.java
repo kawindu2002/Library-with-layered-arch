@@ -49,7 +49,6 @@ public class LoginController  {
     @FXML
     private TextField userIdTxt;
 
-
     private String userId;
     private String password;
     private String role;
@@ -61,7 +60,6 @@ public class LoginController  {
     void backBtnActionClicked(ActionEvent event) {
         CommonUtil.navigateTo(loginAnchPane,"/view/RoleChooseView.fxml");
     }
-
 
     @FXML
     void loginBtnActionClicked(ActionEvent event) throws SQLException {
@@ -87,7 +85,6 @@ public class LoginController  {
             new Alert(Alert.AlertType.ERROR, "Check the role!").show();
 
         }
-
     }
 
     void validateUserDetails() throws SQLException {
