@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PaymentBOImpl implements PaymentBO {
 
-    PaymentDAO paymentDAO= (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PAYMENT);
+    PaymentDAO paymentDAO= (PaymentDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.PAYMENT);
 
     public String getNextId() throws SQLException {
         return paymentDAO.getNextId();
