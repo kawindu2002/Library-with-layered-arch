@@ -152,7 +152,6 @@ public class BookBOImpl implements BookBO {
             ));
         }
         return bookDTO;
-
     }
 
     @Override
