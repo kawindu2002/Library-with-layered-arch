@@ -1,8 +1,10 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.BookBO;
 import edu.ijse.gdse71.library.bo.custom.BookshelfBO;
 import edu.ijse.gdse71.library.bo.custom.PublisherBO;
+import edu.ijse.gdse71.library.bo.custom.impl.AuthorBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.BookshelfBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
@@ -144,11 +146,9 @@ public class BookBodyController implements Initializable {
     @FXML
     private TextField titleTxt;
 
-
-
-    BookBO bookBO = new BookBOImpl();
-    PublisherBO publisherBO = new PublisherBOImpl();
-    BookshelfBO bookshelfBO = new BookshelfBOImpl();
+    BookBOImpl bookBO = (BookBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOK);
+    PublisherBOImpl publisherBO = (PublisherBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PUBLISHER);
+    BookshelfBOImpl bookshelfBO = (BookshelfBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.BOOKSHELF);
 
 
     //------------------------------------------------------------------------------------------------------------------
