@@ -1,8 +1,10 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.FineBO;
 import edu.ijse.gdse71.library.bo.custom.LoanBO;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
+import edu.ijse.gdse71.library.bo.custom.impl.CategoryDetailsBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.FineBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
@@ -122,13 +124,11 @@ public class FineBodyController implements Initializable {
     @FXML
     private Label memberNameShowLbl;
 
-
-    FineBO fineBO = new FineBOImpl();
-    MemberBO memberBO = new MemberBOImpl();
-    LoanBO loanBO = new LoanBOImpl();
+    FineBOImpl fineBO = (FineBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.FINE);
+    MemberBOImpl memberBO = (MemberBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.MEMBER);
+    LoanBOImpl loanBO = (LoanBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.LOAN);
 
     //------------------------------------------------------------------------------------------------------------------
-
 
     @FXML
     void fineDeleteBtnActionClicked(ActionEvent event) throws SQLException {
