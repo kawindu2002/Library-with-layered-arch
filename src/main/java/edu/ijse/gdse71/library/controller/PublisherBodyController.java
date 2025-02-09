@@ -1,6 +1,8 @@
 package edu.ijse.gdse71.library.controller;
 
+import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.PublisherBO;
+import edu.ijse.gdse71.library.bo.custom.impl.PaymentBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.PublisherBOImpl;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
 import edu.ijse.gdse71.library.dto.tm.PublisherTM;
@@ -85,7 +87,9 @@ public class PublisherBodyController implements Initializable {
     @FXML
     private Label regDateLbl;
 
-    PublisherBO publisherBO = new PublisherBOImpl();
+
+    PublisherBOImpl publisherBO = (PublisherBOImpl) BOFactory.getInstance().getBO(BOFactory.BOTypes.PUBLISHER);
+
 
     //------------------------------------------------------------------------------------------------------------------
 
