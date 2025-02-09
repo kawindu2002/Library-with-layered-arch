@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class CategoryBOImpl implements CategoryBO {
 
-    CategoryDAO categoryDAO= (CategoryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CATEGORY);
+    CategoryDAO categoryDAO= (CategoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CATEGORY);
 
     public String getNextId() throws SQLException {
         return categoryDAO.getNextId();
