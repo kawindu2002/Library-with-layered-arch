@@ -7,7 +7,9 @@ import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.CategoryDetailsDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
 import edu.ijse.gdse71.library.dto.BookDTO;
+import edu.ijse.gdse71.library.entity.AuthorDetails;
 import edu.ijse.gdse71.library.entity.Book;
+import edu.ijse.gdse71.library.entity.CategoryDetails;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,7 +27,7 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
-    public boolean save(BookWithDetailsDTO dto) throws SQLException {
+    public boolean save(BookDTO dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         try {
             // @autoCommit: Disables auto-commit to manually control the transaction
@@ -48,10 +50,10 @@ public class BookBOImpl implements BookBO {
             // If the book is saved successfully
             if (isBookSaved) {
                // @isAuthorSaved: Saves the author details into the Author table
-                boolean isAuthorDetailsListSaved = authorDetailsDAO.saveAuthorDetail(dto.getAuthorDetailsDTOS()); // Save Author details
+                boolean isAuthorDetailsListSaved = authorDetailsDAO.saveAuthorDetail(new AuthorDetails()); // Save Author details
                 if (isAuthorDetailsListSaved) {
                     // @isCategoryDetailListSaved: Saves the list of category details
-                    boolean isCategoryDetailListSaved = categoryDetailsDAO.saveCategoryDetail(dto.getCategoryDetailsDTOS());
+                    boolean isCategoryDetailListSaved = categoryDetailsDAO.saveCategoryDetail(new CategoryDetails());
                     if (isCategoryDetailListSaved) {
                         // @commit: Commits the transaction if book, author, and category details are saved successfully
                         connection.commit();
@@ -133,12 +135,12 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
-    public ArrayList<BookWithDetailsDTO> getAll() throws SQLException {
+    public ArrayList<BookDTO> getAll() throws SQLException {
 
         ArrayList<Book> books = bookDAO.getAll();
-        ArrayList<BookWithDetailsDTO> bookWithDetailsDTOS = new ArrayList<>();
+        ArrayList<BookDTO> bookDTO = new ArrayList<>();
         for (Book book:books) {
-            bookWithDetailsDTOS.add(new BookWithDetailsDTO(
+            bookDTO.add(new BookDTO(
                     book.getBookID(),
                     book.getTitle(),
                     book.getIsbn(),
@@ -146,13 +148,11 @@ public class BookBOImpl implements BookBO {
                     book.getPublisherID(),
                     book.getPrice(),
                     book.getState(),
-                    book.getBookshelfID(),
-                    categoryDetailsDAO.getAllCategoryDetails(),
-                    authorDetailsDAO.getAllAuthorDetails()
+                    book.getBookshelfID()
 
             ));
         }
-        return bookWithDetailsDTOS;
+        return bookDTO;
 
     }
 
@@ -163,7 +163,7 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
-    public BookWithDetailsDTO findById(String selectedId) throws SQLException {
+    public BookDTO findById(String selectedId) throws SQLException {
 //        ResultSet rst = CrudUtil.execute("select * from Book where Book_Id=?", selectedId);
 //
 //        if (rst.next()) {

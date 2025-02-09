@@ -204,20 +204,21 @@ public class BookBodyController implements Initializable {
     void bookSaveBtnActionClicked(ActionEvent event) throws SQLException {
 
         try{
-            BookWithDetailsDTO bookDTO = verifySave();
-            boolean isNullAuthorDTOS= bookDTO.getAuthorDetailsDTOS() == null || bookDTO.getAuthorDetailsDTOS().isEmpty();
-            boolean isNullCategoryDTOS= bookDTO.getCategoryDetailsDTOS() == null || bookDTO.getCategoryDetailsDTOS().isEmpty();
+            BookDTO bookDTO = verifySave();
+//            boolean isNullAuthorDTOS= bookDTO.getAuthorDetailsDTOS() == null || bookDTO.getAuthorDetailsDTOS().isEmpty();
+//            boolean isNullCategoryDTOS= bookDTO.getCategoryDetailsDTOS() == null || bookDTO.getCategoryDetailsDTOS().isEmpty();
             boolean isBookDTONull = bookDTO == null;
 
 
-            if (isNullAuthorDTOS){
-                new Alert(Alert.AlertType.ERROR, "Please insert authors...!").show();
-            }
-            if (isNullCategoryDTOS){
-                new Alert(Alert.AlertType.ERROR, "Please insert categories...!").show();
-            }
+//            if (isNullAuthorDTOS){
+//                new Alert(Alert.AlertType.ERROR, "Please insert authors...!").show();
+//            }
+//            if (isNullCategoryDTOS){
+//                new Alert(Alert.AlertType.ERROR, "Please insert categories...!").show();
+//            }
 
-            if (!isBookDTONull && !isNullAuthorDTOS && !isNullCategoryDTOS) {
+            //&& !isNullAuthorDTOS && !isNullCategoryDTOS
+            if (!isBookDTONull ) {
                 boolean isSaved = bookBO.save(bookDTO);
                 if (isSaved) {
                     refreshPage();
@@ -374,10 +375,10 @@ public class BookBodyController implements Initializable {
 
     private void loadTableData() throws SQLException {
 
-        ArrayList<BookWithDetailsDTO> bookDTOS = bookBO.getAll();
+        ArrayList<BookDTO> bookDTOS = bookBO.getAll();
         ObservableList<BookTM> bookTMS = FXCollections.observableArrayList();
 
-        for (BookWithDetailsDTO bookDTO : bookDTOS) {
+        for (BookDTO bookDTO : bookDTOS) {
             BookTM bookTM = new BookTM(
                     bookDTO.getBookID(),
                     bookDTO.getTitle(),
@@ -389,8 +390,8 @@ public class BookBodyController implements Initializable {
                     bookDTO.getBookshelfID()
             );
             bookTMS.add(bookTM);
-            bookDTO.getCategoryDetailsDTOS().clear();
-            bookDTO.getAuthorDetailsDTOS().clear();
+//            bookDTO.getCategoryDetailsDTOS().clear();
+//            bookDTO.getAuthorDetailsDTOS().clear();
         }
 
         bookBodyTbl.setItems(bookTMS);
@@ -403,7 +404,7 @@ public class BookBodyController implements Initializable {
     }
 
 
-    public BookWithDetailsDTO verifySave() throws SQLException {
+    public BookDTO verifySave() throws SQLException {
 
         String bookId = bookIdShowLbl.getText();
         String publisherId = pubIdCombo.getSelectionModel().getSelectedItem();
@@ -483,7 +484,7 @@ public class BookBodyController implements Initializable {
         //validate and return object DTO
 
         if (!isNullBookshelfId && !isNullPublisherId && !isNullState && isValidPrice && !isNullTitle && !isNullIsbn ) {
-            BookWithDetailsDTO bookDTO = new BookWithDetailsDTO(
+            BookDTO bookDTO = new BookDTO(
                     bookId,
                     title,
                     isbn,
@@ -491,9 +492,7 @@ public class BookBodyController implements Initializable {
                     publisherId,
                     price,
                     state,
-                    bookshelfId,
-                    categoryDetailsDTOS,
-                    authorDetailsDTOS
+                    bookshelfId
 
             );
 

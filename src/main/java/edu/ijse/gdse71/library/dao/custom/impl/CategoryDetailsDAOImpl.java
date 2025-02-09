@@ -46,4 +46,3 @@ public class CategoryDetailsDAOImpl implements CategoryDetailsDAO {
     }
 }
 
-

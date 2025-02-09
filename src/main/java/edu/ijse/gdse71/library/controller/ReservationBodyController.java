@@ -197,7 +197,7 @@ public class ReservationBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
+        BookDTO bookDTO = bookBO.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {

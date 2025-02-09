@@ -3,6 +3,7 @@ package edu.ijse.gdse71.library.controller;
 import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.db.DBConnection;
+import edu.ijse.gdse71.library.dto.BookDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,7 +131,7 @@ public class BookReportController implements Initializable {
     @FXML
     void bookIdComboActionClicked(ActionEvent event) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
+        BookDTO bookDTO = bookBO.findById(selectedBookId);
         if (bookDTO != null) {
 
             titleShowLbl.setText(bookDTO.getTitle());

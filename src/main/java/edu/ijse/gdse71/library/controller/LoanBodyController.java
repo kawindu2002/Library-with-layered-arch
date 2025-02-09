@@ -4,6 +4,7 @@ import edu.ijse.gdse71.library.bo.BOFactory;
 import edu.ijse.gdse71.library.bo.custom.impl.BookBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.LoanBOImpl;
 import edu.ijse.gdse71.library.bo.custom.impl.MemberBOImpl;
+import edu.ijse.gdse71.library.dto.BookDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.tm.LoanTM;
@@ -210,7 +211,7 @@ public class LoanBodyController implements Initializable {
 
     public void bookIdComboActionClicked(ActionEvent actionEvent) throws SQLException {
         String selectedBookId = bookIdCombo.getSelectionModel().getSelectedItem();
-        BookWithDetailsDTO bookDTO = bookBO.findById(selectedBookId);
+        BookDTO bookDTO = bookBO.findById(selectedBookId);
 
         // If book found
         if (bookDTO != null) {
