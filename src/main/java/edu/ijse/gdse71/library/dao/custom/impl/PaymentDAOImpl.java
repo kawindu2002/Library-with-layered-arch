@@ -2,6 +2,7 @@ package edu.ijse.gdse71.library.dao.custom.impl;
 
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
+import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.entity.Payment;
 import edu.ijse.gdse71.library.util.CrudUtil;
 
@@ -80,13 +81,16 @@ public class PaymentDAOImpl implements PaymentDAO {
 
         return paymentIds;
     }
+    
 
     @Override
-    public Payment findById(String selectedId) throws SQLException {
+    public ArrayList<Payment> findById(String selectedId) throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from Payment where Payment_Id=?", selectedId);
 
-        if (rst.next()) {
-            return new Payment(
+        ArrayList<Payment> payments = new ArrayList<>();
+
+        while (rst.next()) {
+            Payment payment = new Payment(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -94,9 +98,11 @@ public class PaymentDAOImpl implements PaymentDAO {
                     rst.getDate(5),
                     rst.getString(6)
             );
+            payments.add(payment);
         }
-        return null;
+        return payments;
     }
+
 
 }
 
