@@ -3,9 +3,12 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.MemberBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.MemberDAO;
+import edu.ijse.gdse71.library.dto.LoanDTO;
 import edu.ijse.gdse71.library.dto.MemberDTO;
+import edu.ijse.gdse71.library.entity.Loan;
 import edu.ijse.gdse71.library.entity.Member;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -75,24 +78,27 @@ public class MemberBOImpl implements MemberBO {
 
     }
 
+
     @Override
     public MemberDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Member where Member_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new MemberDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getString(4),
-//                    rst.getString(5),
-//                    rst.getDate(6),
-//                    rst.getString(7)
-//            );
-//        }
+        ArrayList<Member> members = memberDAO.findById(selectedId);
 
-        return null;
+        if (!members.isEmpty()) {
+            Member member = members.get(0);
+            return new MemberDTO(
+                member.getMemberID(),
+                member.getName(),
+                member.getAddress(),
+                member.getEmail(),
+                member.getContact(),
+                member.getRegDate(),
+                member.getState()
+            );
+        } else {
+            return null;
+        }
     }
+
 
     @Override
     public String getState(String id) throws SQLException {
