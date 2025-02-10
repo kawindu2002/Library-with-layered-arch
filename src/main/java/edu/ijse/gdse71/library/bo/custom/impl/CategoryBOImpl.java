@@ -3,7 +3,9 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.CategoryBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.CategoryDAO;
+import edu.ijse.gdse71.library.dto.BookshelfDTO;
 import edu.ijse.gdse71.library.dto.CategoryDTO;
+import edu.ijse.gdse71.library.entity.Bookshelf;
 import edu.ijse.gdse71.library.entity.Category;
 
 import java.sql.SQLException;
@@ -61,18 +63,19 @@ public class CategoryBOImpl implements CategoryBO {
 
     @Override
     public CategoryDTO findById(String selectedId) throws SQLException {
+        ArrayList<Category> categories = categoryDAO.findById(selectedId);
 
-//        ResultSet rst = CrudUtil.execute("select * from Category where Category_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new CategoryDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getDate(3)
-//            );
-//        }
-
-        return null;
+        if (!categories.isEmpty()) {
+            Category category = categories.get(0);
+            return new CategoryDTO(
+                category.getCategoryID(),
+                category.getDescription(),
+                category.getRegDate()
+            );
+        } else {
+            return null;
+        }
     }
 
 }
+
