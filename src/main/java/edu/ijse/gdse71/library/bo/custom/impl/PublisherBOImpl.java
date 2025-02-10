@@ -3,9 +3,12 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.PublisherBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.PublisherDAO;
+import edu.ijse.gdse71.library.dto.PaymentDTO;
 import edu.ijse.gdse71.library.dto.PublisherDTO;
+import edu.ijse.gdse71.library.entity.Payment;
 import edu.ijse.gdse71.library.entity.Publisher;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -68,19 +71,22 @@ public class PublisherBOImpl implements PublisherBO {
 
     }
 
+
     @Override
     public PublisherDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Publisher where Publisher_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new PublisherDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getDate(4)
-//            );
-//        }
-        return null;
+        ArrayList<Publisher> publishers = publisherDAO.findById(selectedId);
+
+        if (!publishers.isEmpty()) {
+            Publisher publisher = publishers.get(0);
+            return new PublisherDTO(
+                publisher.getPublisherID(),
+                publisher.getName(),
+                publisher.getAddress(),
+                publisher.getRegDate()
+            );
+        } else {
+            return null;
+        }
     }
 
 }
