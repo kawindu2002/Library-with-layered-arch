@@ -3,9 +3,12 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.UserBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.UserDAO;
+import edu.ijse.gdse71.library.dto.ReturnDTO;
 import edu.ijse.gdse71.library.dto.UserDTO;
+import edu.ijse.gdse71.library.entity.Returns;
 import edu.ijse.gdse71.library.entity.User;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -76,22 +79,27 @@ public class UserBOImpl implements UserBO {
 
     }
 
+
     @Override
     public UserDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from User where User_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new UserDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getString(4),
-//                    rst.getDate(5),
-//                    rst.getString(6)
-//            );
-//        }
-        return null;
+        ArrayList<User> users = userDAO.findById(selectedId);
+
+        if (!users.isEmpty()) {
+            User user = users.get(0);
+            return new UserDTO(
+                user.getUserID(),
+                user.getName(),
+                user.getPassword(),
+                user.getRole(),
+                user.getRegDate(),
+                user.getState()
+
+            );
+        } else {
+            return null;
+        }
     }
+
 
     @Override
     public String getState(String id) throws SQLException {
