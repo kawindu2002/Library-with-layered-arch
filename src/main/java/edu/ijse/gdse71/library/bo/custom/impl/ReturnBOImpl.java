@@ -5,10 +5,13 @@ import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.ReturnDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
+import edu.ijse.gdse71.library.dto.ReservationDTO;
 import edu.ijse.gdse71.library.dto.ReturnDTO;
+import edu.ijse.gdse71.library.entity.Reservation;
 import edu.ijse.gdse71.library.entity.Returns;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -124,19 +127,22 @@ public class ReturnBOImpl implements ReturnBO {
 
     @Override
     public ReturnDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Returns where Returns_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new ReturnDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getString(4),
-//                    rst.getString(5),
-//                    rst.getDate(6)
-//            );
-//        }
+        ArrayList<Returns> returnss = returnDAO.findById(selectedId);
+
+        if (!returnss.isEmpty()) {
+            Returns returns = returnss.get(0);
+            return new ReturnDTO(
+                returns.getReturnID(),
+                returns.getUserID(),
+                returns.getMemberID(),
+                returns.getLoanID(),
+                returns.getBookID(),
+                returns.getReturnDate()
+
+            );
+        } else {
             return null;
+        }
     }
 
 }
