@@ -5,10 +5,13 @@ import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.BookDAO;
 import edu.ijse.gdse71.library.dao.custom.LoanDAO;
 import edu.ijse.gdse71.library.db.DBConnection;
+import edu.ijse.gdse71.library.dto.FineDTO;
 import edu.ijse.gdse71.library.dto.LoanDTO;
+import edu.ijse.gdse71.library.entity.Fine;
 import edu.ijse.gdse71.library.entity.Loan;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -116,22 +119,25 @@ public class LoanBOImpl implements LoanBO {
 
     }
 
+
     @Override
     public LoanDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Loan where Loan_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new LoanDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getString(4),
-//                    rst.getDate(5),
-//                    rst.getDate(6)
-//            );
-//        }
-        return null;
-    }
+        ArrayList<Loan> loans = loanDAO.findById(selectedId);
 
+        if (!loans.isEmpty()) {
+            Loan loan = loans.get(0);
+            return new LoanDTO(
+                loan.getLoanID(),
+                loan.getUserID(),
+                loan.getMemberID(),
+                loan.getBookID(),
+                loan.getLoanDate(),
+                loan.getDueDate()
+            );
+        } else {
+            return null;
+        }
+    }
 }
+
 
