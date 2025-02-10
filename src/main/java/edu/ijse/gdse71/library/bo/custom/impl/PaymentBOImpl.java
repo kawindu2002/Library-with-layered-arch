@@ -3,9 +3,12 @@ package edu.ijse.gdse71.library.bo.custom.impl;
 import edu.ijse.gdse71.library.bo.custom.PaymentBO;
 import edu.ijse.gdse71.library.dao.DAOFactory;
 import edu.ijse.gdse71.library.dao.custom.PaymentDAO;
+import edu.ijse.gdse71.library.dto.MemberDTO;
 import edu.ijse.gdse71.library.dto.PaymentDTO;
+import edu.ijse.gdse71.library.entity.Member;
 import edu.ijse.gdse71.library.entity.Payment;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -77,19 +80,21 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public PaymentDTO findById(String selectedId) throws SQLException {
-//        ResultSet rst = CrudUtil.execute("select * from Payment where Payment_Id=?", selectedId);
-//
-//        if (rst.next()) {
-//            return new PaymentDTO(
-//                    rst.getString(1),
-//                    rst.getString(2),
-//                    rst.getString(3),
-//                    rst.getDouble(4),
-//                    rst.getDate(5),
-//                    rst.getString(6)
-//            );
-//        }
-        return null;
+        ArrayList<Payment> payments = paymentDAO.findById(selectedId);
+
+        if (!payments.isEmpty()) {
+            Payment payment = payments.get(0);
+            return new PaymentDTO(
+                payment.getPaymentID(),
+                payment.getMemberID(),
+                payment.getPurpose(),
+                payment.getPrice(),
+                payment.getPaymentDate(),
+                payment.getUserID()
+            );
+        } else {
+            return null;
+        }
     }
 
 }
